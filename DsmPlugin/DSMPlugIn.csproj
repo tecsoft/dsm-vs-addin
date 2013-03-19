@@ -101,9 +101,7 @@
     <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Reflector, Version=7.0.0.0, Culture=neutral, PublicKeyToken=18ca6bb8dd6a03c3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <ExecutableExtension>.exe</ExecutableExtension>
-      <HintPath>.\Reflector.exe</HintPath>
-      <Private>False</Private>
+      <HintPath>lib\Reflector7\Reflector.exe</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -369,6 +367,8 @@
     <None Include="app.config" />
     <None Include="Engines\mono.snk" />
     <None Include="images\Partition.gif" />
+    <Content Include="lib\nunit.framework.dll" />
+    <Content Include="lib\Reflector\Reflector.exe" />
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
