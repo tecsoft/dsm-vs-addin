@@ -1,0 +1,28 @@
+C:\Documents and Settings\Tom\WorkDir\BasicForm\bin\Release\BasicForm.exe
+C:\Documents and Settings\Tom\WorkDir\BasicForm\bin\Release\BasicForm.pdb
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Release\BasicForm.Properties.Resources.resources
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Release\BasicForm.csproj.GenerateResource.Cache
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Release\BasicForm.exe
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Release\BasicForm.pdb
+C:\Documents and Settings\Tom\WorkDir\BasicForm\bin\Debug\BasicForm.exe
+C:\Documents and Settings\Tom\WorkDir\BasicForm\bin\Debug\BasicForm.pdb
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Debug\BasicForm.Properties.Resources.resources
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Debug\BasicForm.csproj.GenerateResource.Cache
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Debug\BasicForm.exe
+C:\Documents and Settings\Tom\WorkDir\BasicForm\obj\Debug\BasicForm.pdb
+D:\Perso\DSM\WorkDir\BasicForm\bin\Release\BasicForm.exe
+D:\Perso\DSM\WorkDir\BasicForm\bin\Release\BasicForm.pdb
+D:\Perso\DSM\WorkDir\BasicForm\obj\Release\ResolveAssemblyReference.cache
+D:\Perso\DSM\WorkDir\BasicForm\obj\Release\BasicForm.Properties.Resources.resources
+D:\Perso\DSM\WorkDir\BasicForm\obj\Release\BasicForm.csproj.GenerateResource.Cache
+D:\Perso\DSM\WorkDir\BasicForm\obj\Release\BasicForm.exe
+D:\Perso\DSM\WorkDir\BasicForm\obj\Release\BasicForm.pdb
+D:\Perso\DSM\WorkDir\BasicForm\bin\Debug\BasicForm.exe
+D:\Perso\DSM\WorkDir\BasicForm\bin\Debug\BasicForm.pdb
+D:\Perso\DSM\WorkDir\BasicForm\obj\Debug\ResolveAssemblyReference.cache
+D:\Perso\DSM\WorkDir\BasicForm\obj\Debug\BasicForm.Properties.Resources.resources
+D:\Perso\DSM\WorkDir\BasicForm\obj\Debug\BasicForm.csproj.GenerateResource.Cache
+D:\Perso\DSM\WorkDir\BasicForm\obj\Debug\BasicForm.exe
+D:\Perso\DSM\WorkDir\BasicForm\obj\Debug\BasicForm.pdb

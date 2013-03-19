@@ -1,0 +1,8 @@
+D:\Perso\DSM\WorkDir\VSAdapter\bin\VSAdapter.dll
+D:\Perso\DSM\WorkDir\VSAdapter\bin\VSAdapter.pdb
+D:\Perso\DSM\WorkDir\VSAdapter\obj\Debug\ResolveAssemblyReference.cache
+D:\Perso\DSM\WorkDir\VSAdapter\obj\Debug\VSAdapter.csproj.ResolveComReference.cache
+D:\Perso\DSM\WorkDir\VSAdapter\obj\Debug\VSAdapter.CommandBar.resources
+D:\Perso\DSM\WorkDir\VSAdapter\obj\Debug\VSAdapter.csproj.GenerateResource.Cache
+D:\Perso\DSM\WorkDir\VSAdapter\obj\Debug\VSAdapter.dll
+D:\Perso\DSM\WorkDir\VSAdapter\obj\Debug\VSAdapter.pdb

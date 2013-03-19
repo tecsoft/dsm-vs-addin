@@ -1,0 +1,398 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B8FDC0F6-309D-483D-8B25-FC0BE0A1E287}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Tcdev.DsmPlugin</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Tcdev.Dsm</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Common Files\Microsoft Shared\MSEnv\PublicAssemblies\extensibility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Reflector, Version=7.0.0.0, Culture=neutral, PublicKeyToken=18ca6bb8dd6a03c3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <ExecutableExtension>.exe</ExecutableExtension>
+      <HintPath>.\Reflector.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.XML">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\VisualStudioAdapter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\Code.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\CodeReader.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\CodeWriter.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\Document.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\ExceptionHandler.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\ILProcessor.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\Instruction.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\MethodBody.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\OpCode.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\OpCodes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\SequencePoint.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\Symbols.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\VariableDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Cil\VariableReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\BlobHeap.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\Buffers.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\CodedIndex.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\ElementType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\GuidHeap.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\Heap.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\MetadataToken.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\Row.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\StringHeap.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\TableHeap.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\TokenType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\UserStringHeap.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.Metadata\Utilities.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\BinaryStreamReader.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\BinaryStreamWriter.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\ByteBuffer.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\ByteBufferEqualityComparer.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\DataDirectory.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\Image.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\ImageReader.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\ImageWriter.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\Section.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil.PE\TextMap.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ArrayType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\AssemblyDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\AssemblyFlags.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\AssemblyHashAlgorithm.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\AssemblyLinkedResource.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\AssemblyNameDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\AssemblyNameReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\AssemblyReader.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\AssemblyWriter.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\BaseAssemblyResolver.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\CallSite.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\CustomAttribute.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\DefaultAssemblyResolver.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\EmbeddedResource.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\EventAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\EventDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\EventReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ExportedType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\FieldAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\FieldDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\FieldReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\FileAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\FunctionPointerType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\GenericInstanceMethod.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\GenericInstanceType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\GenericParameter.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\GenericParameterAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\IConstantProvider.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ICustomAttributeProvider.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\IGenericInstance.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\IGenericParameterProvider.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\IMarshalInfoProvider.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\IMemberDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\IMetadataScope.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\IMetadataTokenProvider.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\IMethodSignature.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\Import.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\LinkedResource.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ManifestResourceAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MarshalInfo.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MemberDefinitionCollection.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MemberReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MetadataResolver.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MetadataSystem.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MethodAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MethodCallingConvention.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MethodDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MethodImplAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MethodReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MethodReturnType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MethodSemanticsAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\MethodSpecification.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\Modifiers.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ModuleDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ModuleKind.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ModuleReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\NativeType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ParameterAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ParameterDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ParameterDefinitionCollection.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ParameterReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\PinnedType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\PInvokeAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\PInvokeInfo.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\PointerType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\PropertyAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\PropertyDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\PropertyReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\ReferenceType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\Resource.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\SecurityDeclaration.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\SentinelType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\TargetRuntime.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\TypeAttributes.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\TypeDefinition.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\TypeDefinitionCollection.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\TypeParser.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\TypeReference.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\TypeSpecification.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\TypeSystem.cs" />
+    <Compile Include="Engines\Cecil\Mono.Cecil\VariantType.cs" />
+    <Compile Include="Engines\Cecil\Mono.Collections.Generic\Collection.cs" />
+    <Compile Include="Engines\Cecil\Mono.Collections.Generic\ReadOnlyCollection.cs" />
+    <Compile Include="Engines\Cecil\Mono.Security.Cryptography\CryptoConvert.cs" />
+    <Compile Include="Engines\Cecil\Mono.Security.Cryptography\CryptoService.cs" />
+    <Compile Include="Engines\Cecil\Mono\Actions.cs" />
+    <Compile Include="Engines\Cecil\Mono\Empty.cs" />
+    <Compile Include="Engines\Cecil\Mono\Funcs.cs" />
+    <Compile Include="Engines\Cecil\System.Runtime.CompilerServices\ExtensionAttribute.cs" />
+    <Compile Include="Engines\CecilAnalyser.cs" />
+    <Compile Include="Target.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Commands\CommandAnalyse.cs" />
+    <Compile Include="Commands\CommandPartition.cs" />
+    <Compile Include="Commands\CommandReport.cs" />
+    <Compile Include="DsmException.cs" />
+    <Compile Include="AnalyserOptions.cs" />
+    <Compile Include="Adapters\ReflectorAdapter.cs" />
+    <Compile Include="Adapters\IAdapter.cs" />
+    <Compile Include="Engines\IAnalyser.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Matrix\PartitionerMarkII.cs" />
+    <Compile Include="Matrix\Permutation.cs" />
+    <Compile Include="Matrix\SquareMatrix.cs" />
+    <Compile Include="Matrix\Vector.cs" />
+    <Compile Include="View\DisplayOptions.cs" />
+    <Compile Include="View\IDsmParentControl.cs" />
+    <Compile Include="Commands\CommandMoveNodeUp.cs" />
+    <Compile Include="Commands\CommandOpen.cs" />
+    <Compile Include="Commands\CommandSave.cs" />
+    <Compile Include="Commands\CommandMoveNodeDown.cs" />
+    <Compile Include="Model\IState.cs" />
+    <Compile Include="Model\DsmModel.cs" />
+    <Compile Include="Outil\CursorStateHelper.cs" />
+    <Compile Include="Outil\Logger.cs" />
+    <Compile Include="Outil\Tree.cs" />
+    <Compile Include="Model\Relation.cs" />
+    <Compile Include="Outil\TreeIterator.cs" />
+    <Compile Include="View\ErrorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ErrorDialog.Designer.cs">
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\HtmlViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\HtmlViewer.Designer.cs">
+      <DependentUpon>HtmlViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LayoutHelper.cs" />
+    <Compile Include="View\Main.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MatrixControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MatrixPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Module.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\NodePanel.cs" />
+    <Compile Include="View\TypePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <EmbeddedResource Include="Adapters\VisualStudioAdapter.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>VisualStudioAdapter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ErrorDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ErrorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\HtmlViewer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>HtmlViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MatrixControl.resx">
+      <DependentUpon>MatrixControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MatrixPanel.resx">
+      <DependentUpon>MatrixPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TypePanel.resx">
+      <DependentUpon>TypePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\Collpased.gif" />
+    <None Include="images\DownArrow.gif" />
+    <None Include="images\DSM.gif" />
+    <None Include="images\Expanded.gif" />
+    <None Include="images\HighlightCyclic_Yellow.gif" />
+    <None Include="images\New.gif" />
+    <None Include="images\Open.gif" />
+    <None Include="images\Reports.gif" />
+    <None Include="images\Save.gif" />
+    <None Include="images\UpArrow.gif" />
+    <None Include="images\Zoom.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Engines\mono.snk" />
+    <None Include="images\Partition.gif" />
+    <Content Include="README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
