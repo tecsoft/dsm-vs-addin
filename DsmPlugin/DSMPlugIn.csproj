@@ -102,6 +102,7 @@
     <Reference Include="Reflector, Version=7.0.0.0, Culture=neutral, PublicKeyToken=18ca6bb8dd6a03c3, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Reflector7\Reflector.exe</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -253,7 +254,14 @@
     <Compile Include="Engines\Cecil\Mono\Empty.cs" />
     <Compile Include="Engines\Cecil\Mono\Funcs.cs" />
     <Compile Include="Engines\Cecil\System.Runtime.CompilerServices\ExtensionAttribute.cs" />
-    <Compile Include="Engines\CecilAnalyser.cs" />
+    <Compile Include="Engines\CecilAnalyser.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="Target.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Commands\CommandAnalyse.cs" />
@@ -304,11 +312,6 @@
     <Compile Include="View\MatrixPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Model\Module.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -340,11 +343,6 @@
       <DependentUpon>MatrixPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\TypePanel.resx">
       <DependentUpon>TypePanel.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -367,9 +365,17 @@
     <None Include="app.config" />
     <None Include="Engines\mono.snk" />
     <None Include="images\Partition.gif" />
+    <None Include="Engines\cecil_LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="lib\nunit.framework.dll" />
-    <Content Include="lib\Reflector\Reflector.exe" />
+    <Content Include="lib\Reflector7\Reflector.exe" />
     <Content Include="README.txt" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

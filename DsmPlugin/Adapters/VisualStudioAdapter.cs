@@ -44,15 +44,17 @@ namespace Tcdev.Dsm.Adapters
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualStudioAdapter));
             this.SuspendLayout();
             // 
             // VisualStudioAdapter
             // 
-            this.ClientSize = new System.Drawing.Size( 682, 456 );
+            this.ClientSize = new System.Drawing.Size(682, 456);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VisualStudioAdapter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Dependency Structure Matrix Visual Studio";
-            this.ResumeLayout( false );
+            this.ResumeLayout(false);
 
         }
     }
