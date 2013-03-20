@@ -1,0 +1,7 @@
+bin/
+*.suo
+*.user
+obj/
+web/
+DsmPlugInTestAssembly/bin/Debug/*.dll
+DsmPlugInTestAssembly/obj/
