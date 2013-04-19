@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Tcdev.Dsm.Engine;
+using System.IO;
 
 namespace Tcdev.Dsm.Adapters
 {
@@ -17,5 +18,11 @@ namespace Tcdev.Dsm.Adapters
         /// </summary>
         /// <returns></returns>
         IAnalyser GetAnalyser();
+
+        //DirectoryInfo ProjectPath { get; set; }
+        //string ProjectName { get; set;  }
+
+        void Open( string directory, string name );
+
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Tcdev.Dsm.Commands
 {
@@ -11,12 +12,14 @@ namespace Tcdev.Dsm.Commands
 
         Dsm.Model.DsmModel _model = null;
         bool               _done  = false;
+        FileInfo _file = null;
 
         //-----------------------------------------------------------------------------------------
 
-        public CommandOpen( Dsm.Model.DsmModel model)
+        public CommandOpen( Dsm.Model.DsmModel model,FileInfo file)
         {
             _model = model;
+            _file = file;
         }
 
         //-----------------------------------------------------------------------------------------
@@ -54,22 +57,29 @@ namespace Tcdev.Dsm.Commands
 
         string GetFile()
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.AddExtension = true;
-            dlg.CheckFileExists = true;
-            dlg.CheckPathExists = true;
-            dlg.DefaultExt = "dsm";
-            dlg.Filter = "DSM project files (*.dsm)|*.dsm|All files (*.*)|*.*";
-            dlg.Title = "Open DSM project";
-
-            DialogResult result = dlg.ShowDialog();
-
-            if (result == DialogResult.OK)
+            if (_file == null)
             {
-                return dlg.FileName;
-            }
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.AddExtension = true;
+                dlg.CheckFileExists = true;
+                dlg.CheckPathExists = true;
+                dlg.DefaultExt = "dsm";
+                dlg.Filter = "DSM project files (*.dsm)|*.dsm|All files (*.*)|*.*";
+                dlg.Title = "Open DSM project";
 
-            return null;
+                DialogResult result = dlg.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    return dlg.FileName;
+                }
+
+                return null;
+            }
+            else
+            {
+                return _file.FullName;
+            }
         }
 
         //-----------------------------------------------------------------------------------------

@@ -10,6 +10,7 @@ using Tcdev.Dsm;
 using Tcdev.Dsm.Model;
 using Tcdev.Dsm.View;
 using Tcdev.Dsm.Engine;
+using System.IO;
 
 namespace Tcdev.Dsm.Adapters
 {
@@ -52,6 +53,14 @@ namespace Tcdev.Dsm.Adapters
             //return new ReflectorAnalyser();
             return new CecilAnalyser();
         }
+
+        //public DirectoryInfo ProjectPath { get;set; }
+        //public string ProjectName { get; set; }
+
+        public void Open(string directory, string name)
+        {
+        }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Load function required by reflector to engage the plugin

@@ -18,8 +18,7 @@ namespace Tcdev.Collections.Generic
         /// </summary>
         public class Node : IState
         {
-            private T nodeValue = default(T);
-
+            private Module nodeValue = null;
             internal int  childCount      = 0;
             internal Node firstChild      = null;
             internal Node lastChild       = null;
@@ -34,22 +33,22 @@ namespace Tcdev.Collections.Generic
                 IsHidden = false;
             }
 
-            public Tree<T>.Node FirstChild
+            public Node FirstChild
             {
                 get { return firstChild; }
             }
 
-            public Tree<T>.Node NextSibling
+            public Node NextSibling
             {
                 get { return nextSibling; }
             }
 
-            public Tree<T>.Node Parent
+            public Node Parent
             {
                 get { return parent; }
             }
 
-            public T NodeValue
+            public Module NodeValue
             {
                 get { return nodeValue; }
                 set { nodeValue = value; }
@@ -60,7 +59,7 @@ namespace Tcdev.Collections.Generic
                 get { return this.childCount > 0; }
             }
 
-            public IList<Tree<T>.Node> Children
+            public IList<Node> Children
             {
                 get
                 {
@@ -139,8 +138,10 @@ namespace Tcdev.Collections.Generic
         /// </summary>
         public Tree()
         {
-            rootNode = new Node();
+            rootNode = new Node() ;
         }
+
+        internal IDictionary<string, Node> Lookup = new Dictionary<string, Node>();
 
         //-------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -165,9 +166,9 @@ namespace Tcdev.Collections.Generic
         /// </summary>
         /// <param name="theNodeValue">Valaue to be associated with this node</param>
         /// <returns></returns>
-        public Tree<T>.Node CreateNode(T theNodeValue)
+        public Node CreateNode(Module theNodeValue)
         {
-            Tree<T>.Node newNode = new Tree<T>.Node();
+            Node newNode = new Node();
             newNode.NodeValue = theNodeValue;
 
             return newNode;
@@ -178,27 +179,72 @@ namespace Tcdev.Collections.Generic
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="node"></param>
-        public void Add( Node parent, Tree<T>.Node node)
+        public void Add( Node parent, Node node )
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
+
+            Node realParent = (parent == null) ? rootNode : parent;
+            //Node last = realParent.lastChild;
+            Node first = realParent.firstChild;
+
+            node.parent = realParent;
+            //realParent.lastChild = node;
+            realParent.childCount++;
+            
+            if (first == null)
+            {
+                realParent.firstChild = node;
+             
+            }
+            else
+            {
+                node.nextSibling = first;
+                first.previousSibling = node;
+                realParent.firstChild = node;
+               // last.nextSibling = node;
+               //    node.previousSibling = last;
+            }
+
+            if (Lookup.ContainsKey(node.NodeValue.FullName) == false)
+                Lookup.Add(node.NodeValue.FullName, node);
+        }
+
+        //-------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// Adds a node to end of parents child list
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="node"></param>
+        public void AddLast(Node parent, Node node)
         {
             if (node == null)
                 throw new ArgumentNullException("node");
 
             Node realParent = (parent == null) ? rootNode : parent;
             Node last = realParent.lastChild;
+            //Node first = realParent.firstChild;
 
             node.parent = realParent;
             realParent.lastChild = node;
             realParent.childCount++;
-            
+
             if (last == null)
             {
                 realParent.firstChild = node;
+
             }
             else
             {
+                //node.nextSibling = first;
+                //first.previousSibling = node;
+                //realParent.firstChild = node;
                 last.nextSibling = node;
                 node.previousSibling = last;
-            }
+            } 
+
+            if (Lookup.ContainsKey(node.NodeValue.FullName) == false)
+                Lookup.Add(node.NodeValue.FullName, node);
         }
 
         //-------------------------------------------------------------------------------------------------------------
@@ -234,6 +280,8 @@ namespace Tcdev.Collections.Generic
             node.parent = null;
             node.previousSibling = null;
             node.nextSibling = null;
+
+             Lookup.Remove(node.NodeValue.FullName);
             
         }
         //-------------------------------------------------------------------------------------------------------------
@@ -242,7 +290,7 @@ namespace Tcdev.Collections.Generic
         /// </summary>
         /// <param name="node"></param>
         /// <param name="position"></param>
-        public void InsertBefore(Tree<T>.Node node, Tree<T>.Node position )
+        public void InsertBefore(Node node, Node position )
         {
             if ( position == null )
                 throw new ArgumentNullException("position" );
@@ -250,7 +298,7 @@ namespace Tcdev.Collections.Generic
             if ( node == null )
                 throw new ArgumentNullException("node");
 
-            Tree<T>.Node parent = position.parent;
+            Node parent = position.parent;
             node.parent = parent;
             parent.childCount++;
 
@@ -267,6 +315,8 @@ namespace Tcdev.Collections.Generic
                 position.previousSibling.nextSibling = node;
                 position.previousSibling = node;
             }
+
+            Lookup.Add(node.NodeValue.FullName, node);
         }
     }
 }

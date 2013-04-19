@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsmVsAddin", "DsmVsAddin\Ds
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{E63FB8A0-F5FB-43D0-BDAA-B8514AC8FAAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioTestDouble", "VisualStudioTestDouble\VisualStudioTestDouble.csproj", "{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +175,30 @@ Global
 		{E63FB8A0-F5FB-43D0-BDAA-B8514AC8FAAE}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E63FB8A0-F5FB-43D0-BDAA-B8514AC8FAAE}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E63FB8A0-F5FB-43D0-BDAA-B8514AC8FAAE}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_2_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_2_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_2_0_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_2_0_Release|Any CPU.Build.0 = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_3_5_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_3_5_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_3_5_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_3_5_Release|Any CPU.Build.0 = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_4_0_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_4_0_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_4_0_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.net_4_0_Release|Any CPU.Build.0 = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.silverlight_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.silverlight_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.silverlight_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.silverlight_Release|Any CPU.Build.0 = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.winphone_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

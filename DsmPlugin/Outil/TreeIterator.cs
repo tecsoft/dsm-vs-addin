@@ -54,6 +54,10 @@ namespace Tcdev.Collections.Generic
 
                 current = current.nextSibling;
             }
+            else
+            {
+                current = null;
+            }
 
             return current;
         }

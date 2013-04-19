@@ -77,7 +77,7 @@ namespace Tcdev.Dsm.Model
         /// <param name="namespaceName"></param>
         /// <param name="assemblyName"></param>
         /// <param name="isNested"></param>
-        internal Module( string name, string srcFile, string namespaceName, string assemblyName, bool isNested )
+        public Module( string name, string srcFile, string namespaceName, string assemblyName, bool isNested )
         {
             this.name          = name;
             this.srcFile       = srcFile;
@@ -145,6 +145,24 @@ namespace Tcdev.Dsm.Model
 
                 return Name;
             }
+        }
+
+        public int BuildNumber { set; get; }
+
+        public override int GetHashCode()
+        {
+            return FullName == null ? 0 : FullName.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            Module other = obj as Module;
+            if (other == null) return false;
+
+            if (this.FullName != null && other.FullName != null)
+                return this.FullName.Equals(other.FullName);
+
+            return this.FullName == other.FullName;
         }
 
 	}

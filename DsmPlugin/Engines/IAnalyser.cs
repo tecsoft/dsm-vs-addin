@@ -1,6 +1,8 @@
 
 using System;
 using Tcdev.Dsm.Model;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Tcdev.Dsm.Engine
 {
@@ -35,11 +37,13 @@ namespace Tcdev.Dsm.Engine
         /// <summary>
         /// Stage where the types are determined from the assemblies
         /// </summary>
-        void LoadTypes();
+        IList<Module> LoadTypes();
 
         /// <summary>
         /// Stage where the relations between the _loaded types are determined
         /// </summary>
-        void AnalyseRelations();   
+        void AnalyseRelations();
+
+        FileInfo ProjectFile { get; set; }
 	}
 }

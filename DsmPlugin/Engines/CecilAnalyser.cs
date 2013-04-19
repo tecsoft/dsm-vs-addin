@@ -5,6 +5,7 @@ using System.IO;
 using Mono.Cecil;
 using Tcdev.Dsm.Model;
 using Tcdev.Outil;
+using System.Linq;
 
 namespace Tcdev.Dsm.Engine
 {
@@ -66,6 +67,12 @@ namespace Tcdev.Dsm.Engine
             set { _model = value; }
         }
 
+        public FileInfo ProjectFile
+        {
+            get;
+            set;
+        }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// This engine expects an assembly of type Target
@@ -80,7 +87,7 @@ namespace Tcdev.Dsm.Engine
         /// <summary>
         /// Identifiy the individual Types that can be analysed
         /// </summary>
-        public void LoadTypes()
+        public IList<Module> LoadTypes()
         {
             var resolver = new DefaultAssemblyResolver();
 
@@ -132,6 +139,8 @@ namespace Tcdev.Dsm.Engine
                     throw e;
                 }
             }
+
+            return _modules.Values.ToList();
         }
 
         private void LoadType( Target target, Mono.Cecil.TypeDefinition typeDecl )
@@ -489,9 +498,9 @@ namespace Tcdev.Dsm.Engine
             }
             else
             {
-                Tcdev.Dsm.Model.Module consumer;
+                //Tcdev.Dsm.Model.Module consumer;
 
-                Tcdev.Dsm.Model.Module provider;
+                //Tcdev.Dsm.Model.Module provider;
                 if (_options.HideNestedClasses)
                 {
                     providerType = NestedParentHelper(providerType);
@@ -500,11 +509,15 @@ namespace Tcdev.Dsm.Engine
 
                 _log.Trace(providerType.ToString() + " ---> " + consumerType.ToString());
 
-                if (_modules.TryGetValue(consumerType.FullName, out consumer) &&
-                    _modules.TryGetValue(providerType.FullName, out provider))
+                var consumer = _model.FindNode(consumerType.FullName);
+                var provider = _model.FindNode(providerType.FullName);
+
+                //if ( _model.H.TryGetValue(consumerType.FullName, out consumer) &&
+                //    _modules.TryGetValue(providerType.FullName, out provider))
+                if ( consumer != null && provider != null )
                 {
                     _log.Trace("Relation found: " + providerType.Name);
-                    provider.AddRelation(consumer, 1);
+                    provider.NodeValue.AddRelation(consumer.NodeValue, 1);
                 }
                 else
                 {

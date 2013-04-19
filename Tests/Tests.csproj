@@ -35,10 +35,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DsmPlugin\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Reflector, Version=7.0.0.0, Culture=neutral, PublicKeyToken=18ca6bb8dd6a03c3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DsmPlugin\lib\Reflector7\Reflector.exe</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -49,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\ReflectorAdapterFixture.cs" />
+    <Compile Include="Adapters\VisualStudioAdapterFixture.cs" />
     <Compile Include="CecilAnalyser\MarkBodyTypeReferencesFixture.cs" />
     <Compile Include="CecilAnalyser\MarkLocalVariablesFixture.cs" />
     <Compile Include="CecilAnalyser\MarkGenericMethodParametersFixture.cs" />
@@ -59,6 +66,8 @@
     <Compile Include="CecilAnalyser\MarkBaseTypesFixture.cs" />
     <Compile Include="CecilAnalyser\MarkFieldsFixture.cs" />
     <Compile Include="CecilAnalyser\MarkInterfacesFixture.cs" />
+    <Compile Include="Commands\AnalyseCommandFixture.cs" />
+    <Compile Include="DsmModel\ModelLoadFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +75,11 @@
       <Project>{B8FDC0F6-309D-483D-8B25-FC0BE0A1E287}</Project>
       <Name>DSMPlugIn</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DsmModel\ModelFile.dsm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

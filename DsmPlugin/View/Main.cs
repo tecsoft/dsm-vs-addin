@@ -646,13 +646,45 @@ namespace Tcdev.Dsm.View
             set { this.btnPartition.Enabled = value; }
         }
 
+        public void ReAnalyse()
+        {
+            using (IAnalyser analyser = _adapter.GetAnalyser())
+            {
+                TabPage assemblyPage = this.tabControl.TabPages[0];
+
+                // Set assemblies to be analysed
+                foreach (Target assembly in this.checkedListBox1.CheckedItems)
+                {
+                    analyser.IncludeAssembly(assembly);
+                }
+
+                ICommand cmd = new CommandAnalyse(analyser, _model, UpdateProgress);
+
+                cmd.Execute();
+
+                if (cmd.Completed)
+                {
+                    matrixControl1.Size = new Size(
+                        this.tabControl.ClientSize.Width,
+                        this.tabControl.ClientSize.Height - this.toolStrip1.Height);
+
+                    //SetModel(newModel);
+
+                    this.pageAssemblies.Hide();
+                    this.tabControl.SelectedTab = this.pageResults;
+                }
+
+                this.Refresh();
+            }
+        }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Run the analysis
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void btnAnalyse_Click(object sender, System.EventArgs e)
+        public void btnAnalyse_Click(object sender, System.EventArgs e)
 		{
             CursorStateHelper csh = new CursorStateHelper( this, Cursors.WaitCursor );
 
@@ -807,13 +839,14 @@ namespace Tcdev.Dsm.View
                 dlg.Dispose();
             }
         }
+
         //-------------------------------------------------------------------------------------------------
-        void DoProjectOpen()
+        public void DoProjectOpen(FileInfo dsmFile )
         {
             if ( ConfirmModelSaved() )
             {
                 DsmModel newModel = new DsmModel();
-                ICommand cmd = new CommandOpen(newModel);
+                ICommand cmd = new CommandOpen(newModel, dsmFile );
 
                 CursorStateHelper csh = new CursorStateHelper(this, Cursors.WaitCursor);
 
@@ -941,7 +974,7 @@ namespace Tcdev.Dsm.View
         //-------------------------------------------------------------------------------------------------
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            DoProjectOpen();
+            DoProjectOpen(null);
         }
 
         //-------------------------------------------------------------------------------------------------
