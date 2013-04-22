@@ -27,6 +27,8 @@ namespace Tcdev.Dsm.Adapters
             _mainControl.Adapter = this;
             this.Controls.Add( _mainControl );
 
+            
+
             _mainControl.Dock = DockStyle.Fill;
         }
 
@@ -74,6 +76,7 @@ namespace Tcdev.Dsm.Adapters
 
         public Tcdev.Dsm.Engine.IAnalyser GetAnalyser()
         {
+
             _analyser = new CecilAnalyser();
 
             FileInfo[] files = ProjectPath.GetFiles(ProjectName + ".dsm", SearchOption.TopDirectoryOnly);

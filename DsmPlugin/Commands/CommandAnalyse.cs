@@ -70,7 +70,7 @@ namespace Tcdev.Dsm.Commands
 
                 _updateFunction(100, "Analyse completed");
 
-                _model.Modified = true;
+                _model.IsModified = true;
 
                 _done = true;
 

@@ -136,7 +136,8 @@ namespace Tcdev.Dsm.Engine
                 }
                 catch (Exception e)
                 {
-                    throw e;
+                    _log.Trace(e.ToString());
+                    //throw e;
                 }
             }
 

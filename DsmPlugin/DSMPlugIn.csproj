@@ -257,6 +257,8 @@
     <Compile Include="Engines\CecilAnalyser.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\Partitionner.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>

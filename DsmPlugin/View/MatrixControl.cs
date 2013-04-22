@@ -252,7 +252,7 @@ namespace Tcdev.Dsm.View
             {
                 NodeListModified(false);
                 EnableButtons();
-                MatrixModel.Modified = true;
+                MatrixModel.IsModified = true;
             }
         }
 
@@ -263,7 +263,7 @@ namespace Tcdev.Dsm.View
             {
                 NodeListModified(false);
                 EnableButtons();
-                MatrixModel.Modified = true;
+                MatrixModel.IsModified = true;
             }
         }
 

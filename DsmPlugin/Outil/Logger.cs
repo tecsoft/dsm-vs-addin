@@ -17,6 +17,7 @@ namespace Tcdev.Outil
                 FileInfo file = new FileInfo( filename );
                 
                 logfile = new StreamWriter( filename, false, System.Text.Encoding.UTF8);
+                //logfile = new StreamWriter(Console.OpenStandardOutput());
                 logfile.AutoFlush = true;
                 //MessageBox.Show( " logging to : " + file.FullName );
             }

@@ -658,6 +658,9 @@ namespace Tcdev.Dsm.View
                     analyser.IncludeAssembly(assembly);
                 }
 
+                if (_model == null)
+                    _model = new DsmModel();
+
                 ICommand cmd = new CommandAnalyse(analyser, _model, UpdateProgress);
 
                 cmd.Execute();
@@ -668,7 +671,7 @@ namespace Tcdev.Dsm.View
                         this.tabControl.ClientSize.Width,
                         this.tabControl.ClientSize.Height - this.toolStrip1.Height);
 
-                    //SetModel(newModel);
+                    SetModel(_model);
 
                     this.pageAssemblies.Hide();
                     this.tabControl.SelectedTab = this.pageResults;
@@ -678,13 +681,18 @@ namespace Tcdev.Dsm.View
             }
         }
 
+        public void btnAnalyse_Click(object sender, System.EventArgs e)
+        {
+            ReAnalyse();
+        }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Run the analysis
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void btnAnalyse_Click(object sender, System.EventArgs e)
+        public void btnAnalyse_Click2(object sender, System.EventArgs e)
 		{
             CursorStateHelper csh = new CursorStateHelper( this, Cursors.WaitCursor );
 
@@ -993,7 +1001,7 @@ namespace Tcdev.Dsm.View
         {
             bool cont = true;
 
-            if (_model != null && _model.Modified)
+            if (_model != null && _model.IsModified)
             {
                 string text = "The current model has some unsaved changes." +
                     Environment.NewLine + Environment.NewLine +
@@ -1023,7 +1031,7 @@ namespace Tcdev.Dsm.View
         {
             bool closed = true;
 
-            if (_model != null && _model.Modified)
+            if (_model != null && _model.IsModified)
             {
                 string text = "The current model has some unsaved changes." +
                     Environment.NewLine + Environment.NewLine +

@@ -38,7 +38,7 @@ namespace Tcdev.Dsm.Commands
                 if (filename != null)
                 {
                     _model.SaveModel(filename);
-                    _model.Modified = false;
+                    _model.IsModified = false;
                     _done = true;
                 }
             }
