@@ -776,6 +776,8 @@ namespace Tcdev.Dsm.View
             this.matrixControl1.MatrixModel = _model;
             this.matrixControl1.Enabled = true;
             this.toolStrip1.Enabled = true;
+
+            
         }
         
 
@@ -866,7 +868,7 @@ namespace Tcdev.Dsm.View
 
                     if (cmd.Completed)
                     {
-                       SetModel(newModel);
+                        SetModel(newModel);
 
                         matrixControl1.Size = new Size(this.tabControl.ClientSize.Width,
                                this.tabControl.ClientSize.Height - this.toolStrip1.Height);

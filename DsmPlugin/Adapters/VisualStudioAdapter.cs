@@ -44,25 +44,29 @@ namespace Tcdev.Dsm.Adapters
         public void Open(string directory, string name)
         {
             ProjectPath = new DirectoryInfo(directory);
-            ProjectName = name;
+            FileInfo[] files = ProjectPath.GetFiles("*.dsm" );
 
-            FileInfo fi = new FileInfo( Path.Combine(directory, name) );
-            if (fi.Exists)
+            if (files.Length == 0)
             {
-                MessageBox.Show("existing file found");
+                MessageBox.Show("new project ?");
+                // ask if analyse automatically ??
+
+                // TOOD show progress if analysing automatically
+                _mainControl.btnAnalyse_Click(this, EventArgs.Empty);
+            }
+            else if ( files.Length == 1 )
+            {
+                MessageBox.Show("existing file found:" + files[0].FullName);
 
                 // ask  if open and reanalyse,
                 // or open but not updated
                 // cancel for empty project
 
-                _mainControl.DoProjectOpen( fi );
-                
+                _mainControl.DoProjectOpen( files[0] ); 
             }
             else
             {
-                MessageBox.Show("new project ?");
-                // ask if analyse automatically
-                 _mainControl.btnAnalyse_Click(this, EventArgs.Empty);
+                MessageBox.Show("TODO too many files found");
             }
             this.Show();
         }

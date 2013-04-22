@@ -18,21 +18,11 @@ namespace Tcdev.Dsm.Model
     /// </summary>
     public class DsmModel 
     {    
-        //private Dictionary<string, object> _sourceFiles;       
-       // private IList<Module>              _modules = new List<Module>();
-
-        /* No need for lookup - only need to hierarchy lookup */
-        //private IDictionary<string, Module> _lookup;  // review if necessary- just a list of types (useful later?)
-
         static Logger _log = new Logger(Path.Combine( Path.GetTempPath() ,"model.txt" ));
 
         public int BuildNumber { get; internal set; }
 
-
-        //public Tree<Module> Hierarchy = null;
         Dictionary<string, Tree<Module>.Node> branchLookup = new Dictionary<string, Tree<Module>.Node>();
-
-
 
         //-------------------------------------------------------------------------------------------------
         /// <summary>
@@ -40,11 +30,8 @@ namespace Tcdev.Dsm.Model
         /// </summary>
         public DsmModel()
         {
-            //_modules      = new List<Module>();
-            //_lookup = new Dictionary<string, Module>();
             SourceFiles  = new Dictionary<string, object>();
             IsModified   = false;
-            //SelectedNode = null;
             Options      = new DsmOptions();  // created with a default set of options
         }
 
@@ -88,14 +75,33 @@ namespace Tcdev.Dsm.Model
         
         //-----------------------------------------------------------------------------------------
 
+        /// <summary>
+        /// Returns true if the Model contains a node with the given key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public bool Contains(string key)
         {
             return branchLookup.ContainsKey(key);
         }
+
+        /// <summary>
+        /// Gets the node for the given key (requires contains check beforehand)
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public Tree<Module>.Node Get(string key)
         {
             return branchLookup[key];
         }
+        /// <summary>
+        /// Adds a module to the end list of children of parentNode
+        /// </summary>
+        /// <param name="module"></param>
+        /// <param name="key"></param>
+        /// <param name="parentNode"></param>
+        /// <param name="buildNumber"></param>
+        /// <returns></returns>
         public Tree<Module>.Node Add(Module module, string key, Tree<Module>.Node parentNode, int buildNumber)
         {
             module.BuildNumber = buildNumber;
@@ -104,7 +110,10 @@ namespace Tcdev.Dsm.Model
             if (parentNode != null)
                 n.Depth = parentNode.Depth + 1;
 
-            Hierarchy.Add(parentNode, n);
+            if (buildNumber == 0)
+                Hierarchy.AddLast(parentNode, n);
+            else
+                Hierarchy.Add(parentNode, n);
 
             // new
             if (Contains(key) == false)
@@ -113,6 +122,10 @@ namespace Tcdev.Dsm.Model
             return n;
         }
 
+        /// <summary>
+        /// Remove node and its children from the model
+        /// </summary>
+        /// <param name="node"></param>
         void RemoveNode(Tree<Module>.Node node)
         {
             // Remove node from hierarchy and branch lookup and
@@ -132,6 +145,11 @@ namespace Tcdev.Dsm.Model
             }
         }
 
+        /// <summary>
+        /// Recursive function to remove old nodes according to the current build number
+        /// </summary>
+        /// <param name="buildNumber"></param>
+        /// <param name="current"></param>
         void RemoveIfOld(int buildNumber, Tree<Module>.Node current)
         {
             Module m = current.NodeValue;
@@ -148,6 +166,10 @@ namespace Tcdev.Dsm.Model
             }
         }
 
+        /// <summary>
+        /// Remove old nodes according to build number
+        /// </summary>
+        /// <param name="buildNumber"></param>
         public void RemoveOldItems(int buildNumber)
         {
             Tree<Module>.Node current = Hierarchy.Root;
@@ -155,14 +177,6 @@ namespace Tcdev.Dsm.Model
             RemoveIfOld(buildNumber, current);
 
         }
-
-
-
-
-
-
-
-
 
         //TODO Change so that it is done automatically in call CreateModule
         public void AddAssembly(string src)
@@ -184,27 +198,6 @@ namespace Tcdev.Dsm.Model
         {
             Module m = new Module(typeName, null, namespaceName, assemblyName, isNested );
             m.BuildNumber = BuildNumber;
-
-            //if (_lookup.ContainsKey(m.FullName))
-            //{
-                
-            //    Module m1 =_lookup[m.FullName];
-            //    m1.BuildNumber = BuildNumber;
-            //    //m1.AssemblyName = assemblyName;
-
-                
-            //    // replace even so ? not now
-            //}
-            //else
-            //{
-            //    m.BuildNumber = BuildNumber;
-
-            //    if (_modules.Count == 0)
-            //        _modules.Add(m);
-            //    else
-            //        _modules.Insert(0, m);
-            //    _lookup.Add(m.FullName, m);
-            //}
             return m;
         }
  
@@ -226,10 +219,8 @@ namespace Tcdev.Dsm.Model
             }
             else
             {
-                BuildNumber++;
+                StartBuild();
             }
-
-            StartBuild();
 
             if (this.Options.DsmModelType == DsmOptions.ModelType.Physical )
             {
@@ -239,8 +230,6 @@ namespace Tcdev.Dsm.Model
             {
                 LogicalModelBuilder2( types );
 
-
-
                 if (BuildNumber > 0)
                 {
                     RemoveOldItems(BuildNumber);
@@ -249,8 +238,6 @@ namespace Tcdev.Dsm.Model
                 // clean up hanging leaf nodes to a * namespace
                 BalanceLeafNodes();
             }
-
-            EndBuild();
         }
 
         public Tree<Module>.Node FindNode(string key)
@@ -866,6 +853,7 @@ namespace Tcdev.Dsm.Model
             Dictionary<string, Tree<Module>.Node> nodeMap = new Dictionary<string, Tree<Module>.Node>();
 
             newModel.Hierarchy = new Tree<Module>();
+            newModel.BuildNumber = 0; // reset build number to zero
             //newModel.Hierarchy = new ModuleTree();
 
             foreach (XmlNode node in modules)
@@ -1012,7 +1000,7 @@ namespace Tcdev.Dsm.Model
                                         list.AppendChild(xhtml.CreateElement("li"))
                                         .AppendChild(xhtml.CreateTextNode(
                                             mod.FullName + " <---> " + rel.Consumer.FullName));
-                                 }
+                                    }
                                 }
                             }
 
@@ -1175,7 +1163,7 @@ namespace Tcdev.Dsm.Model
             try
             {
                 Partitionner p = new Partitionner(Hierarchy);
-                p.Do(this.SelectedNode);
+                p.Partition(this.SelectedNode);
 
                 this.AllocateIds();
             }
@@ -1226,16 +1214,12 @@ namespace Tcdev.Dsm.Model
         }
         //-------------------------------------------------------------------------------------------------
 
+        /// <summary>
+        /// Called before reanalysing to increment build number and clear existing relations
+        /// </summary>
         public void StartBuild()
         {
             BuildNumber++;
-
-            // remove all relations
-
-            //foreach (Module m in _modules)
-            //{
-            //    m.Relations.Clear();
-            //}
 
             foreach (var node in branchLookup.Values)
             {
@@ -1243,22 +1227,5 @@ namespace Tcdev.Dsm.Model
                     node.NodeValue.Relations.Clear();
             }
         }
-
-        public void EndBuild()
-        {
-            //for (int i = 0; i < _modules.Count; )
-            //{
-            //    Module m = _modules[i];
-
-            //    if (m.BuildNumber != BuildNumber )
-            //    {
-            //        //_modules.RemoveAt(i);
-            //        //_lookup.Remove( m.FullName );
-            //    }
-            //    else
-            //        i++;
-            //}
-        }
-
     }
 }

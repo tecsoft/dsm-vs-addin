@@ -33,8 +33,6 @@ namespace Tcdev.Dsm.Commands
                 _updateFunction = (int i, string x ) => Console.WriteLine( i + " : " + x );
             else
                 _updateFunction = updateFunction;
-
-            //_model.Options.DsmModelType = modelType;
         }
 
         //------------------------------------------------------------------------------------------------------
@@ -43,23 +41,18 @@ namespace Tcdev.Dsm.Commands
         {
             if (ValidateParameters())
             {
-//                _model.StartBuild();
-
                 _analyser.Model = _model;
 
                 _updateFunction(0, "Loading assemblies");
                 var types = _analyser.LoadTypes();
 
-                _updateFunction(10, "Analysing inter-module relationships");
-                //_analyser.AnalyseRelations();
-
-                _updateFunction(40, "Building module hierarchy");
-//_model.EndBuild();
+                _updateFunction(20, "Building module hierarchy");
                 _model.BuildHierarchy( types);
 
-                _updateFunction(70, "Assigning IDs");
+                _updateFunction(30, "Assigning IDs");
                 _model.AllocateIds();
 
+                _updateFunction(40, "Analysing inter-module relationships");
                 _analyser.AnalyseRelations();
 
                 _updateFunction(80, "Calculating subtotal weights");
@@ -73,8 +66,6 @@ namespace Tcdev.Dsm.Commands
                 _model.IsModified = true;
 
                 _done = true;
-
-                
             }
         }
 
@@ -82,16 +73,7 @@ namespace Tcdev.Dsm.Commands
         
         bool ValidateParameters()
         {
-            /*if (checkedListBox1.CheckedItems.Count == 0)
-            {
-                MessageBox.Show("At least one assembly must be selected", "DSM Plugin warning",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                return false;
-            }*/
-
-            return true;
-                
+            return true; 
         }
     }
 }
