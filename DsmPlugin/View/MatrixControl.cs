@@ -33,30 +33,13 @@ namespace Tcdev.Dsm.View
         public ToolStripMenuItem cntxtItemMoveUp;
         public ToolStripMenuItem cntxtItemMoveDown;
 
-        private Brush _brush1 = Brushes.LightCyan;
-        private Brush _brush2 = Brushes.BlanchedAlmond;
-        private Brush _brush3 = Brushes.Lavender;
-        private Brush _brush4 = Brushes.MistyRose;
+        private Brush _brush1 = new SolidBrush( Color.FromArgb(217,231,246) ); //Brushes.LightCyan;
+        private Brush _brush2 = new SolidBrush(Color.FromArgb(246, 231, 217)); //Brushes.BlanchedAlmond;
+        private Brush _brush3 = new SolidBrush(Color.FromArgb(244, 217, 246)); //Brushes.Lavender;
+        private Brush _brush4 = new SolidBrush(Color.FromArgb(217, 246, 231)); //Brushes.MistyRose;
 
         public Tcdev.Dsm.Model.DsmModel MatrixModel;
-        
-        //internal Tree<Module>.Node RowNode = null;
-        //internal Tree<Module>.Node ColNode = null;
-        
-        //private Module _providerModule;
-        //private Module _consumerModule;
-        //internal Node ProviderModule
-        //{
-        //    get { return _providerModule; }
-        //    private set { _providerModule = value; }
-        //}
-        
-        //internal Module ConsumerModule
-        //{
-        //    get { return _consumerModule; }
-        //    private set { _consumerModule = value; }
-        //}
-        
+
         internal Tree<Module>.Node ProviderNode { get; set; }
         internal Tree<Module>.Node ConsumerNode { get; set; }
 
@@ -222,7 +205,6 @@ namespace Tcdev.Dsm.View
             
             if (node != null && node.HasChildren)
             {
-                //Module module = MatrixModel.SelectedNode.NodeValue;
                 node.IsCollapsed = !node.IsCollapsed;
                 NodeListModified(true);
             }
@@ -231,8 +213,6 @@ namespace Tcdev.Dsm.View
         
         internal void ExpandCurrentNode( )
         {
-            //MessageBox.Show(ProviderModule == null ? "null" : "notnull" );
-            //MessageBox.Show( ConsumerModule == null ? "null" : "notnull" );
             if ( ProviderNode == null && ConsumerNode != null)
             {
                 // TODO need to know if current nodes are expandable !!
