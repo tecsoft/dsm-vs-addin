@@ -29,7 +29,7 @@ namespace Tcdev.Dsm.Commands
 
         //-----------------------------------------------------------------------------------------
 
-        public void Execute()
+        public void Execute(MainControl.ProgressUpdateDelegate updateFunction)
         {
             StreamWriter sw = null;
             string filename = GetTemporaryFile();

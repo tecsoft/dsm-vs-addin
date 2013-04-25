@@ -28,6 +28,8 @@ namespace Tcdev.Dsm.View
         HtmlViewer()
         {
             InitializeComponent();
+            Font sysFont = SystemFonts.MessageBoxFont;
+            this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
         }
         
         //-------------------------------------------------------------------------------------------------------------

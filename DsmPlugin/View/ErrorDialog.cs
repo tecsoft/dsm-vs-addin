@@ -17,6 +17,8 @@ namespace Tcdev.Dsm.View
         internal ErrorDialog()
         {
             InitializeComponent();
+            Font sysFont = SystemFonts.MessageBoxFont;
+            this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
         }
         //-----------------------------------------------------------------------------------------------
 

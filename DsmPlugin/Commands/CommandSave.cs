@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Tcdev.Dsm.Model;
 using System.Windows.Forms;
+using Tcdev.Dsm.View;
 
 namespace Tcdev.Dsm.Commands
 {
@@ -29,7 +30,7 @@ namespace Tcdev.Dsm.Commands
 
         //-----------------------------------------------------------------------------------------
 
-        public void Execute()
+        public void Execute(MainControl.ProgressUpdateDelegate updateFunction)
         {
             try
             {

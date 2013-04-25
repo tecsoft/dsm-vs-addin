@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Collections;
 using Tcdev.Outil;
 using Tcdev.Dsm.Commands;
+using System.Threading;
 
 namespace Tcdev.Dsm.Adapters
 {
@@ -48,27 +49,20 @@ namespace Tcdev.Dsm.Adapters
 
             if (files.Length == 0)
             {
-                MessageBox.Show("new project ?");
-                // ask if analyse automatically ??
-
-                // TOOD show progress if analysing automatically
                 _mainControl.btnAnalyse_Click(this, EventArgs.Empty);
             }
-            else if ( files.Length == 1 )
+            else if (files.Length == 1)
             {
-                MessageBox.Show("existing file found:" + files[0].FullName);
 
-                // ask  if open and reanalyse,
-                // or open but not updated
-                // cancel for empty project
-
-                _mainControl.DoProjectOpen( files[0] ); 
+                _mainControl.DoProjectOpen(files[0]);
             }
             else
             {
                 MessageBox.Show("TODO too many files found");
             }
             this.Show();
+            this.BringToFront();
+            
         }
 
         public void Reanalyser()
@@ -104,11 +98,11 @@ namespace Tcdev.Dsm.Adapters
             // 
             // VisualStudioAdapter
             // 
-            this.ClientSize = new System.Drawing.Size(682, 456);
+            this.ClientSize = new System.Drawing.Size(1001, 602);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VisualStudioAdapter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Dependency Structure Matrix Visual Studio";
+            this.Text = "Dependency Structure Matrix for Visual Studio";
             this.ResumeLayout(false);
 
         }

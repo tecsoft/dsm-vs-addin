@@ -9,6 +9,7 @@ using Tcdev.Dsm;
 using Tcdev.Dsm.Matrix;
 using Tcdev.Dsm.Engine;
 using Tcdev.Outil;
+using Tcdev.Dsm.Model.DependencyRules;
 
 namespace Tcdev.Dsm.Model
 {
@@ -24,6 +25,10 @@ namespace Tcdev.Dsm.Model
 
         Dictionary<string, Tree<Module>.Node> branchLookup = new Dictionary<string, Tree<Module>.Node>();
 
+        //public IList<DependencyRule> Rules { get; protected set; }
+
+        public RuleManager RuleManager { get; protected set; }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Constructor
@@ -33,6 +38,7 @@ namespace Tcdev.Dsm.Model
             SourceFiles  = new Dictionary<string, object>();
             IsModified   = false;
             Options      = new DsmOptions();  // created with a default set of options
+            RuleManager = new RuleManager();
         }
 
         private Dictionary<string, object> SourceFiles
@@ -1172,9 +1178,7 @@ namespace Tcdev.Dsm.Model
                 throw new DsmException("Matrix partitioning error", e);
             }
         }
-        
-
-
+       
         /******************************************************************************************/
         /* DsmModel Helper functions                                                                 */
         /******************************************************************************************/

@@ -1,5 +1,6 @@
 
 using System;
+using Tcdev.Dsm.View;
 
 namespace Tcdev.Dsm.Commands
 {
@@ -11,7 +12,7 @@ namespace Tcdev.Dsm.Commands
         /// <summary>
         /// Run the command
         /// </summary>
-		void Execute();
+        void Execute(MainControl.ProgressUpdateDelegate updateFunction);
 
         /// <summary>
         /// Set to true if command was run, false if error or if cancelled by user

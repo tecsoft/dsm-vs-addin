@@ -57,9 +57,9 @@ namespace Tcdev.Dsm.View
         private CheckBox chkHideNested;
         private ToolTip toolTip1;
         Model.DsmModel _model;
-        private ProgressBar progressBar1;
         private GroupBox groupBox1;
         private Label label2;
+        private ToolStripButton btnAddRule;
         IAdapter _adapter;
 
         //-------------------------------------------------------------------------------------------------
@@ -75,6 +75,8 @@ namespace Tcdev.Dsm.View
         public MainControl()
         {
             InitializeComponent();
+            Font sysFont = SystemFonts.MessageBoxFont;
+            this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
             _adapter = null;
         }
 
@@ -117,7 +119,6 @@ namespace Tcdev.Dsm.View
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAnalyse = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -136,6 +137,7 @@ namespace Tcdev.Dsm.View
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnMoveUp = new System.Windows.Forms.ToolStripButton();
             this.btnMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.btnAddRule = new System.Windows.Forms.ToolStripButton();
             this.btnPartition = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnHighlightCyclic = new System.Windows.Forms.ToolStripButton();
@@ -181,7 +183,6 @@ namespace Tcdev.Dsm.View
             this.pageAssemblies.Controls.Add(this.label2);
             this.pageAssemblies.Controls.Add(this.groupBox1);
             this.pageAssemblies.Controls.Add(this.lblStatus);
-            this.pageAssemblies.Controls.Add(this.progressBar1);
             this.pageAssemblies.Controls.Add(this.label1);
             this.pageAssemblies.Controls.Add(this.btnAnalyse);
             this.pageAssemblies.Controls.Add(this.groupBox3);
@@ -196,12 +197,11 @@ namespace Tcdev.Dsm.View
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 44);
+            this.label2.Location = new System.Drawing.Point(19, 49);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(428, 15);
+            this.label2.Size = new System.Drawing.Size(326, 15);
             this.label2.TabIndex = 13;
-            this.label2.Text = "To start a new analysis select at least one assembly and click Run Analysis below" +
-                "";
+            this.label2.Text = "To start a new analysis select at least one assembly and click:";
             // 
             // groupBox1
             // 
@@ -209,9 +209,9 @@ namespace Tcdev.Dsm.View
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.checkedListBox1);
-            this.groupBox1.Location = new System.Drawing.Point(22, 170);
+            this.groupBox1.Location = new System.Drawing.Point(16, 77);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(790, 345);
+            this.groupBox1.Size = new System.Drawing.Size(510, 438);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Assemblies";
@@ -224,7 +224,7 @@ namespace Tcdev.Dsm.View
             this.checkedListBox1.CheckOnClick = true;
             this.checkedListBox1.Location = new System.Drawing.Point(6, 19);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(766, 310);
+            this.checkedListBox1.Size = new System.Drawing.Size(486, 400);
             this.checkedListBox1.Sorted = true;
             this.checkedListBox1.TabIndex = 4;
             this.checkedListBox1.ThreeDCheckBoxes = true;
@@ -239,18 +239,10 @@ namespace Tcdev.Dsm.View
             this.lblStatus.Size = new System.Drawing.Size(0, 15);
             this.lblStatus.TabIndex = 6;
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(564, 115);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(163, 19);
-            this.progressBar1.Step = 1;
-            this.progressBar1.TabIndex = 11;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 9);
+            this.label1.Location = new System.Drawing.Point(19, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(185, 15);
             this.label1.TabIndex = 7;
@@ -258,21 +250,22 @@ namespace Tcdev.Dsm.View
             // 
             // btnAnalyse
             // 
-            this.btnAnalyse.Location = new System.Drawing.Point(564, 86);
+            this.btnAnalyse.Location = new System.Drawing.Point(378, 44);
             this.btnAnalyse.Name = "btnAnalyse";
-            this.btnAnalyse.Size = new System.Drawing.Size(163, 24);
+            this.btnAnalyse.Size = new System.Drawing.Size(113, 24);
             this.btnAnalyse.TabIndex = 1;
             this.btnAnalyse.Text = "Run Analysis";
             this.btnAnalyse.Click += new System.EventHandler(this.btnAnalyse_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.chkHideNested);
             this.groupBox3.Controls.Add(this.chkExGlobal);
             this.groupBox3.Controls.Add(this.chkExCompName);
-            this.groupBox3.Location = new System.Drawing.Point(298, 72);
+            this.groupBox3.Location = new System.Drawing.Point(532, 77);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(260, 92);
+            this.groupBox3.Size = new System.Drawing.Size(260, 101);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Other options";
@@ -308,7 +301,7 @@ namespace Tcdev.Dsm.View
             this.chkExCompName.AutoSize = true;
             this.chkExCompName.Checked = true;
             this.chkExCompName.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkExCompName.Location = new System.Drawing.Point(11, 19);
+            this.chkExCompName.Location = new System.Drawing.Point(11, 18);
             this.chkExCompName.Name = "chkExCompName";
             this.chkExCompName.Size = new System.Drawing.Size(240, 19);
             this.chkExCompName.TabIndex = 9;
@@ -320,7 +313,7 @@ namespace Tcdev.Dsm.View
             // btnBrowse
             // 
             this.btnBrowse.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.Location = new System.Drawing.Point(227, 4);
+            this.btnBrowse.Location = new System.Drawing.Point(236, 9);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(67, 25);
             this.btnBrowse.TabIndex = 8;
@@ -332,16 +325,19 @@ namespace Tcdev.Dsm.View
             // 
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Location = new System.Drawing.Point(22, 72);
+            this.groupBox2.Enabled = false;
+            this.groupBox2.Location = new System.Drawing.Point(550, 406);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(260, 92);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Model Type";
+            this.groupBox2.Visible = false;
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
+            this.radioButton2.Enabled = false;
             this.radioButton2.Location = new System.Drawing.Point(11, 43);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(127, 19);
@@ -379,9 +375,9 @@ namespace Tcdev.Dsm.View
             // 
             this.panel2.Controls.Add(this.matrixControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 25);
+            this.panel2.Location = new System.Drawing.Point(0, 28);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(840, 505);
+            this.panel2.Size = new System.Drawing.Size(840, 502);
             this.panel2.TabIndex = 8;
             // 
             // panel1
@@ -390,17 +386,17 @@ namespace Tcdev.Dsm.View
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(840, 25);
+            this.panel1.Size = new System.Drawing.Size(840, 28);
             this.panel1.TabIndex = 7;
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Enabled = false;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
             this.toolStripSeparator1,
             this.btnMoveUp,
             this.btnMoveDown,
+            this.btnAddRule,
             this.btnPartition,
             this.toolStripSeparator2,
             this.btnHighlightCyclic,
@@ -450,6 +446,16 @@ namespace Tcdev.Dsm.View
             this.btnMoveDown.Size = new System.Drawing.Size(23, 22);
             this.btnMoveDown.Text = "toolStripButton1";
             this.btnMoveDown.ToolTipText = "Move Down";
+            // 
+            // btnAddRule
+            // 
+            this.btnAddRule.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddRule.Image = ((System.Drawing.Image)(resources.GetObject("btnAddRule.Image")));
+            this.btnAddRule.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddRule.Name = "btnAddRule";
+            this.btnAddRule.Size = new System.Drawing.Size(23, 22);
+            this.btnAddRule.Text = "toolStripButton1";
+            this.btnAddRule.ToolTipText = "Add rule for selected node";
             // 
             // btnPartition
             // 
@@ -555,9 +561,10 @@ namespace Tcdev.Dsm.View
             // 
             this.matrixControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.matrixControl1.Enabled = false;
+            this.matrixControl1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.matrixControl1.Location = new System.Drawing.Point(0, 0);
             this.matrixControl1.Name = "matrixControl1";
-            this.matrixControl1.Size = new System.Drawing.Size(840, 505);
+            this.matrixControl1.Size = new System.Drawing.Size(840, 502);
             this.matrixControl1.TabIndex = 7;
             // 
             // MainControl
@@ -661,20 +668,29 @@ namespace Tcdev.Dsm.View
                 if (_model == null)
                     _model = new DsmModel();
 
-                ICommand cmd = new CommandAnalyse(analyser, _model, UpdateProgress);
+                ICommand cmd = new CommandAnalyse(analyser, _model);
 
-                cmd.Execute();
-
-                if (cmd.Completed)
+                ModelessMessageBox msg = new ModelessMessageBox("Analysing");
+                try
                 {
-                    matrixControl1.Size = new Size(
-                        this.tabControl.ClientSize.Width,
-                        this.tabControl.ClientSize.Height - this.toolStrip1.Height);
 
-                    SetModel(_model);
+                    cmd.Execute(msg.UpdateProgress);
 
-                    this.pageAssemblies.Hide();
-                    this.tabControl.SelectedTab = this.pageResults;
+                    if (cmd.Completed)
+                    {
+                        matrixControl1.Size = new Size(
+                            this.tabControl.ClientSize.Width,
+                            this.tabControl.ClientSize.Height - this.toolStrip1.Height);
+
+                        SetModel(_model);
+
+                        this.pageAssemblies.Hide();
+                        this.tabControl.SelectedTab = this.pageResults;
+                    }
+                }
+                finally
+                {
+                    msg.Dispose();
                 }
 
                 this.Refresh();
@@ -732,21 +748,29 @@ namespace Tcdev.Dsm.View
                             newModel.Options = options;
                             analyser.Options = options;
 
-                            ICommand cmd = new CommandAnalyse( analyser, newModel, UpdateProgress );
-
-                            cmd.Execute();
-
-                            if (cmd.Completed)
+                            ModelessMessageBox msg = new ModelessMessageBox("Analysing");
+                            msg.Show();
+                            try
                             {
-                                matrixControl1.Size = new Size(
-                                    this.tabControl.ClientSize.Width,
-                                    this.tabControl.ClientSize.Height - this.toolStrip1.Height);
 
-                                SetModel( newModel );
-                               
-                                this.pageAssemblies.Hide();
-                                this.tabControl.SelectedTab = this.pageResults;
+
+                                ICommand cmd = new CommandAnalyse(analyser, newModel);
+
+                                cmd.Execute(null);
+
+                                if (cmd.Completed)
+                                {
+                                    matrixControl1.Size = new Size(
+                                        this.tabControl.ClientSize.Width,
+                                        this.tabControl.ClientSize.Height - this.toolStrip1.Height);
+
+                                    SetModel(newModel);
+
+                                    this.pageAssemblies.Hide();
+                                    this.tabControl.SelectedTab = this.pageResults;
+                                }
                             }
+                            finally { msg.Dispose(); }
 
                             this.Refresh();
                         }
@@ -759,7 +783,6 @@ namespace Tcdev.Dsm.View
                 ErrorDialog errdlg = new ErrorDialog(ex.ToString());
                 errdlg.ShowDialog();
                 errdlg.Dispose();
-                UpdateProgress(0, "Unable to complete analysis");
                     
             }
             finally
@@ -817,6 +840,10 @@ namespace Tcdev.Dsm.View
                 {
                     DoPartitioning();
                 }
+                else if (item == this.btnAddRule)
+                {
+                    matrixControl1.AddRule();
+                }
             }
             catch (Exception ex)
             {
@@ -833,7 +860,7 @@ namespace Tcdev.Dsm.View
 
             try
             {
-                cmd.Execute();
+                cmd.Execute(null);
             }
             catch (DsmException dsmEx)
             {
@@ -862,9 +889,10 @@ namespace Tcdev.Dsm.View
 
                 Refresh();
 
+                ModelessMessageBox msg = new ModelessMessageBox("Loading project file");
                 try
                 {
-                    cmd.Execute();
+                    cmd.Execute( msg.UpdateProgress );
 
                     if (cmd.Completed)
                     {
@@ -892,6 +920,7 @@ namespace Tcdev.Dsm.View
                 }
                 finally
                 {
+                    msg.Dispose();
                     csh.Reset();
                 }
             }
@@ -907,7 +936,7 @@ namespace Tcdev.Dsm.View
 
             try
             {
-                cmd.Execute();
+                cmd.Execute(null);
             }
             catch (Exception ex)
             {
@@ -932,7 +961,7 @@ namespace Tcdev.Dsm.View
 
             try
             {
-                cmd.Execute();
+                cmd.Execute(null);
 
                this.matrixControl1.Invalidate();
                 
@@ -987,15 +1016,15 @@ namespace Tcdev.Dsm.View
             DoProjectOpen(null);
         }
 
-        //-------------------------------------------------------------------------------------------------
-        public void UpdateProgress(int val, string message)
-        {
-            this.lblStatus.Text = message;
-            this.progressBar1.Value = val;
+        ////-------------------------------------------------------------------------------------------------
+        //public void UpdateProgress(int val, string message)
+        //{
+        //    this.lblStatus.Text = message;
+        //    this.progressBar1.Value = val;
 
-            this.lblStatus.Refresh();
-            this.progressBar1.Refresh();
-        }
+        //    this.lblStatus.Refresh();
+        //    this.progressBar1.Refresh();
+        //}
 
         //-------------------------------------------------------------------------------------------------
 
@@ -1015,7 +1044,7 @@ namespace Tcdev.Dsm.View
                 if (dr.Equals(DialogResult.Yes))
                 {
                     ICommand cmd = new CommandSave(_model);
-                    cmd.Execute();
+                    cmd.Execute(null);
                 }
                 else if (dr.Equals(DialogResult.Cancel))
                 {
@@ -1047,7 +1076,7 @@ namespace Tcdev.Dsm.View
                 if (dr.Equals(DialogResult.Yes))
                 {
                     ICommand cmd = new CommandSave(_model);
-                    cmd.Execute();
+                    cmd.Execute(null);
                 }
                 else
                 {

@@ -12,7 +12,6 @@ namespace Tcdev.Dsm.Commands
         IAnalyser _analyser;
         DsmModel  _model;
         bool      _done = false;
-        MainControl.ProgressUpdateDelegate _updateFunction;
 
         //-----------------------------------------------------------------------------------------
 
@@ -24,44 +23,40 @@ namespace Tcdev.Dsm.Commands
         //-----------------------------------------------------------------------------------------
         public CommandAnalyse(
             IAnalyser analyser, 
-            DsmModel model, 
-            MainControl.ProgressUpdateDelegate updateFunction )
+            DsmModel model)
         {
             _analyser = analyser;
             _model = model;
-            if (updateFunction == null )
-                _updateFunction = (int i, string x ) => Console.WriteLine( i + " : " + x );
-            else
-                _updateFunction = updateFunction;
+            
         }
 
         //------------------------------------------------------------------------------------------------------
 
-        public void Execute()
+        public void Execute(MainControl.ProgressUpdateDelegate updateFunction)
         {
             if (ValidateParameters())
             {
                 _analyser.Model = _model;
 
-                _updateFunction(0, "Loading assemblies");
+                updateFunction(0, "Loading assemblies");
                 var types = _analyser.LoadTypes();
 
-                _updateFunction(20, "Building module hierarchy");
+                updateFunction(20, "Building module hierarchy");
                 _model.BuildHierarchy( types);
 
-                _updateFunction(30, "Assigning IDs");
+                updateFunction(30, "Assigning IDs");
                 _model.AllocateIds();
 
-                _updateFunction(40, "Analysing inter-module relationships");
+                updateFunction(40, "Analysing inter-module relationships");
                 _analyser.AnalyseRelations();
 
-                _updateFunction(80, "Calculating subtotal weights");
+                updateFunction(80, "Calculating subtotal weights");
                 _model.CalculateParentWeights();
 
-                _updateFunction(90, "Looking for cyclic dependencies");
+                updateFunction(90, "Looking for cyclic dependencies");
                 _model.AnalyseCyclicDepedencies();
 
-                _updateFunction(100, "Analyse completed");
+                updateFunction(100, "Analyse completed");
 
                 _model.IsModified = true;
 

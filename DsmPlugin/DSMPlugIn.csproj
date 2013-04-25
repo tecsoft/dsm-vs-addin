@@ -258,6 +258,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\DependencyRules\DependencyRule.cs" />
+    <Compile Include="Model\DependencyRules\CannotUseRule.cs" />
+    <Compile Include="Model\DependencyRules\RuleManager.cs" />
     <Compile Include="Model\Partitionner.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
@@ -317,7 +320,20 @@
     <Compile Include="Model\Module.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\ModelessMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModelessMessageBox.Designer.cs">
+      <DependentUpon>ModelessMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModifyRuleDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModifyRuleDialog.Designer.cs">
+      <DependentUpon>ModifyRuleDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\NodePanel.cs" />
+    <Compile Include="View\TreeGridViewDataItem.cs" />
     <Compile Include="View\TypePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -377,6 +393,12 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModelessMessageBox.resx">
+      <DependentUpon>ModelessMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModifyRuleDialog.resx">
+      <DependentUpon>ModifyRuleDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -40,7 +40,10 @@ namespace Tcdev.Dsm.View
         /// </summary>
 		public TypePanel()
 		{
-			InitializeComponent();        
+			InitializeComponent();
+
+            Font sysFont = SystemFonts.MessageBoxFont;
+            this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
 
             _borderPen = new Pen(Brushes.DarkGray, 1);
             _fcPen     = new Pen(Brushes.Black, 1);
@@ -227,6 +230,15 @@ namespace Tcdev.Dsm.View
             {
                 g.FillRectangle(Controller.GetBackgroundColour(node, null), bounds);
             }
+
+            //g.FillPolygon(
+            //    Brushes.Red,
+            //   new Point[] { 
+            //       new Point(bounds.Right - 10, bounds.Top), 
+            //       new Point( bounds.Right, bounds.Top ),
+            //       new Point( bounds.Right, bounds.Top +10)
+            //   }
+            //    );
             
             if ( node.HasChildren )
             {
@@ -248,6 +260,8 @@ namespace Tcdev.Dsm.View
                 g.DrawString(module.Name + " - " + module.Id, GetNodeFont(node), Brushes.Black, 
                     bounds.Left + 2, bounds.Top + 2);
             }
+
+            
 
             g.DrawRectangle( _borderPen, bounds );
         }

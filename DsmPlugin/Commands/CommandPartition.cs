@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using Tcdev.Dsm.Model;
+using Tcdev.Dsm.View;
 
 namespace Tcdev.Dsm.Commands
 {
@@ -16,7 +17,7 @@ namespace Tcdev.Dsm.Commands
 
             
         }
-        public void Execute()
+        public void Execute(MainControl.ProgressUpdateDelegate updateFunction)
         {
             // show confirmation box
             if (_model.SelectedNode != null)

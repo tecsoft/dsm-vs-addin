@@ -65,6 +65,9 @@ namespace Tcdev.Dsm.View
             // Cet appel est requis par le Concepteur de formulaires Windows.Forms.
             InitializeComponent();
 
+            Font sysFont = SystemFonts.MessageBoxFont;
+            this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
+
             _displayOptions = new DsmDisplayOptions(this);
 
             _selector.Controller = this;
@@ -221,6 +224,23 @@ namespace Tcdev.Dsm.View
                 {
                     ConsumerNode.IsCollapsed = !ConsumerNode.IsCollapsed;
                     NodeListModified( true );
+                }
+            }
+        }
+
+        internal void AddRule()
+        {
+            if (MatrixModel.SelectedNode != null)
+            {
+                using (ModifyRuleDialog ruleDialog = new ModifyRuleDialog(MatrixModel))
+                {
+                    DialogResult result = ruleDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        MatrixModel.IsModified = true;
+                        this.Invalidate();
+                        Update();
+                    }
                 }
             }
         }
@@ -715,7 +735,7 @@ namespace Tcdev.Dsm.View
             CursorStateHelper csh = new CursorStateHelper(this, Cursors.WaitCursor);
             try
             {
-                cmd.Execute();
+                cmd.Execute(null);
 
                this.Invalidate();
                 

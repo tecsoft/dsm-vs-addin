@@ -40,12 +40,15 @@ namespace Tcdev.Dsm.View
         /// </summary>
         static DsmDisplayOptions()
         {
-            _zoomSettings[0] = new ZoomLevel(35, 14, new Font("tahoma", 6));
-            _zoomSettings[1] = new ZoomLevel(36, 16, new Font("tahoma", 6));
-            _zoomSettings[2] = new ZoomLevel(37, 17, new Font("tahoma", 7));
-            _zoomSettings[3] = new ZoomLevel(38, 18, new Font("tahoma", 8));
-            _zoomSettings[4] = new ZoomLevel(39, 19, new Font("tahoma", 8));
-            _zoomSettings[5] = new ZoomLevel(40, 21, new Font("tahoma", 9));
+            Font sysFont = SystemFonts.MessageBoxFont;
+            //this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
+
+            _zoomSettings[0] = new ZoomLevel(35, 14, new Font(sysFont.Name, 6));
+            _zoomSettings[1] = new ZoomLevel(36, 16, new Font(sysFont.Name, 6));
+            _zoomSettings[2] = new ZoomLevel(37, 17, new Font(sysFont.Name, 7));
+            _zoomSettings[3] = new ZoomLevel(38, 18, new Font(sysFont.Name, 8));
+            _zoomSettings[4] = new ZoomLevel(39, 19, new Font(sysFont.Name, 8));
+            _zoomSettings[5] = new ZoomLevel(40, 21, new Font(sysFont.Name, 9));
         }
 
         //-------------------------------------------------------------------------------------------

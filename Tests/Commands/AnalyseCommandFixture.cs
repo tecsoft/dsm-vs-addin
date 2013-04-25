@@ -37,15 +37,15 @@ namespace Tcdev.Dsm.Tests.Commands
             //model.CreateModule("type1", "namespace", null, false);
             int i = model.BuildNumber;
 
-            CommandAnalyse sut = new CommandAnalyse(_analyser, model, null );
+            CommandAnalyse sut = new CommandAnalyse(_analyser, model);
 
-            sut.Execute();
+            sut.Execute(null);
 
            //Assert.IsTrue(model.BuildNumber == i + 1);
 
             model.CreateModule("type2", "namespace", null, false);
 
-            sut.Execute();
+            sut.Execute(null);
 
             //Assert.IsTrue(model.BuildNumber == i + 2);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using Tcdev.Dsm.View;
 
 namespace Tcdev.Dsm.Commands
 {
@@ -31,7 +32,7 @@ namespace Tcdev.Dsm.Commands
 
         //-----------------------------------------------------------------------------------------
 
-        public void Execute()
+        public void Execute(MainControl.ProgressUpdateDelegate updateFunction)
         {
             try
             {
@@ -39,10 +40,23 @@ namespace Tcdev.Dsm.Commands
 
                 if (filename != null)
                 {
+                    if (updateFunction != null) 
+                        updateFunction(0, filename);
+
                     _model = Model.DsmModel.LoadModel(filename, _model);
+
+                    if (updateFunction != null)
+                        updateFunction(33, filename );
+
                     _model.AllocateIds();
-                    //_model.CalculateParentWeights();
+
+                    if (updateFunction != null)
+                        updateFunction(33, filename);
+
                     _model.AnalyseCyclicDepedencies();
+
+                    if (updateFunction != null)
+                        updateFunction(100, "done");
 
                     _done = true;
                 }

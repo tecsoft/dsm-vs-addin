@@ -67,6 +67,7 @@
     <Compile Include="CecilAnalyser\MarkFieldsFixture.cs" />
     <Compile Include="CecilAnalyser\MarkInterfacesFixture.cs" />
     <Compile Include="Commands\AnalyseCommandFixture.cs" />
+    <Compile Include="DsmModel\RuleManagerFixture.cs" />
     <Compile Include="DsmModel\ModelLoadFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

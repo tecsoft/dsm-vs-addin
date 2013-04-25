@@ -49,6 +49,9 @@ namespace Tcdev.Dsm.View
 			// Cet appel est requis par le Concepteur de formulaires Windows.Forms.
 			InitializeComponent();
 
+            Font sysFont = SystemFonts.MessageBoxFont;
+            this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
+
             _borderPen     = new Pen(Brushes.DarkGray, 1);
             _fcPen         = new Pen(Brushes.Black, 1);
             _fcBrush       = Brushes.Black;
