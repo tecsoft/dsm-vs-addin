@@ -27,11 +27,11 @@ namespace Tcdev.Dsm.Tests
             base.TestSetup();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            base.TearDown();
-        }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    base.TearDown();
+        //}
         
         [Test]
         public void Test_Consumer_Is_Consumer_Of_Provider_As_Field_Type()

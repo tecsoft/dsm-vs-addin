@@ -20,11 +20,11 @@ namespace Tcdev.Dsm.Tests.Commands
             _analyser = new CecilAnalyser();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            _analyser.Dispose();
-        }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    _analyser.Dispose();
+        //}
         [Test]
         public void Test_Create()
         {

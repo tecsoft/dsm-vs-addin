@@ -123,9 +123,10 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="paritionToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        R0lGODlhEAAQAPMAAAAAABsBAURERCZ9/6qqqvK//////9UcHP//////////////////////////////
-        /yH5BAEAAAcALAAAAAAQABAAAARH8MhJqxQ4ay2J/yDYeUVpnsRInMXgDkV6EC5ZwnHc1etdrjLaiwTS
-        zV4DG2qHTPZ+O5BzeRS2eNCq6zo10k7ND7M59FjOlAgAOw==
+        R0lGODlhEAAQAIMAAAAAABsBAURERCZ9/6qqqvK//////9UcHP//////////////////////////////
+        /yH/C05FVFNDQVBFMi4wAwEBAAAh+QQBAAAHACwAAAAAEAAQAAAIZgAPCBxIsKBAAQgTKlQokIDDhxAh
+        NnRYoKLFiwQmErhYYIDHAQUyHiDgkWJFkCFDNiy58WTFjSJJfqQIUeXIjwNMYlyJM2fLlysh+tx5U2ZH
+        lkCLejw61CbJiz0f8uw506HBqwQDAgA7
 </value>
   </data>
 </root>

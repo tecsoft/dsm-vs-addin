@@ -9,6 +9,9 @@ using Tcdev.Dsm.Model;
 using Tcdev.Collections.Generic;
 using Tcdev.Dsm.Commands;
 using Tcdev.Outil;
+using System.IO;
+using System.Text;
+using System.Xml;
 
 
 namespace Tcdev.Dsm.View
@@ -36,7 +39,8 @@ namespace Tcdev.Dsm.View
         private Brush _brush1 = new SolidBrush( Color.FromArgb(217,231,246) ); //Brushes.LightCyan;
         private Brush _brush2 = new SolidBrush(Color.FromArgb(246, 231, 217)); //Brushes.BlanchedAlmond;
         private Brush _brush3 = new SolidBrush(Color.FromArgb(244, 217, 246)); //Brushes.Lavender;
-        private Brush _brush4 = new SolidBrush(Color.FromArgb(217, 246, 231)); //Brushes.MistyRose;
+        private Brush _brush4 = new SolidBrush(Color.FromArgb(217, 246, 231));
+        private ToolStripMenuItem cntxtItemShowRelationships; //Brushes.MistyRose;
 
         public Tcdev.Dsm.Model.DsmModel MatrixModel;
 
@@ -196,6 +200,22 @@ namespace Tcdev.Dsm.View
         internal void SelectNode(Tree<Module>.Node node)
         {
             MatrixModel.SelectedNode = node;
+            MatrixModel.SelectedProviderNode = null;
+            MatrixModel.SelectedConsumerNode = null;
+            NodeListModified(false);
+            EnableButtons();
+        }
+
+        internal void SelectProviderNode(Tree<Module>.Node node)
+        {
+            MatrixModel.SelectedProviderNode = node;
+            NodeListModified(false);
+            EnableButtons();
+        }
+
+        internal void SelectConsumerNode(Tree<Module>.Node node)
+        {
+            MatrixModel.SelectedConsumerNode = node;
             NodeListModified(false);
             EnableButtons();
         }
@@ -381,6 +401,7 @@ namespace Tcdev.Dsm.View
             this.cntxtItemMoveUp = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtItemMoveDown = new System.Windows.Forms.ToolStripMenuItem();
             this.paritionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cntxtItemShowRelationships = new System.Windows.Forms.ToolStripMenuItem();
             this._selector = new Tcdev.Dsm.View.TypePanel();
             this._matrix = new Tcdev.Dsm.View.MatrixPanel();
             this._splitContainer.Panel1.SuspendLayout();
@@ -436,18 +457,19 @@ namespace Tcdev.Dsm.View
             this._cntxtMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cntxtItemMoveUp,
             this.cntxtItemMoveDown,
-            this.paritionToolStripMenuItem});
+            this.paritionToolStripMenuItem,
+            this.cntxtItemShowRelationships});
             this._cntxtMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this._cntxtMenuStrip.Name = "contextMenuStrip1";
             this._cntxtMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this._cntxtMenuStrip.Size = new System.Drawing.Size(142, 70);
+            this._cntxtMenuStrip.Size = new System.Drawing.Size(167, 114);
             // 
             // cntxtItemMoveUp
             // 
             this.cntxtItemMoveUp.Enabled = false;
             this.cntxtItemMoveUp.Image = global::Tcdev.Dsm.Properties.Resources.UpArrow1;
             this.cntxtItemMoveUp.Name = "cntxtItemMoveUp";
-            this.cntxtItemMoveUp.Size = new System.Drawing.Size(141, 22);
+            this.cntxtItemMoveUp.Size = new System.Drawing.Size(166, 22);
             this.cntxtItemMoveUp.Text = "Move Up";
             this.cntxtItemMoveUp.Click += new System.EventHandler(this.cntxtItemMoveUp_Click);
             // 
@@ -456,7 +478,7 @@ namespace Tcdev.Dsm.View
             this.cntxtItemMoveDown.Enabled = false;
             this.cntxtItemMoveDown.Image = global::Tcdev.Dsm.Properties.Resources.DownArrow;
             this.cntxtItemMoveDown.Name = "cntxtItemMoveDown";
-            this.cntxtItemMoveDown.Size = new System.Drawing.Size(141, 22);
+            this.cntxtItemMoveDown.Size = new System.Drawing.Size(166, 22);
             this.cntxtItemMoveDown.Text = "Move Down";
             this.cntxtItemMoveDown.Click += new System.EventHandler(this.cntxtItemMoveDown_Click);
             // 
@@ -465,13 +487,22 @@ namespace Tcdev.Dsm.View
             this.paritionToolStripMenuItem.Enabled = false;
             this.paritionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("paritionToolStripMenuItem.Image")));
             this.paritionToolStripMenuItem.Name = "paritionToolStripMenuItem";
-            this.paritionToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.paritionToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.paritionToolStripMenuItem.Text = "Partition";
             this.paritionToolStripMenuItem.Click += new System.EventHandler(this.paritionToolStripMenuItem_Click);
+            // 
+            // cntxtItemShowRelationships
+            // 
+            this.cntxtItemShowRelationships.Enabled = false;
+            this.cntxtItemShowRelationships.Name = "cntxtItemShowRelationships";
+            this.cntxtItemShowRelationships.Size = new System.Drawing.Size(166, 22);
+            this.cntxtItemShowRelationships.Text = "Show Relationships";
+            this.cntxtItemShowRelationships.Click += new System.EventHandler(this.showRelationshipsToolStripMenuItem_Click);
             // 
             // _selector
             // 
             this._selector.BackColor = System.Drawing.SystemColors.Control;
+            this._selector.Font = new System.Drawing.Font("Segoe UI", 9F);
             this._selector.ForeColor = System.Drawing.SystemColors.ControlText;
             this._selector.Location = new System.Drawing.Point(0, 3);
             this._selector.Name = "_selector";
@@ -482,6 +513,7 @@ namespace Tcdev.Dsm.View
             // 
             this._matrix.AllowDrop = true;
             this._matrix.BackColor = System.Drawing.SystemColors.Control;
+            this._matrix.Font = new System.Drawing.Font("Segoe UI", 9F);
             this._matrix.Location = new System.Drawing.Point(1, 3);
             this._matrix.Name = "_matrix";
             this._matrix.Size = new System.Drawing.Size(501, 216);
@@ -693,10 +725,17 @@ namespace Tcdev.Dsm.View
             main.EnableNodeUpButton = up;
 
             bool canPartition = (MatrixModel.SelectedNode != null && 
-                MatrixModel.SelectedNode.Children.Count > 1);
+                MatrixModel.SelectedNode.Children.Count > 1 &&
+                MatrixModel.SelectedProviderNode != null &&
+                MatrixModel.SelectedConsumerNode != null);
 
             this.paritionToolStripMenuItem.Enabled = canPartition;
             main.EnablePartitionButton = canPartition;
+
+            if (MatrixModel.SelectedConsumerNode != null && MatrixModel.SelectedProviderNode != null)
+            {
+                this.cntxtItemShowRelationships.Enabled = true;
+            }
         }
 
         //-------------------------------------------------------------------------------------------
@@ -750,6 +789,76 @@ namespace Tcdev.Dsm.View
             {
                 csh.Reset();
             }        
+        }
+
+        void WritePreamble(StreamWriter sw)
+        {
+            sw.WriteLine("<html><head><style>");
+            sw.WriteLine("body    { font-family:  Arial, Helvetica; font-size: 90%; color: #444444; }");
+            sw.WriteLine("b       { color: #000000; font-weight: bold; }");
+            sw.WriteLine("a       { color: #000080; }");
+            sw.WriteLine("a:hover { color: #0000c0; }");
+            sw.WriteLine("h1      { font-size: 100%; }");
+            sw.WriteLine("h2      { font-size: 95%; }");
+            sw.WriteLine("h3      { font-size: 90%; }");
+            sw.WriteLine("ul	{ font-size: 90%; }");
+            sw.WriteLine("</style></head><body>");
+        }
+
+        private void showRelationshipsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CursorStateHelper csh = new CursorStateHelper(this, Cursors.WaitCursor);
+            MemoryStream ms = new MemoryStream();
+            StreamWriter sw = new StreamWriter(ms);
+            try
+            {
+                var relations = MatrixModel.FindRelations(
+                    MatrixModel.SelectedProviderNode,
+                    MatrixModel.SelectedConsumerNode );
+
+               
+
+                //StringBuilder builder = new StringBuilder();
+                
+                WritePreamble(sw);
+                XmlDocument xhtml = new XmlDocument();
+                XmlNode root = xhtml.CreateNode(XmlNodeType.Element, "div", null);
+                xhtml.AppendChild(root);
+
+                XmlElement el = xhtml.CreateElement("h1");
+                root.AppendChild(el)
+                    .AppendChild(xhtml.CreateTextNode("Nodes ...."));
+                
+                XmlNode list = root.AppendChild(xhtml.CreateElement("ul"));
+                foreach (var item in relations)
+                {
+                    string li = string.Format("{0} -> {1} weight: {2} cyclic:{3}",
+                        item.Value.Consumer, item.Key, item.Value.Weight, item.Value.IsCyclic);
+
+                    list.AppendChild(xhtml.CreateElement("li")).AppendChild(xhtml.CreateTextNode(li)); 
+                }
+                sw.WriteLine(xhtml.OuterXml);
+
+                sw.Flush();
+
+                HtmlViewer viewer = new HtmlViewer(ms);
+                viewer.Show();
+
+                this.Invalidate();
+
+            }
+            catch (Exception ex)
+            {
+                ErrorDialog errdlg = new ErrorDialog(ex.ToString());
+                errdlg.ShowDialog();
+                errdlg.Dispose();
+            }
+            finally
+            {
+                //ms.Close();
+                //sw.Close();
+                csh.Reset();
+            }
         }
         //-------------------------------------------------------------------------------------------
     }

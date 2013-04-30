@@ -30,11 +30,11 @@ namespace Tcdev.Dsm.Tests
             base.TestSetup();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            base.TearDown();
-        }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    base.TearDown();
+        //}
         
         [Test]
         public void Test_Consumer_Consumes_MEthod_With_ReturnType_Provider()

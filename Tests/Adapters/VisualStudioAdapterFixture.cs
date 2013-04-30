@@ -19,7 +19,7 @@ namespace Tcdev.Dsm.Tests.Adapters
             sut.ProjectPath = new DirectoryInfo( "..");
             sut.ProjectName = "VisualStudioAdapterFixture";
 
-            using( IAnalyser analyser = sut.GetAnalyser() )
+            IAnalyser analyser = sut.GetAnalyser();
                 Assert.IsFalse(analyser.ProjectFile.Exists);
         }
 
@@ -43,7 +43,7 @@ namespace Tcdev.Dsm.Tests.Adapters
             }
             finally
             {
-                analyser.Dispose();
+                //analyser.Dispose();
                 fi.Delete();
             }
 

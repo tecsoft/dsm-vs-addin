@@ -60,6 +60,7 @@ namespace Tcdev.Dsm.View
         private GroupBox groupBox1;
         private Label label2;
         private ToolStripButton btnAddRule;
+        private ToolStripButton btnMacroView;
         IAdapter _adapter;
 
         //-------------------------------------------------------------------------------------------------
@@ -149,6 +150,7 @@ namespace Tcdev.Dsm.View
             this.itmZoom5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnReports = new System.Windows.Forms.ToolStripButton();
+            this.btnMacroView = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.matrixControl1 = new Tcdev.Dsm.View.MatrixControl();
             this.tabControl.SuspendLayout();
@@ -375,9 +377,9 @@ namespace Tcdev.Dsm.View
             // 
             this.panel2.Controls.Add(this.matrixControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 28);
+            this.panel2.Location = new System.Drawing.Point(0, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(840, 502);
+            this.panel2.Size = new System.Drawing.Size(840, 500);
             this.panel2.TabIndex = 8;
             // 
             // panel1
@@ -386,7 +388,7 @@ namespace Tcdev.Dsm.View
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(840, 28);
+            this.panel1.Size = new System.Drawing.Size(840, 30);
             this.panel1.TabIndex = 7;
             // 
             // toolStrip1
@@ -402,7 +404,8 @@ namespace Tcdev.Dsm.View
             this.btnHighlightCyclic,
             this.btnZoom,
             this.toolStripSeparator3,
-            this.btnReports});
+            this.btnReports,
+            this.btnMacroView});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -456,6 +459,7 @@ namespace Tcdev.Dsm.View
             this.btnAddRule.Size = new System.Drawing.Size(23, 22);
             this.btnAddRule.Text = "toolStripButton1";
             this.btnAddRule.ToolTipText = "Add rule for selected node";
+            this.btnAddRule.Visible = false;
             // 
             // btnPartition
             // 
@@ -557,6 +561,16 @@ namespace Tcdev.Dsm.View
             this.btnReports.Size = new System.Drawing.Size(23, 22);
             this.btnReports.Text = "Generate Report";
             // 
+            // btnMacroView
+            // 
+            this.btnMacroView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnMacroView.Image = ((System.Drawing.Image)(resources.GetObject("btnMacroView.Image")));
+            this.btnMacroView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnMacroView.Name = "btnMacroView";
+            this.btnMacroView.Size = new System.Drawing.Size(23, 22);
+            this.btnMacroView.Text = "macro view";
+            this.btnMacroView.Visible = false;
+            // 
             // matrixControl1
             // 
             this.matrixControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -564,7 +578,7 @@ namespace Tcdev.Dsm.View
             this.matrixControl1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.matrixControl1.Location = new System.Drawing.Point(0, 0);
             this.matrixControl1.Name = "matrixControl1";
-            this.matrixControl1.Size = new System.Drawing.Size(840, 502);
+            this.matrixControl1.Size = new System.Drawing.Size(840, 500);
             this.matrixControl1.TabIndex = 7;
             // 
             // MainControl
@@ -655,8 +669,8 @@ namespace Tcdev.Dsm.View
 
         public void ReAnalyse()
         {
-            using (IAnalyser analyser = _adapter.GetAnalyser())
-            {
+            IAnalyser analyser = _adapter.GetAnalyser();
+           // {
                 TabPage assemblyPage = this.tabControl.TabPages[0];
 
                 // Set assemblies to be analysed
@@ -694,7 +708,7 @@ namespace Tcdev.Dsm.View
                 }
 
                 this.Refresh();
-            }
+            //}
         }
 
         public void btnAnalyse_Click(object sender, System.EventArgs e)
@@ -725,8 +739,8 @@ namespace Tcdev.Dsm.View
                     {
                         this.Refresh();
 
-                        using (IAnalyser analyser = _adapter.GetAnalyser())
-                        {
+                        IAnalyser analyser = _adapter.GetAnalyser();
+                        //{
                             TabPage assemblyPage = this.tabControl.TabPages[0];
 
                             // Set assemblies to be analysed
@@ -773,7 +787,7 @@ namespace Tcdev.Dsm.View
                             finally { msg.Dispose(); }
 
                             this.Refresh();
-                        }
+                        //}
                     }
                 }
                 
@@ -843,6 +857,14 @@ namespace Tcdev.Dsm.View
                 else if (item == this.btnAddRule)
                 {
                     matrixControl1.AddRule();
+                }
+                else if (item == this.btnMacroView)
+                {
+                    MacroView macroView = new MacroView();
+                    macroView.Model = _model;
+                    macroView.Build();
+                    macroView.Show();
+                    macroView.Refresh();
                 }
             }
             catch (Exception ex)

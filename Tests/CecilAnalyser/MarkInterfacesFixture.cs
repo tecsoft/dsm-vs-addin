@@ -28,11 +28,11 @@ namespace Tcdev.Dsm.Tests
             base.TestSetup();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            base.TearDown();
-        }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    base.TearDown();
+        //}
 
         [Test]
         public void Test_Independent_Class_Has_No_Relation_To_Interface()

@@ -165,5 +165,10 @@ namespace Tcdev.Dsm.Model
             return this.FullName == other.FullName;
         }
 
+        public override string ToString()
+        {
+            return FullName;
+        }
+
 	}
 }

@@ -109,11 +109,12 @@ namespace Tcdev.Dsm.View
             // 
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Name = "MatrixPanel";
-            this.Size = new System.Drawing.Size( 669, 366 );
-            this.DoubleClick += new System.EventHandler( this.MatrixPanel_DoubleClick );
-            this.MouseLeave += new System.EventHandler( this.MatrixPanel_MouseLeave );
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler( this.MatrixPanel_MouseMove );
-            this.ResumeLayout( false );
+            this.Size = new System.Drawing.Size(669, 366);
+            this.DoubleClick += new System.EventHandler(this.MatrixPanel_DoubleClick);
+            this.MouseLeave += new System.EventHandler(this.MatrixPanel_MouseLeave);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MatrixPanel_MouseMove);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MatrixPanel_MouseClick);
+            this.ResumeLayout(false);
 
 		}
 		#endregion
@@ -559,6 +560,34 @@ catch(Exception ex )
                 //    Controller.ExpandSelectedNode();
                 //}
             //}
+        }
+
+        private void MatrixPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (this.Controller.Enabled)
+            {
+                NodePanel providerNodePanel = _hLayout.LocatePanel(e.Location);
+                NodePanel consumerNodePanel = _vLayout.LocatePanel(e.Location);
+
+                if (providerNodePanel != null && consumerNodePanel != null )
+                {
+                    Controller.SelectProviderNode(providerNodePanel.Node);
+                    Controller.SelectConsumerNode(consumerNodePanel.Node);
+
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        if (Controller.ContextMenuIsVisible)
+                        {
+                            Controller.HideContextMenu();
+                            this.Invalidate();
+                        }
+                        else
+                        {
+                            Controller.ShowContextMenu(this.PointToScreen(e.Location));
+                        }
+                    }
+                }
+            }
         }
 	}
 }

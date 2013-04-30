@@ -16,13 +16,23 @@ namespace Tcdev.Dsm.View
     public partial class HtmlViewer : Form
     {
         /// <summary>
-        /// Create a form with content provided at the uri
+        /// Create a form with content provided in the given stream
         /// </summary>
         /// <param name="uri"></param>
-        public HtmlViewer(string uri)
+        public HtmlViewer(Stream stream)
         {
             InitializeComponent();
-            webBrowser1.Url = new Uri(uri);
+            stream.Position = 0;
+            webBrowser1.DocumentStream = stream;
+            //webBrowser1.Navigating += new WebBrowserNavigatingEventHandler(webBrowser1_Navigating);
+            webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
+        }
+
+        
+
+        void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            webBrowser1.DocumentStream.Close();
         }
         //-------------------------------------------------------------------------------------------------------------
         HtmlViewer()
@@ -47,16 +57,23 @@ namespace Tcdev.Dsm.View
             dlg.OverwritePrompt = true;
             dlg.Filter = "Html (*.html)|*.html|All files (*.*)|*.*";
 
-            FileInfo fi = new FileInfo(webBrowser1.Url.LocalPath);
+            //FileInfo fi = new FileInfo(webBrowser1.Url.LocalPath);
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                FileStream fs = new FileStream(dlg.FileName, FileMode.Create);
                 try
                 {
-                    fi.CopyTo( dlg.FileName, true );
+                    
+                    Byte[] bytes = new Byte[webBrowser1.DocumentStream.Length];
+                    webBrowser1.DocumentStream.Read(bytes, 0, bytes.Length);
+                    fs.Write(bytes, 0, bytes.Length);
+                    fs.Flush();
+                    
+                    //fi.CopyTo( dlg.FileName, true );
 
-                    this.Text = "DSM Report - " +  dlg.FileName;
-                    webBrowser1.Url = new Uri(dlg.FileName);
+                    //this.Text = "DSM Report - " +  dlg.FileName;
+                    //webBrowser1.Url = new Uri(dlg.FileName);
                 }
                 catch (System.IO.IOException ioe)
                 {
@@ -67,6 +84,11 @@ namespace Tcdev.Dsm.View
                 {
                     ErrorDialog dlgE = new ErrorDialog(ex.ToString());
                     dlgE.ShowDialog();
+                }
+                finally
+                {
+                    fs.Close();
+                    webBrowser1.DocumentStream.Close();
                 }
             }
         }

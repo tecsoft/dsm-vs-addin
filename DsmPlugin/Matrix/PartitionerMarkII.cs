@@ -25,7 +25,7 @@ namespace Tcdev.Dsm.Matrix
         /*
          * DEBUG variables
          */
-        static Logger _log = new Logger(Path.Combine( Path.GetTempPath(), "Partitioner.txt" ) );
+        //static Logger _log = new Logger(Path.Combine( Path.GetTempPath(), "Partitioner.txt" ) );
         int _accepted = 0;
         int _rejected = 0;
         #endregion
@@ -52,7 +52,7 @@ namespace Tcdev.Dsm.Matrix
             _rejected = 0;
 
             DateTime start = DateTime.Now;
-            _log.Trace("Starting Partitioning ");
+            System.Diagnostics.Debug.WriteLine("Starting Partitioning ");
 
             // Craete the starting vector
             Vector vector = new Vector(_sm.Size);
@@ -67,12 +67,12 @@ namespace Tcdev.Dsm.Matrix
                 b.Append(vector.Get(i)).Append(", ");
             }
 
-            _log.Trace(b.ToString());
-            _log.Trace(String.Format("Permutations accepted: {0}", _accepted));
-            _log.Trace(String.Format("Permutations rejected: {0}", _rejected));
+            System.Diagnostics.Debug.WriteLine(b.ToString());
+            System.Diagnostics.Debug.WriteLine(String.Format("Permutations accepted: {0}", _accepted));
+            System.Diagnostics.Debug.WriteLine(String.Format("Permutations rejected: {0}", _rejected));
 
             TimeSpan t = DateTime.Now - start;
-            _log.Trace("Partition completed in : " + t.TotalSeconds);
+            System.Diagnostics.Debug.WriteLine("Partition completed in : " + t.TotalSeconds);
 
             return vector;
         }

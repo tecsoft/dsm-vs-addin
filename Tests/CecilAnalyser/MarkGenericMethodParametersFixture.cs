@@ -30,11 +30,11 @@ namespace Tcdev.Dsm.Tests
             base.TestSetup();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            base.TearDown();
-        }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    base.TearDown();
+        //}
         
         [Test]
         public void Test_Consumer_Consumes_Method_With_Generic_Parameter_Constrained_As_Provider()

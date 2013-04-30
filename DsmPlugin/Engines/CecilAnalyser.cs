@@ -13,7 +13,7 @@ namespace Tcdev.Dsm.Engine
     /// One type of Analyser engine - one which uses the Reflector API to analyse the call _matrix
     /// betwen types in the Assemblies made known to it
     /// </summary>
-    public  class CecilAnalyser : IAnalyser, IDisposable
+    public  class CecilAnalyser : IAnalyser//, IDisposable
     {
         private IList _assemblies;
 
@@ -23,7 +23,7 @@ namespace Tcdev.Dsm.Engine
         Dictionary< string, Tcdev.Dsm.Model.Module> _modules;
         IList<Mono.Cecil.TypeDefinition> _typeList;
         private Tcdev.Dsm.Model.DsmModel          _model;
-        private static Logger                     _log;
+        //private static Logger                     _log;
         private DsmOptions                        _options;
 
         public Dictionary<string, Tcdev.Dsm.Model.Module> Modules
@@ -39,8 +39,8 @@ namespace Tcdev.Dsm.Engine
         //-------------------------------------------------------------------------------------------------
         public CecilAnalyser()
         {
-            _log = new Logger(Path.Combine( Path.GetTempPath(), "log.txt" ) );
-            _log.Trace("FRAMEWORK ANALYSER : New Analysis : " + DateTime.Now);
+            //_log = new Logger(Path.Combine( Path.GetTempPath(), "log.txt" ) );
+            System.Diagnostics.Debug.WriteLine("FRAMEWORK ANALYSER : New Analysis : " + DateTime.Now);
 
             _modules    = new Dictionary<string, Tcdev.Dsm.Model.Module>();
             _typeList = new List<Mono.Cecil.TypeDefinition>();
@@ -98,7 +98,7 @@ namespace Tcdev.Dsm.Engine
                 FileInfo fi = new FileInfo(target.FullPath );
                 if (!fi.Exists)
                 {
-                    _log.Trace("Assembly not found: " + target.FullPath);
+                    System.Diagnostics.Debug.WriteLine("Assembly not found: " + target.FullPath);
                 }
                 else
                 {
@@ -114,7 +114,7 @@ namespace Tcdev.Dsm.Engine
 
             foreach( Target target in _assemblies )
             {
-                _log.Trace("Reading Assembly: " + target.FullPath);
+                System.Diagnostics.Debug.WriteLine("Reading Assembly: " + target.FullPath);
 
                 try
                 {
@@ -136,7 +136,7 @@ namespace Tcdev.Dsm.Engine
                 }
                 catch (Exception e)
                 {
-                    _log.Trace(e.ToString());
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
                     //throw e;
                 }
             }
@@ -148,7 +148,7 @@ namespace Tcdev.Dsm.Engine
         {
             if ( !ExcludeType( typeDecl ) )
             {
-                _log.Trace( "Type found: " + typeDecl.ToString() );
+                System.Diagnostics.Debug.WriteLine( "Type found: " + typeDecl.ToString() );
 
                 if ( !_modules.ContainsKey( /*typeDecl.GUID*/ typeDecl.FullName ) )
                 {
@@ -168,7 +168,7 @@ namespace Tcdev.Dsm.Engine
                     {
                         if ( !_modules.ContainsKey( nestedType.FullName) )
                         {
-                            _log.Trace( " Nested type found: " + nestedType.ToString() );
+                            System.Diagnostics.Debug.WriteLine( " Nested type found: " + nestedType.ToString() );
 
                             _modules.Add(
                                 nestedType.FullName,
@@ -187,7 +187,7 @@ namespace Tcdev.Dsm.Engine
                 }
                 catch
                 {
-                    _log.Trace( "Resolution exception of GetNestedTypes" );
+                    System.Diagnostics.Debug.WriteLine( "Resolution exception of GetNestedTypes" );
                 }
             }
         }
@@ -195,14 +195,14 @@ namespace Tcdev.Dsm.Engine
         //-------------------------------------------------------------------------------------------------
         public void AnalyseRelations()
         {
-            _log.Trace("Starting Analysis ...");
+            System.Diagnostics.Debug.WriteLine("Starting Analysis ...");
 
             foreach( Mono.Cecil.TypeDefinition typeDecl in _typeList )
             {
                 AnalyseType(typeDecl);
             }
 
-            _log.Trace("AnalyseRelations completed : " + DateTime.Now);
+            System.Diagnostics.Debug.WriteLine("AnalyseRelations completed : " + DateTime.Now);
         }
 
         //-----------------------------------------------------------------------------------------
@@ -232,13 +232,13 @@ namespace Tcdev.Dsm.Engine
 
         void AnalyseTypeMethods(Mono.Cecil.TypeDefinition typeDecl)
         {
-            _log.Trace( typeDecl.Name + " Methods ...");
+            System.Diagnostics.Debug.WriteLine( typeDecl.Name + " Methods ...");
             
             try
             {  
                 foreach( Mono.Cecil.MethodDefinition method in typeDecl.Methods )
                 {
-                    _log.Trace(method.Name );
+                    System.Diagnostics.Debug.WriteLine(method.Name );
 
                     AnalyseMethodBody(typeDecl, method);
                     MarkGenericMethodParameters(typeDecl, method);
@@ -248,7 +248,7 @@ namespace Tcdev.Dsm.Engine
             }
             catch
             {
-                _log.Trace( "Resolution Exception in AnalyseTypeMethods" );
+                System.Diagnostics.Debug.WriteLine( "Resolution Exception in AnalyseTypeMethods" );
             }
         }
 
@@ -256,7 +256,7 @@ namespace Tcdev.Dsm.Engine
 
         public void MarkMethodReturnType( Mono.Cecil.TypeDefinition typeDecl, Mono.Cecil.MethodDefinition method )
         {
-            _log.Trace("Return Type " + method.ReturnType);
+            System.Diagnostics.Debug.WriteLine("Return Type " + method.ReturnType);
 
             try
             {
@@ -266,7 +266,7 @@ namespace Tcdev.Dsm.Engine
             }
             catch
             {
-                _log.Trace( "Resolution exception MarkMethodReturnType" );
+                System.Diagnostics.Debug.WriteLine( "Resolution exception MarkMethodReturnType" );
             }
         }
 
@@ -274,20 +274,20 @@ namespace Tcdev.Dsm.Engine
 
         public void MarkMethodParameters( Mono.Cecil.TypeDefinition typeDecl, Mono.Cecil.MethodDefinition method )
         {
-            _log.Trace("Parameters ...");
+            System.Diagnostics.Debug.WriteLine("Parameters ...");
             
             try
             {
                 foreach (Mono.Cecil.ParameterDefinition paramDecl in method.Parameters)
                 {
-                    _log.Trace(paramDecl.Name);
+                    System.Diagnostics.Debug.WriteLine(paramDecl.Name);
 
                     MarkRelation(paramDecl.ParameterType, typeDecl);
                 }
             }
             catch
             {
-                _log.Trace( "Resolution exception in MarkMethodParameters" );
+                System.Diagnostics.Debug.WriteLine( "Resolution exception in MarkMethodParameters" );
             }
         }
         
@@ -295,13 +295,13 @@ namespace Tcdev.Dsm.Engine
 
         public void MarkGenericMethodParameters( Mono.Cecil.TypeDefinition typeDecl, Mono.Cecil.MethodDefinition method )
         {
-            _log.Trace("Generic Arguments of method ...");
+            System.Diagnostics.Debug.WriteLine("Generic Arguments of method ...");
             
             try
             {
                 foreach (Mono.Cecil.GenericParameter genericArgument in method.GenericParameters)
                 {
-                    _log.Trace("Method.Generic argument: " + genericArgument.ToString());
+                    System.Diagnostics.Debug.WriteLine("Method.Generic argument: " + genericArgument.ToString());
 
                     foreach (var constraint in genericArgument.Constraints)
                     {
@@ -311,7 +311,7 @@ namespace Tcdev.Dsm.Engine
             }
             catch
             {
-                _log.Trace( "Resolution exception in MarkGenericMethodParametres" );
+                System.Diagnostics.Debug.WriteLine( "Resolution exception in MarkGenericMethodParametres" );
             }
         }
 
@@ -320,18 +320,18 @@ namespace Tcdev.Dsm.Engine
 
         public void MarkProperties(Mono.Cecil.TypeDefinition typeDecl)
         {
-            _log.Trace("Properties ...");
+            System.Diagnostics.Debug.WriteLine("Properties ...");
             try
             {
                 foreach (Mono.Cecil.PropertyDefinition propertyDecl in  typeDecl.Properties)
                 {
-                    _log.Trace("Property:  " + propertyDecl.Name);
+                    System.Diagnostics.Debug.WriteLine("Property:  " + propertyDecl.Name);
                     MarkRelation(propertyDecl.PropertyType, typeDecl);
                 }
             }
             catch
             {
-                _log.Trace( "ResolutionException in MarkProperties" );
+                System.Diagnostics.Debug.WriteLine( "ResolutionException in MarkProperties" );
             } 
         }
 
@@ -343,14 +343,14 @@ namespace Tcdev.Dsm.Engine
             {
                 foreach (Mono.Cecil.FieldDefinition fieldDecl in typeDecl.Fields )
                 {
-                    _log.Trace("Fields : " + fieldDecl.Name);
+                    System.Diagnostics.Debug.WriteLine("Fields : " + fieldDecl.Name);
 
                     MarkRelation( fieldDecl.FieldType, typeDecl );
                 }
             }
             catch
             {
-                _log.Trace( "Resolution exception in MarkFields" );
+                System.Diagnostics.Debug.WriteLine( "Resolution exception in MarkFields" );
             }
         }
 
@@ -358,7 +358,7 @@ namespace Tcdev.Dsm.Engine
 
         public void MarkBaseType( Mono.Cecil.TypeDefinition typeDecl )
         {
-            _log.Trace("Base Types ...");
+            System.Diagnostics.Debug.WriteLine("Base Types ...");
             if (typeDecl.BaseType != null)
             {
                 MarkRelation(typeDecl.BaseType, typeDecl);
@@ -368,7 +368,7 @@ namespace Tcdev.Dsm.Engine
         //-----------------------------------------------------------------------------------------
         public void MarkInterfaces( Mono.Cecil.TypeDefinition typeDecl )
         {
-            _log.Trace("Interfaces ...");
+            System.Diagnostics.Debug.WriteLine("Interfaces ...");
             
             try
             {
@@ -379,7 +379,7 @@ namespace Tcdev.Dsm.Engine
             }
             catch
             {
-                _log.Trace("Resolution exception in MarkInterfaces" );
+                System.Diagnostics.Debug.WriteLine("Resolution exception in MarkInterfaces" );
             }
             
         }
@@ -387,7 +387,7 @@ namespace Tcdev.Dsm.Engine
         //-------------------------------------------------------------------------------------------------
         void AnalyseMethodBody( Mono.Cecil.TypeDefinition typeDecl, Mono.Cecil.MethodDefinition method )
         {
-            _log.Trace("Method Body ..." + method.Name);
+            System.Diagnostics.Debug.WriteLine("Method Body ..." + method.Name);
 
             try
             {
@@ -401,12 +401,12 @@ namespace Tcdev.Dsm.Engine
                 }
                 else
                 {
-                    _log.Trace("Abstract Method Declaration?");
+                    System.Diagnostics.Debug.WriteLine("Abstract Method Declaration?");
                 }
             } 
             catch( Exception ex )
             {
-                _log.Trace( "Resolution error in GetMethodBody:" + ex.ToString() );
+                System.Diagnostics.Debug.WriteLine( "Resolution error in GetMethodBody:" + ex.ToString() );
             }
         }
 
@@ -435,7 +435,7 @@ namespace Tcdev.Dsm.Engine
 
                             if (op == null)
                             {
-                                _log.Trace("unexpected null operand");
+                                System.Diagnostics.Debug.WriteLine("unexpected null operand");
                             }
                             else
                             {
@@ -453,7 +453,7 @@ namespace Tcdev.Dsm.Engine
                                     }
                                     else
                                     {
-                                        _log.Trace("Unhandled token type: " + op.ToString());
+                                        System.Diagnostics.Debug.WriteLine("Unhandled token type: " + op.ToString());
                                     }
                                 }
                             }
@@ -472,7 +472,7 @@ namespace Tcdev.Dsm.Engine
         //-----------------------------------------------------------------------------------------
         public void MarkLocalVariables( Mono.Cecil.TypeDefinition typeDecl, Mono.Cecil.Cil.MethodBody body )
         {
-            _log.Trace("Local variables ...");
+            System.Diagnostics.Debug.WriteLine("Local variables ...");
             
             try
             {
@@ -483,7 +483,7 @@ namespace Tcdev.Dsm.Engine
             }
             catch
             {
-                _log.Trace( "Resolution exception in MarkLocalVariables" );
+                System.Diagnostics.Debug.WriteLine( "Resolution exception in MarkLocalVariables" );
             }
             
         }
@@ -491,11 +491,11 @@ namespace Tcdev.Dsm.Engine
         //-------------------------------------------------------------------------------------------------
         private void MarkRelation( Mono.Cecil.TypeReference providerType, Mono.Cecil.TypeReference consumerType )
         {
-            _log.Trace("Marking Relation");
+            System.Diagnostics.Debug.WriteLine("Marking Relation");
             
             if (providerType == null || consumerType == null)
             {
-                _log.Trace("At least one type has not been resolved - ignoring relation");
+                System.Diagnostics.Debug.WriteLine("At least one type has not been resolved - ignoring relation");
             }
             else
             {
@@ -508,7 +508,7 @@ namespace Tcdev.Dsm.Engine
                     consumerType = NestedParentHelper(consumerType);
                 }
 
-                _log.Trace(providerType.ToString() + " ---> " + consumerType.ToString());
+                System.Diagnostics.Debug.WriteLine(providerType.ToString() + " ---> " + consumerType.ToString());
 
                 var consumer = _model.FindNode(consumerType.FullName);
                 var provider = _model.FindNode(providerType.FullName);
@@ -517,16 +517,16 @@ namespace Tcdev.Dsm.Engine
                 //    _modules.TryGetValue(providerType.FullName, out provider))
                 if ( consumer != null && provider != null )
                 {
-                    _log.Trace("Relation found: " + providerType.Name);
+                    System.Diagnostics.Debug.WriteLine("Relation found: " + providerType.Name);
                     provider.NodeValue.AddRelation(consumer.NodeValue, 1);
                 }
                 else
                 {
-                    _log.Trace("Relation NOT FOUND");
-                    _log.Trace("consumer: " + consumerType.FullName);
-                    _log.Trace("provider: " + providerType.FullName);
+                    System.Diagnostics.Debug.WriteLine("Relation NOT FOUND");
+                    System.Diagnostics.Debug.WriteLine("consumer: " + consumerType.FullName);
+                    System.Diagnostics.Debug.WriteLine("provider: " + providerType.FullName);
                 }
-                _log.Trace("-----------------------------------------------------");
+                System.Diagnostics.Debug.WriteLine("-----------------------------------------------------");
             }
         }
 
@@ -547,10 +547,10 @@ namespace Tcdev.Dsm.Engine
 
         //-------------------------------------------------------------------------------------------------
 
-        public void Dispose()
-        {
-            if (_log != null) _log.Dispose();
-        }
+        //public void Dispose()
+        //{
+        //    if (_log != null) _log.Dispose();
+        //}
         
         //-------------------------------------------------------------------------------------------------
 
@@ -577,7 +577,7 @@ namespace Tcdev.Dsm.Engine
                 // Using the Reflection API for loading assemblies can result in exceptions when trying to access
                 // the Namespace property.  We can ignore these assuming that since the assembly has not been
                 // preloaded we are not interested in its analysis
-                _log.Trace("Reflection error : " + err.ToString());
+                System.Diagnostics.Debug.WriteLine("Reflection error : " + err.ToString());
                 exclude = true;
             }
             return exclude;

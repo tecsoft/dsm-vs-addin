@@ -32,7 +32,7 @@ namespace Tcdev.Dsm.Model
 
                 ReorderNodes(nodes, v);
 
-               // _log.Trace("reorder done");
+               // System.Diagnostics.Debug.WriteLine("reorder done");
             }
         }
         //-------------------------------------------------------------------------------------------------

@@ -36,12 +36,17 @@ namespace Tcdev.Dsm.Commands
 
             try
             {
-                sw = File.CreateText(filename);
+                //sw = File.CreateText(filename);
+                MemoryStream ms = new MemoryStream();
+
+                sw = new StreamWriter(ms);
                 WriteHtmlPreamble( sw );
                 WriteReport( sw );
                 CloseHtml( sw );
 
-                ViewReport( filename );
+                //ViewReport( filename );
+                HtmlViewer viewer = new HtmlViewer(ms);
+                viewer.Show();
 
                 _done = true;
             }
@@ -91,7 +96,7 @@ namespace Tcdev.Dsm.Commands
         {
             sw.WriteLine("<p>---End of Report---</p></body></html>");
             sw.Flush();
-            sw.Close();
+            //sw.Close();
         }
 
         //-----------------------------------------------------------------------------------------
@@ -104,12 +109,12 @@ namespace Tcdev.Dsm.Commands
 
         //-----------------------------------------------------------------------------------------
 
-        void ViewReport(string filename )
-        {
-            HtmlViewer view = new HtmlViewer(filename);
-            view.Text = "DSM Report - " + filename;
-            view.Show();
-        }
+        //void ViewReport(Stream stream )
+        //{
+        //    HtmlViewer view = new HtmlViewer(stream);
+        //    view.Text = "DSM Report - " + filename;
+        //    view.Show();
+        //}
 
         //-----------------------------------------------------------------------------------------
     }

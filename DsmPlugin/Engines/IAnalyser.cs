@@ -9,7 +9,7 @@ namespace Tcdev.Dsm.Engine
 	/// <summary>
 	/// The interface to Analysis engine implementations
 	/// </summary>
-	public interface IAnalyser : IDisposable
+	public interface IAnalyser //: IDisposable
 	{
         /// <summary>
         /// The _model to populate

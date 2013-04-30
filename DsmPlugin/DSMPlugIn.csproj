@@ -291,7 +291,6 @@
     <Compile Include="Model\IState.cs" />
     <Compile Include="Model\DsmModel.cs" />
     <Compile Include="Outil\CursorStateHelper.cs" />
-    <Compile Include="Outil\Logger.cs" />
     <Compile Include="Outil\Tree.cs" />
     <Compile Include="Model\Relation.cs" />
     <Compile Include="Outil\TreeIterator.cs" />
@@ -308,6 +307,18 @@
       <DependentUpon>HtmlViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="View\LayoutHelper.cs" />
+    <Compile Include="View\MacroView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MacroView.Designer.cs">
+      <DependentUpon>MacroView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MacroViewPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MacroViewPanel.Designer.cs">
+      <DependentUpon>MacroViewPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Main.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -393,6 +404,12 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MacroView.resx">
+      <DependentUpon>MacroView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MacroViewPanel.resx">
+      <DependentUpon>MacroViewPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ModelessMessageBox.resx">
       <DependentUpon>ModelessMessageBox.cs</DependentUpon>

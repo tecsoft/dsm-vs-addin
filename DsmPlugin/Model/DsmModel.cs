@@ -19,7 +19,7 @@ namespace Tcdev.Dsm.Model
     /// </summary>
     public class DsmModel 
     {    
-        static Logger _log = new Logger(Path.Combine( Path.GetTempPath() ,"model.txt" ));
+        //static Logger _log = new Logger(Path.Combine( Path.GetTempPath() ,"model.txt" ));
 
         public int BuildNumber { get; internal set; }
 
@@ -99,6 +99,11 @@ namespace Tcdev.Dsm.Model
         public Tree<Module>.Node Get(string key)
         {
             return branchLookup[key];
+        }
+
+        public int NodeCount()
+        {
+            return branchLookup.Keys.Count;
         }
         /// <summary>
         /// Adds a module to the end list of children of parentNode
@@ -523,7 +528,7 @@ namespace Tcdev.Dsm.Model
         /// <returns></returns>
         public bool CanMoveNodeDown()
         {
-            return (SelectedNode != null && SelectedNode.nextSibling != null);
+            return (SelectedNode != null && SelectedNode.nextSibling != null && SelectedConsumerNode == null );
         }
         
         //-------------------------------------------------------------------------------------------------
@@ -555,7 +560,7 @@ namespace Tcdev.Dsm.Model
         /// <returns></returns>
         public bool CanMoveNodeUp()
         {
-            return (SelectedNode != null && SelectedNode.previousSibling != null);
+            return (SelectedNode != null && SelectedNode.previousSibling != null && SelectedConsumerNode == null);
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -584,6 +589,18 @@ namespace Tcdev.Dsm.Model
         /// Set or get the selected node
         /// </summary>
         public Tree<Module>.Node SelectedNode
+        {
+            get;
+            set;
+        }
+
+        public Tree<Module>.Node SelectedConsumerNode
+        {
+            get;
+            set;
+        }
+
+        public Tree<Module>.Node SelectedProviderNode
         {
             get;
             set;
@@ -1176,6 +1193,60 @@ namespace Tcdev.Dsm.Model
             catch (Exception e)
             {
                 throw new DsmException("Matrix partitioning error", e);
+            }
+        }
+
+        // Get a list of modules that make up the relation between provider and consumer
+        public IDictionary<Module,Relation> FindRelations(
+            Tree<Module>.Node providerNode, Tree<Module>.Node consumerNode)
+        {
+            IDictionary<Module, Relation> result;
+
+            var relations = providerNode.NodeValue.Relations;
+            if (relations.Count == 0 || relations.ContainsKey(consumerNode.NodeValue) == false)
+            {
+               result = new Dictionary<Module,Relation>(); // empty
+            }
+            else
+            {
+                // find all types with parent provider with relations 
+                //Tree<Module>.Node providerNode = FindNode(provider.FullName);
+                //Tree<Module>.Node consumerNode = FindNode(consumer.FullName);
+
+                IList<Tree<Module>.Node> leaves = new List<Tree<Module>.Node>();
+
+                FindLeafNodes(providerNode, leaves);
+
+                result = new Dictionary<Module,Relation>();
+                foreach (var leaf in leaves)
+                {
+                    foreach (var relation in leaf.NodeValue.Relations.Values)
+                    {
+                        var node = FindNode(relation.Consumer.FullName);
+
+                        if ( node.HasChildren == false && ( consumerNode == node || IsDescendent(consumerNode, node ) ) )
+                        {
+                            result[leaf.NodeValue] = relation;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        void FindLeafNodes(Tree<Module>.Node providerNode, IList<Tree<Module>.Node> nodes)
+        {
+            if (providerNode.HasChildren)
+            {
+                foreach (var node in providerNode.Children)
+                {
+                    FindLeafNodes(node, nodes);
+                }
+            }
+            else
+            {
+                nodes.Add(providerNode);
             }
         }
        

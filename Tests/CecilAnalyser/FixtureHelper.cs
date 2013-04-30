@@ -35,10 +35,10 @@ namespace Tcdev.Dsm.Tests
             _analyser.LoadTypes();
         }
 
-        protected void TearDown()
-        {
-            _analyser.Dispose();
-        }
+        //protected void TearDown()
+        //{
+        //    _analyser.Dispose();
+        //}
 
         protected void FixtureSetup()
         {

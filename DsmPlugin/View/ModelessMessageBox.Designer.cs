@@ -76,7 +76,7 @@
             this.Name = "ModelessMessageBox";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DSM is working  - please wait !";
+            this.Text = "Dependency Structure Matrix - please wait !";
             this.Load += new System.EventHandler(this.ModelessMessageBox_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

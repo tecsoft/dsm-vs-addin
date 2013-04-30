@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioTestDouble", "VisualStudioTestDouble\VisualStudioTestDouble.csproj", "{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DsmInstaller", "DsmInstaller\DsmInstaller.vdproj", "{18376220-AE83-41EF-9F09-EFC3F38C5709}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -201,18 +199,6 @@ Global
 		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31A26750-8FA5-4CD7-8BAE-1CCA1FDCA866}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.Debug|Any CPU.ActiveCfg = Debug
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.net_2_0_Debug|Any CPU.ActiveCfg = Debug
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.net_2_0_Release|Any CPU.ActiveCfg = Release
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.net_3_5_Debug|Any CPU.ActiveCfg = Debug
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.net_3_5_Release|Any CPU.ActiveCfg = Release
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.net_4_0_Debug|Any CPU.ActiveCfg = Debug
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.net_4_0_Release|Any CPU.ActiveCfg = Release
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.Release|Any CPU.ActiveCfg = Release
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.silverlight_Debug|Any CPU.ActiveCfg = Debug
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.silverlight_Release|Any CPU.ActiveCfg = Release
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.winphone_Debug|Any CPU.ActiveCfg = Debug
-		{18376220-AE83-41EF-9F09-EFC3F38C5709}.winphone_Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

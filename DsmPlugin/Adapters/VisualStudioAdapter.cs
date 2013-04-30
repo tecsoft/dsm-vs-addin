@@ -27,9 +27,6 @@ namespace Tcdev.Dsm.Adapters
             _mainControl = new MainControl();
             _mainControl.Adapter = this;
             this.Controls.Add( _mainControl );
-
-            
-
             _mainControl.Dock = DockStyle.Fill;
         }
 
@@ -49,11 +46,21 @@ namespace Tcdev.Dsm.Adapters
 
             if (files.Length == 0)
             {
-                _mainControl.btnAnalyse_Click(this, EventArgs.Empty);
+                string msg =
+                    "No project file found.  Do you wish to run the analyser now?" +
+                    System.Environment.NewLine + System.Environment.NewLine +
+                    "Choose Yes to include all project assemblies" + System.Environment.NewLine +
+                    "Otherwise, choose No to include only selected assemblies";
+
+                DialogResult result = MessageBox.Show(msg, "New project", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    _mainControl.btnAnalyse_Click(this, EventArgs.Empty);
+                }
             }
             else if (files.Length == 1)
             {
-
                 _mainControl.DoProjectOpen(files[0]);
             }
             else
@@ -111,8 +118,8 @@ namespace Tcdev.Dsm.Adapters
 
         void IDisposable.Dispose()
         {
-            if (_analyser != null)
-                _analyser.Dispose();
+            //if (_analyser != null)
+            //    _analyser.Dispose();
         }
 
         #endregion
