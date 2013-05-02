@@ -34,9 +34,16 @@ namespace Tcdev.Dsm.Adapters
         public string ProjectName { get; set; }
         
         public void LoadAssembly( string assemblyPath, bool refOnly )
-        {   
-            FileInfo fi = new FileInfo(assemblyPath);
-            _mainControl.AddAssembly(new Target(fi.Name, fi.FullName), !refOnly );
+        {
+            try
+            {
+                FileInfo fi = new FileInfo(assemblyPath);
+                _mainControl.AddAssembly(new Target(fi.Name, fi.FullName), !refOnly);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(assemblyPath + Environment.NewLine + e.Message);
+            }
         }
 
         public void Open(string directory, string name)

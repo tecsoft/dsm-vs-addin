@@ -36,7 +36,6 @@ namespace Tcdev.Dsm.Commands
 
             try
             {
-                //sw = File.CreateText(filename);
                 MemoryStream ms = new MemoryStream();
 
                 sw = new StreamWriter(ms);
@@ -44,7 +43,6 @@ namespace Tcdev.Dsm.Commands
                 WriteReport( sw );
                 CloseHtml( sw );
 
-                //ViewReport( filename );
                 HtmlViewer viewer = new HtmlViewer(ms);
                 viewer.Show();
 

@@ -86,10 +86,6 @@ namespace Tcdev.Dsm.Model
             this.isNested      = isNested;
 
             Relations = new Dictionary<Module, Relation>();
-
-            //Depth = 0;
-            //IsCollapsed = true;
-            //IsHidden = false;
         }
 
         //-------------------------------------------------------------------------------------------------

@@ -189,7 +189,6 @@ namespace Tcdev.Dsm.View
             this.pageAssemblies.Controls.Add(this.btnAnalyse);
             this.pageAssemblies.Controls.Add(this.groupBox3);
             this.pageAssemblies.Controls.Add(this.btnBrowse);
-            this.pageAssemblies.Controls.Add(this.groupBox2);
             this.pageAssemblies.Location = new System.Drawing.Point(4, 24);
             this.pageAssemblies.Name = "pageAssemblies";
             this.pageAssemblies.Size = new System.Drawing.Size(840, 530);
@@ -213,7 +212,7 @@ namespace Tcdev.Dsm.View
             this.groupBox1.Controls.Add(this.checkedListBox1);
             this.groupBox1.Location = new System.Drawing.Point(16, 77);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(510, 438);
+            this.groupBox1.Size = new System.Drawing.Size(802, 438);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Assemblies";
@@ -226,7 +225,7 @@ namespace Tcdev.Dsm.View
             this.checkedListBox1.CheckOnClick = true;
             this.checkedListBox1.Location = new System.Drawing.Point(6, 19);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(486, 400);
+            this.checkedListBox1.Size = new System.Drawing.Size(778, 400);
             this.checkedListBox1.TabIndex = 4;
             this.checkedListBox1.ThreeDCheckBoxes = true;
             // 
@@ -264,12 +263,14 @@ namespace Tcdev.Dsm.View
             this.groupBox3.Controls.Add(this.chkHideNested);
             this.groupBox3.Controls.Add(this.chkExGlobal);
             this.groupBox3.Controls.Add(this.chkExCompName);
-            this.groupBox3.Location = new System.Drawing.Point(532, 77);
+            this.groupBox3.Controls.Add(this.groupBox2);
+            this.groupBox3.Location = new System.Drawing.Point(532, 9);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(260, 101);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Other options";
+            this.groupBox3.Visible = false;
             // 
             // chkHideNested
             // 
@@ -327,7 +328,7 @@ namespace Tcdev.Dsm.View
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
             this.groupBox2.Enabled = false;
-            this.groupBox2.Location = new System.Drawing.Point(550, 406);
+            this.groupBox2.Location = new System.Drawing.Point(11, 43);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(260, 92);
             this.groupBox2.TabIndex = 8;

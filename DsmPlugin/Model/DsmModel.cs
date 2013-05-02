@@ -886,10 +886,7 @@ namespace Tcdev.Dsm.Model
                 {
                     isNested = bool.Parse( node.Attributes["nested"].InnerText );
                 }
-                //Module m = new Module(
-                //    node.Attributes["name"].InnerText, null, 
-                //    node.Attributes["namespace"].InnerText, null, isNested );
-                //newModel._modules.Add(m);
+
                 Module m = newModel.CreateModule(node.Attributes["name"].InnerText, 
                    node.Attributes["namespace"].InnerText, null, isNested );
                 
@@ -899,10 +896,6 @@ namespace Tcdev.Dsm.Model
                 //    m.IsHidden = true;
                 //}
 
-                
-                
-                
-
                 string parentId = node.Attributes["parent"].InnerText;
                 Tree<Module>.Node parentNode = null;
                 if (nodeMap.ContainsKey(parentId))
@@ -910,19 +903,8 @@ namespace Tcdev.Dsm.Model
                     parentNode = nodeMap[parentId];
                 }
 
-                //newModel.Hierarchy.tree.Add( parentNode, newNode );
-
-                //nodeMap.Add(node.Attributes["idref"].InnerText, newNode);
-                
-                //newNode.IsHidden = (m.IsNested == true && newModel.Options.HideNestedClasses == true);
-                //if (parentNode != null)
-                //{
-                //    newNode.Depth = parentNode.Depth + 1;
-                //}
-
                 Tree<Module>.Node newNode = newModel.Add(m, m.FullName, parentNode, 0);
                 nodeMap.Add(node.Attributes["idref"].InnerText, newNode);
-                //Tree<Module>.Node newNode = newModel.Hierarchy.tree.CreateNode(m);
             }
 
             // Once all _modules have been read we read in the relatio weights
@@ -952,7 +934,6 @@ namespace Tcdev.Dsm.Model
         /// <param name="sw"></param>
         public void DoReport(StreamWriter sw)
         {
-            //if (modelType.Equals(ModelType.Logical))
             if( this.Options.DsmModelType.Equals( DsmOptions.ModelType.Logical ) )
             {
                 DoLogicalReport(sw);
@@ -1195,13 +1176,6 @@ namespace Tcdev.Dsm.Model
                 throw new DsmException("Matrix partitioning error", e);
             }
         }
-
-        //public IEnumerable<Module> FindModules(Tree<Module>.Node node1)
-        //{
-        //    // get list of modules that are attached to nodes which are desecndents of node1
-        //    IList<Module> leaves = new List<Module>();
-            
-        //}
 
         public IList<Relation> FindRelations(
             Tree<Module>.Node node1, Tree<Module>.Node node2)
