@@ -1224,15 +1224,10 @@ namespace Tcdev.Dsm.Model
             }
             else
             {
-                // find all types with parent provider with relations 
-                //Tree<Module>.Node providerNode = FindNode(provider.FullName);
-                //Tree<Module>.Node consumerNode = FindNode(consumer.FullName);
-
                 IList<Tree<Module>.Node> leaves = new List<Tree<Module>.Node>();
 
                 FindLeafNodes(providerNode, leaves);
 
-                //result = new Dictionary<Module,Relation>();
                 foreach (var leaf in leaves)
                 {
                     foreach (var relation in leaf.NodeValue.Relations.Values)
@@ -1241,14 +1236,11 @@ namespace Tcdev.Dsm.Model
 
                         if ( node.HasChildren == false && ( consumerNode == node || IsDescendent(consumerNode, node ) ) )
                         {
-                            //result[leaf.NodeValue] = relation;
                             result.Add(relation);
                         }
                     }
                 }
             }
-
-            //return result;
         }
 
         void FindLeafNodes(Tree<Module>.Node providerNode, IList<Tree<Module>.Node> nodes)

@@ -150,7 +150,7 @@ namespace Tcdev.Dsm.Engine
             {
                 System.Diagnostics.Debug.WriteLine( "Type found: " + typeDecl.ToString() );
 
-                if ( !_modules.ContainsKey( /*typeDecl.GUID*/ typeDecl.FullName ) )
+                if ( !_modules.ContainsKey( typeDecl.FullName ) )
                 {
                     Tcdev.Dsm.Model.Module newModule = _model.CreateModule(
                                             typeDecl.Name, typeDecl.Namespace, target.FullPath, false );
@@ -513,8 +513,6 @@ namespace Tcdev.Dsm.Engine
                 var consumer = _model.FindNode(consumerType.FullName);
                 var provider = _model.FindNode(providerType.FullName);
 
-                //if ( _model.H.TryGetValue(consumerType.FullName, out consumer) &&
-                //    _modules.TryGetValue(providerType.FullName, out provider))
                 if ( consumer != null && provider != null )
                 {
                     System.Diagnostics.Debug.WriteLine("Relation found: " + providerType.Name);

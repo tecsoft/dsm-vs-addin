@@ -227,7 +227,6 @@ namespace Tcdev.Dsm.View
             this.checkedListBox1.Location = new System.Drawing.Point(6, 19);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(486, 400);
-            this.checkedListBox1.Sorted = true;
             this.checkedListBox1.TabIndex = 4;
             this.checkedListBox1.ThreeDCheckBoxes = true;
             // 
