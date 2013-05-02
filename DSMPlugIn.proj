@@ -1,0 +1,199 @@
+Microsoft (R) Build Engine, Version 3.5.30729.5420
+[Microsoft .NET Framework, Version 2.0.50727.5466]
+Copyright (C) Microsoft Corporationÿ2007. Tous droits r‚serv‚s.
+
+Build started 25/04/2013 22:02:01.
+Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" on node 0 (default targets).
+  Building solution configuration "Debug|Any CPU".
+Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (1) is building "D:\Perso\DSM\WorkDir\DsmPlugInTestAssembly\DsmPlugInTestAssembly.csproj" (2) on node 0 (default targets).
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  DsmPlugInTestAssembly -> D:\Perso\DSM\WorkDir\DsmPlugInTestAssembly\bin\Debug\DsmPlugInTestAssembly.dll
+Done Building Project "D:\Perso\DSM\WorkDir\DsmPlugInTestAssembly\DsmPlugInTestAssembly.csproj" (default targets).
+Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (1) is building "D:\Perso\DSM\WorkDir\DsmPlugin\DSMPlugIn.csproj" (3) on node 0 (default targets).
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+CoreResGen:
+  Aucune ressource n'apparaŒt obsolŠte par rapport aux fichiers sources. La g‚n‚ration des ressources sera ignor‚e.
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectoryAlways:
+  Copie du fichier de "D:\Perso\DSM\WorkDir\DsmPlugin\Engines\CecilAnalyser.cs" vers "bin\Debug\Engines\CecilAnalyser.cs".
+_CopyAppConfigFile:
+Skipping target "_CopyAppConfigFile" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  DSMPlugIn -> D:\Perso\DSM\WorkDir\DsmPlugin\bin\Debug\Tcdev.DsmPlugin.dll
+Done Building Project "D:\Perso\DSM\WorkDir\DsmPlugin\DSMPlugIn.csproj" (default targets).
+Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (1) is building "D:\Perso\DSM\WorkDir\PartitionTest\PartitionTest.csproj" (4) on node 0 (default targets).
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  PartitionTest -> D:\Perso\DSM\WorkDir\PartitionTest\bin\Debug\PartitionTest.exe
+Done Building Project "D:\Perso\DSM\WorkDir\PartitionTest\PartitionTest.csproj" (default targets).
+Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (1) is building "D:\Perso\DSM\WorkDir\ResourcesTest\ResourcesTest.csproj" (5) on node 0 (default targets).
+  R‚f‚rence principale "test.resources".
+C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning : MSB3245ÿ: Impossible de r‚soudre cette r‚f‚rence. Impossible de trouver l'assembly "test.resources". V‚rifiez que l'assembly existe sur le disque. Si cette r‚f‚rence est requise par votre code, vous obtiendrez des erreurs de compilation.
+          Pour SearchPath "{HintPathFromItem}".
+          "bin\Release\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          Pour SearchPath "{TargetFrameworkDirectory}".
+          "C:\Windows\Microsoft.NET\Framework\v2.0.50727\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Windows\Microsoft.NET\Framework\v2.0.50727\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          Pour SearchPath "{Registry:Software\Microsoft\.NetFramework,v2.0,AssemblyFoldersEx}".
+          "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 2\Assemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 2\Assemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SDKs\Microsoft Sync Framework\v1.0\Runtime\x86\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SDKs\Microsoft Sync Framework\v1.0\Runtime\x86\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\FSharp\2.0\Runtime\v2.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\FSharp\2.0\Runtime\v2.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Chart Controls\Assemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Chart Controls\Assemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Visual Studio Tools for Office\PIA\Office11\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Visual Studio Tools for Office\PIA\Office11\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Visual Studio Tools for Office\PIA\Office12\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Visual Studio Tools for Office\PIA\Office12\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE\PublicAssemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 8\Common7\IDE\PublicAssemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Common Files\Microsoft Shared\MSEnv\PublicAssemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Common Files\Microsoft Shared\MSEnv\PublicAssemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 9.0\ReportViewer\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 9.0\ReportViewer\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\ReportViewer\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\ReportViewer\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server Compact Edition\v3.5\Desktop\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server Compact Edition\v3.5\Desktop\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SDKs\Microsoft Sync Framework\v1.0\Runtime\ADO.NET\V2.0\x64\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SDKs\Microsoft Sync Framework\v1.0\Runtime\ADO.NET\V2.0\x64\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Synchronization Services\ADO.NET\v1.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Synchronization Services\ADO.NET\v1.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\ReferenceAssemblies\v2.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\ReferenceAssemblies\v2.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Common Files\Microsoft Shared\Visual Basic Power Packs\1.1\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Common Files\Microsoft Shared\Visual Basic Power Packs\1.1\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\VBPowerPacks\v10.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\VBPowerPacks\v10.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\ReferenceAssemblies\v2.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\ReferenceAssemblies\v2.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\Extensions\Microsoft\SharePoint\PublicAssemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\Extensions\Microsoft\SharePoint\PublicAssemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Visual Studio Tools for Office\PIA\Common\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Visual Studio Tools for Office\PIA\Common\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Visual Studio Tools for Office\PIA\Office12\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Visual Studio Tools for Office\PIA\Office12\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Visual Studio Tools for Office\PIA\Office14\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Visual Studio Tools for Office\PIA\Office14\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\Reference Assemblies\Microsoft\VSTA30\v10.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\Reference Assemblies\Microsoft\VSTA30\v10.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\Reference Assemblies\Microsoft\VSTA30\v9.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\Reference Assemblies\Microsoft\VSTA30\v9.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\VSTA\v9.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\VSTA\v9.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\Reference Assemblies\Microsoft\VSTO40\v10.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\Reference Assemblies\Microsoft\VSTO40\v10.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\Reference Assemblies\Microsoft\VSTO40\v9.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\Reference Assemblies\Microsoft\VSTO40\v9.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\VSTO\v8.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\VSTO\v8.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\VSTO\v9.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\VSTO\v9.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          Pour SearchPath "{AssemblyFolders}".
+          "C:\Program Files\IIS\Microsoft Web Deploy\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files\IIS\Microsoft Web Deploy\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\90\DTS\Connections\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\90\DTS\Connections\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Synchronization Services\ADO.NET\v1.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft Synchronization Services\ADO.NET\v1.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\ForEachEnumerators\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\ForEachEnumerators\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.5\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.5\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft.NET\ADOMD.NET\90\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft.NET\ADOMD.NET\90\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\90\DTS\Tasks\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\90\DTS\Tasks\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server Compact Edition\v3.5\Desktop\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server Compact Edition\v3.5\Desktop\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\90\DTS\PipelineComponents\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\90\DTS\PipelineComponents\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\PipelineComponents\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\PipelineComponents\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Tasks\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Tasks\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\90\DTS\ForEachEnumerators\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\90\DTS\ForEachEnumerators\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft.NET\ADOMD.NET\100\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft.NET\ADOMD.NET\100\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "C:\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+          Pour SearchPath "{GAC}".
+          "test.resources" a ‚t‚ envisag‚, mais n'a pas ‚t‚ trouv‚ dans le GAC.
+          Pour SearchPath "{RawFileName}".
+          "test.resources, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL" aurait pu ˆtre trait‚ comme un nom de fichier, mais il n'existe pas.
+          Pour SearchPath "bin\Debug\".
+          "bin\Debug\test.resources.exe" a ‚t‚ envisag‚, mais il n'existe pas.
+          "bin\Debug\test.resources.dll" a ‚t‚ envisag‚, mais il n'existe pas.
+CoreResGen:
+  Aucune ressource n'apparaŒt obsolŠte par rapport aux fichiers sources. La g‚n‚ration des ressources sera ignor‚e.
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+CopyFilesToOutputDirectory:
+  ResourcesTest -> D:\Perso\DSM\WorkDir\ResourcesTest\bin\Debug\ResourcesTest.exe
+Done Building Project "D:\Perso\DSM\WorkDir\ResourcesTest\ResourcesTest.csproj" (default targets).
+DsmInstaller:
+  The project "DsmInstaller" is not selected for building in solution configuration "Debug|Any CPU".
+Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (1) is building "D:\Perso\DSM\WorkDir\DsmVsAddin\DsmVsAddin.csproj" (6) on node 0 (default targets).
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectoryAlways:
+  Copie du fichier de "D:\Perso\DSM\WorkDir\DsmPlugin\Engines\CecilAnalyser.cs" vers "bin\Engines\CecilAnalyser.cs".
+CopyFilesToOutputDirectory:
+  DsmVsAddin -> D:\Perso\DSM\WorkDir\DsmVsAddin\bin\DsmVsAddin.dll
+Done Building Project "D:\Perso\DSM\WorkDir\DsmVsAddin\DsmVsAddin.csproj" (default targets).
+Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (1) is building "D:\Perso\DSM\WorkDir\Tests\Tests.csproj" (7) on node 0 (default targets).
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectoryAlways:
+  Copie du fichier de "D:\Perso\DSM\WorkDir\DsmPlugin\Engines\CecilAnalyser.cs" vers "bin\Debug\Engines\CecilAnalyser.cs".
+CopyFilesToOutputDirectory:
+  Tests -> D:\Perso\DSM\WorkDir\Tests\bin\Debug\Tests.dll
+Done Building Project "D:\Perso\DSM\WorkDir\Tests\Tests.csproj" (default targets).
+Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (1) is building "D:\Perso\DSM\WorkDir\VisualStudioTestDouble\VisualStudioTestDouble.csproj" (8) on node 0 (default targets).
+  Processing 0 EDMX files.
+  Finished processing 0 EDMX files.
+CoreResGen:
+  Aucune ressource n'apparaŒt obsolŠte par rapport aux fichiers sources. La g‚n‚ration des ressources sera ignor‚e.
+CoreCompile:
+Skipping target "CoreCompile" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectory:
+Skipping target "_CopyOutOfDateSourceItemsToOutputDirectory" because all output files are up-to-date with respect to the input files.
+_CopyOutOfDateSourceItemsToOutputDirectoryAlways:
+  Copie du fichier de "D:\Perso\DSM\WorkDir\DsmPlugin\Engines\CecilAnalyser.cs" vers "bin\Debug\Engines\CecilAnalyser.cs".
+CopyFilesToOutputDirectory:
+  VisualStudioTestDouble -> D:\Perso\DSM\WorkDir\VisualStudioTestDouble\bin\Debug\VisualStudioTestDouble.exe
+Done Building Project "D:\Perso\DSM\WorkDir\VisualStudioTestDouble\VisualStudioTestDouble.csproj" (default targets).
+Done Building Project "D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (default targets).
+
+Build succeeded.
+
+"D:\Perso\DSM\WorkDir\DSMPlugIn.sln" (default target) (1) ->
+"D:\Perso\DSM\WorkDir\ResourcesTest\ResourcesTest.csproj" (default target) (5) ->
+(ResolveAssemblyReferences target) -> 
+  C:\Windows\Microsoft.NET\Framework\v3.5\Microsoft.Common.targets : warning : MSB3245ÿ: Impossible de r‚soudre cette r‚f‚rence. Impossible de trouver l'assembly "test.resources". V‚rifiez que l'assembly existe sur le disque. Si cette r‚f‚rence est requise par votre code, vous obtiendrez des erreurs de compilation.
+
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.54

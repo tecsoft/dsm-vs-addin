@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
-
+using System.Linq;
 using Tcdev.Dsm.Model;
 using Tcdev.Collections.Generic;
 using Tcdev.Dsm.Commands;
@@ -40,7 +40,8 @@ namespace Tcdev.Dsm.View
         private Brush _brush2 = new SolidBrush(Color.FromArgb(246, 231, 217)); //Brushes.BlanchedAlmond;
         private Brush _brush3 = new SolidBrush(Color.FromArgb(244, 217, 246)); //Brushes.Lavender;
         private Brush _brush4 = new SolidBrush(Color.FromArgb(217, 246, 231));
-        private ToolStripMenuItem cntxtItemShowRelationships; //Brushes.MistyRose;
+        private ContextMenuStrip _cntxtMenuStripMatrixPanel;
+        private ToolStripMenuItem showRelationsToolStripMenuItem; //Brushes.MistyRose;
 
         public Tcdev.Dsm.Model.DsmModel MatrixModel;
 
@@ -290,7 +291,14 @@ namespace Tcdev.Dsm.View
         //-------------------------------------------------------------------------------------------
         internal void ShowContextMenu(Point position)
         {
-            this._cntxtMenuStrip.Show(position);
+            if (MatrixModel.SelectedConsumerNode != null && MatrixModel.SelectedProviderNode != null)
+            {
+                this._cntxtMenuStripMatrixPanel.Show(position);
+            }
+            else
+            {
+                this._cntxtMenuStrip.Show(position);
+            }
         }
 
         //-------------------------------------------------------------------------------------------
@@ -395,19 +403,21 @@ namespace Tcdev.Dsm.View
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MatrixControl));
             this._splitContainer = new System.Windows.Forms.SplitContainer();
+            this._selector = new Tcdev.Dsm.View.TypePanel();
+            this._matrix = new Tcdev.Dsm.View.MatrixPanel();
             this._hScrollBar = new System.Windows.Forms.HScrollBar();
             this._vScrollBar = new System.Windows.Forms.VScrollBar();
             this._cntxtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cntxtItemMoveUp = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtItemMoveDown = new System.Windows.Forms.ToolStripMenuItem();
             this.paritionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cntxtItemShowRelationships = new System.Windows.Forms.ToolStripMenuItem();
-            this._selector = new Tcdev.Dsm.View.TypePanel();
-            this._matrix = new Tcdev.Dsm.View.MatrixPanel();
+            this._cntxtMenuStripMatrixPanel = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showRelationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._splitContainer.Panel1.SuspendLayout();
             this._splitContainer.Panel2.SuspendLayout();
             this._splitContainer.SuspendLayout();
             this._cntxtMenuStrip.SuspendLayout();
+            this._cntxtMenuStripMatrixPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // _splitContainer
@@ -431,6 +441,26 @@ namespace Tcdev.Dsm.View
             this._splitContainer.SplitterWidth = 3;
             this._splitContainer.TabIndex = 2;
             this._splitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
+            // 
+            // _selector
+            // 
+            this._selector.BackColor = System.Drawing.SystemColors.Control;
+            this._selector.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this._selector.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._selector.Location = new System.Drawing.Point(0, 3);
+            this._selector.Name = "_selector";
+            this._selector.Size = new System.Drawing.Size(265, 216);
+            this._selector.TabIndex = 0;
+            // 
+            // _matrix
+            // 
+            this._matrix.AllowDrop = true;
+            this._matrix.BackColor = System.Drawing.SystemColors.Control;
+            this._matrix.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this._matrix.Location = new System.Drawing.Point(1, 3);
+            this._matrix.Name = "_matrix";
+            this._matrix.Size = new System.Drawing.Size(501, 216);
+            this._matrix.TabIndex = 0;
             // 
             // _hScrollBar
             // 
@@ -457,19 +487,18 @@ namespace Tcdev.Dsm.View
             this._cntxtMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cntxtItemMoveUp,
             this.cntxtItemMoveDown,
-            this.paritionToolStripMenuItem,
-            this.cntxtItemShowRelationships});
+            this.paritionToolStripMenuItem});
             this._cntxtMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this._cntxtMenuStrip.Name = "contextMenuStrip1";
             this._cntxtMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this._cntxtMenuStrip.Size = new System.Drawing.Size(167, 114);
+            this._cntxtMenuStrip.Size = new System.Drawing.Size(153, 92);
             // 
             // cntxtItemMoveUp
             // 
             this.cntxtItemMoveUp.Enabled = false;
             this.cntxtItemMoveUp.Image = global::Tcdev.Dsm.Properties.Resources.UpArrow1;
             this.cntxtItemMoveUp.Name = "cntxtItemMoveUp";
-            this.cntxtItemMoveUp.Size = new System.Drawing.Size(166, 22);
+            this.cntxtItemMoveUp.Size = new System.Drawing.Size(152, 22);
             this.cntxtItemMoveUp.Text = "Move Up";
             this.cntxtItemMoveUp.Click += new System.EventHandler(this.cntxtItemMoveUp_Click);
             // 
@@ -478,7 +507,7 @@ namespace Tcdev.Dsm.View
             this.cntxtItemMoveDown.Enabled = false;
             this.cntxtItemMoveDown.Image = global::Tcdev.Dsm.Properties.Resources.DownArrow;
             this.cntxtItemMoveDown.Name = "cntxtItemMoveDown";
-            this.cntxtItemMoveDown.Size = new System.Drawing.Size(166, 22);
+            this.cntxtItemMoveDown.Size = new System.Drawing.Size(152, 22);
             this.cntxtItemMoveDown.Text = "Move Down";
             this.cntxtItemMoveDown.Click += new System.EventHandler(this.cntxtItemMoveDown_Click);
             // 
@@ -487,37 +516,23 @@ namespace Tcdev.Dsm.View
             this.paritionToolStripMenuItem.Enabled = false;
             this.paritionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("paritionToolStripMenuItem.Image")));
             this.paritionToolStripMenuItem.Name = "paritionToolStripMenuItem";
-            this.paritionToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.paritionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.paritionToolStripMenuItem.Text = "Partition";
             this.paritionToolStripMenuItem.Click += new System.EventHandler(this.paritionToolStripMenuItem_Click);
             // 
-            // cntxtItemShowRelationships
+            // _cntxtMenuStripMatrixPanel
             // 
-            this.cntxtItemShowRelationships.Enabled = false;
-            this.cntxtItemShowRelationships.Name = "cntxtItemShowRelationships";
-            this.cntxtItemShowRelationships.Size = new System.Drawing.Size(166, 22);
-            this.cntxtItemShowRelationships.Text = "Show Relationships";
-            this.cntxtItemShowRelationships.Click += new System.EventHandler(this.showRelationshipsToolStripMenuItem_Click);
+            this._cntxtMenuStripMatrixPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showRelationsToolStripMenuItem});
+            this._cntxtMenuStripMatrixPanel.Name = "_cntxtMenuStripMatrixPanel";
+            this._cntxtMenuStripMatrixPanel.Size = new System.Drawing.Size(155, 26);
             // 
-            // _selector
+            // showRelationsToolStripMenuItem
             // 
-            this._selector.BackColor = System.Drawing.SystemColors.Control;
-            this._selector.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this._selector.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._selector.Location = new System.Drawing.Point(0, 3);
-            this._selector.Name = "_selector";
-            this._selector.Size = new System.Drawing.Size(265, 216);
-            this._selector.TabIndex = 0;
-            // 
-            // _matrix
-            // 
-            this._matrix.AllowDrop = true;
-            this._matrix.BackColor = System.Drawing.SystemColors.Control;
-            this._matrix.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this._matrix.Location = new System.Drawing.Point(1, 3);
-            this._matrix.Name = "_matrix";
-            this._matrix.Size = new System.Drawing.Size(501, 216);
-            this._matrix.TabIndex = 0;
+            this.showRelationsToolStripMenuItem.Name = "showRelationsToolStripMenuItem";
+            this.showRelationsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.showRelationsToolStripMenuItem.Text = "Show Relations";
+            this.showRelationsToolStripMenuItem.Click += new System.EventHandler(this.showRelationsToolStripMenuItem_Click);
             // 
             // MatrixControl
             // 
@@ -534,6 +549,7 @@ namespace Tcdev.Dsm.View
             this._splitContainer.Panel2.ResumeLayout(false);
             this._splitContainer.ResumeLayout(false);
             this._cntxtMenuStrip.ResumeLayout(false);
+            this._cntxtMenuStripMatrixPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -725,17 +741,10 @@ namespace Tcdev.Dsm.View
             main.EnableNodeUpButton = up;
 
             bool canPartition = (MatrixModel.SelectedNode != null && 
-                MatrixModel.SelectedNode.Children.Count > 1 &&
-                MatrixModel.SelectedProviderNode != null &&
-                MatrixModel.SelectedConsumerNode != null);
+                MatrixModel.SelectedNode.Children.Count > 1 );
 
             this.paritionToolStripMenuItem.Enabled = canPartition;
             main.EnablePartitionButton = canPartition;
-
-            if (MatrixModel.SelectedConsumerNode != null && MatrixModel.SelectedProviderNode != null)
-            {
-                this.cntxtItemShowRelationships.Enabled = true;
-            }
         }
 
         //-------------------------------------------------------------------------------------------
@@ -794,18 +803,20 @@ namespace Tcdev.Dsm.View
         void WritePreamble(StreamWriter sw)
         {
             sw.WriteLine("<html><head><style>");
-            sw.WriteLine("body    { font-family:  Arial, Helvetica; font-size: 90%; color: #444444; }");
+            sw.WriteLine("body    { font-family:  Arial, Helvetica; font-size: 0.9em; color: #444444; }");
             sw.WriteLine("b       { color: #000000; font-weight: bold; }");
             sw.WriteLine("a       { color: #000080; }");
             sw.WriteLine("a:hover { color: #0000c0; }");
-            sw.WriteLine("h1      { font-size: 100%; }");
-            sw.WriteLine("h2      { font-size: 95%; }");
-            sw.WriteLine("h3      { font-size: 90%; }");
-            sw.WriteLine("ul	{ font-size: 90%; }");
+            sw.WriteLine("h1      { font-size: 1em; }");
+            sw.WriteLine("h2      { font-size: .95em; }");
+            sw.WriteLine("h3      { font-size: .9em; }");
+            //sw.WriteLine("ul	{  }");
+            sw.WriteLine("table	{ width:100%;font-size: 0.9em; }");
+            sw.WriteLine("th { text-align:left;}");
             sw.WriteLine("</style></head><body>");
         }
 
-        private void showRelationshipsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void showRelationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CursorStateHelper csh = new CursorStateHelper(this, Cursors.WaitCursor);
             MemoryStream ms = new MemoryStream();
@@ -816,10 +827,6 @@ namespace Tcdev.Dsm.View
                     MatrixModel.SelectedProviderNode,
                     MatrixModel.SelectedConsumerNode );
 
-               
-
-                //StringBuilder builder = new StringBuilder();
-                
                 WritePreamble(sw);
                 XmlDocument xhtml = new XmlDocument();
                 XmlNode root = xhtml.CreateNode(XmlNodeType.Element, "div", null);
@@ -827,15 +834,27 @@ namespace Tcdev.Dsm.View
 
                 XmlElement el = xhtml.CreateElement("h1");
                 root.AppendChild(el)
-                    .AppendChild(xhtml.CreateTextNode("Nodes ...."));
-                
-                XmlNode list = root.AppendChild(xhtml.CreateElement("ul"));
-                foreach (var item in relations)
-                {
-                    string li = string.Format("{0} -> {1} weight: {2} cyclic:{3}",
-                        item.Value.Consumer, item.Key, item.Value.Weight, item.Value.IsCyclic);
+                    .AppendChild(xhtml.CreateTextNode(
+                    string.Format("Relationships from {0} to {1}",
+                        MatrixModel.SelectedConsumerNode.NodeValue,
+                        MatrixModel.SelectedProviderNode.NodeValue)));
 
-                    list.AppendChild(xhtml.CreateElement("li")).AppendChild(xhtml.CreateTextNode(li)); 
+                var thead = root.AppendChild(xhtml.CreateElement("table") )
+                    .AppendChild(xhtml.CreateElement("thead") );
+               thead.AppendChild(xhtml.CreateElement("th")).AppendChild(xhtml.CreateTextNode("Type"));
+               thead.AppendChild(xhtml.CreateElement("th")).AppendChild(xhtml.CreateTextNode("Uses"));
+               thead.AppendChild(xhtml.CreateElement("th")).AppendChild(xhtml.CreateTextNode("Weight"));
+               thead.AppendChild(xhtml.CreateElement("th")).AppendChild(xhtml.CreateTextNode("Cyclic"));
+
+                XmlNode tbody = thead.AppendChild(xhtml.CreateElement("tbody"));
+                
+                foreach (var item in relations.OrderBy( x=>x.Consumer.FullName).ThenBy( x=>x.Provider.FullName ) )
+                {
+                    var tr = tbody.AppendChild(xhtml.CreateElement("tr"));
+                    tr.AppendChild(xhtml.CreateElement("td")).AppendChild(xhtml.CreateTextNode("" + item.Consumer ));
+                    tr.AppendChild(xhtml.CreateElement("td")).AppendChild(xhtml.CreateTextNode("" + item.Provider));
+                    tr.AppendChild(xhtml.CreateElement("td")).AppendChild(xhtml.CreateTextNode("" + item.Weight ));
+                    tr.AppendChild(xhtml.CreateElement("td")).AppendChild(xhtml.CreateTextNode( item.IsCyclic ? "yes" :"-" ));
                 }
                 sw.WriteLine(xhtml.OuterXml);
 
@@ -855,11 +874,10 @@ namespace Tcdev.Dsm.View
             }
             finally
             {
-                //ms.Close();
-                //sw.Close();
                 csh.Reset();
             }
         }
+
         //-------------------------------------------------------------------------------------------
     }
 }

@@ -124,7 +124,7 @@ namespace Tcdev.Dsm.Model
 		{
             if (!Relations.ContainsKey(consumer))
             {
-                Relations.Add(consumer, new Relation(consumer));
+                Relations.Add(consumer, new Relation(this,consumer));
             }
             
             Relations[consumer].Weight += weight;

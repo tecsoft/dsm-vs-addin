@@ -528,7 +528,7 @@ namespace Tcdev.Dsm.Model
         /// <returns></returns>
         public bool CanMoveNodeDown()
         {
-            return (SelectedNode != null && SelectedNode.nextSibling != null && SelectedConsumerNode == null );
+            return (SelectedNode != null && SelectedNode.nextSibling != null);
         }
         
         //-------------------------------------------------------------------------------------------------
@@ -560,7 +560,7 @@ namespace Tcdev.Dsm.Model
         /// <returns></returns>
         public bool CanMoveNodeUp()
         {
-            return (SelectedNode != null && SelectedNode.previousSibling != null && SelectedConsumerNode == null);
+            return (SelectedNode != null && SelectedNode.previousSibling != null);
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -1196,16 +1196,31 @@ namespace Tcdev.Dsm.Model
             }
         }
 
-        // Get a list of modules that make up the relation between provider and consumer
-        public IDictionary<Module,Relation> FindRelations(
-            Tree<Module>.Node providerNode, Tree<Module>.Node consumerNode)
+        //public IEnumerable<Module> FindModules(Tree<Module>.Node node1)
+        //{
+        //    // get list of modules that are attached to nodes which are desecndents of node1
+        //    IList<Module> leaves = new List<Module>();
+            
+        //}
+
+        public IList<Relation> FindRelations(
+            Tree<Module>.Node node1, Tree<Module>.Node node2)
         {
-            IDictionary<Module, Relation> result;
+            IList<Relation> result = new List<Relation>();
+            FindRelations(node1, node2, result);
+            
+            return result;
+        }
+
+        // Get a list of modules that make up the relation between provider and consumer
+        void FindRelations(
+            Tree<Module>.Node providerNode, Tree<Module>.Node consumerNode, IList<Relation> result )
+        {
 
             var relations = providerNode.NodeValue.Relations;
             if (relations.Count == 0 || relations.ContainsKey(consumerNode.NodeValue) == false)
             {
-               result = new Dictionary<Module,Relation>(); // empty
+                return;
             }
             else
             {
@@ -1217,7 +1232,7 @@ namespace Tcdev.Dsm.Model
 
                 FindLeafNodes(providerNode, leaves);
 
-                result = new Dictionary<Module,Relation>();
+                //result = new Dictionary<Module,Relation>();
                 foreach (var leaf in leaves)
                 {
                     foreach (var relation in leaf.NodeValue.Relations.Values)
@@ -1226,13 +1241,14 @@ namespace Tcdev.Dsm.Model
 
                         if ( node.HasChildren == false && ( consumerNode == node || IsDescendent(consumerNode, node ) ) )
                         {
-                            result[leaf.NodeValue] = relation;
+                            //result[leaf.NodeValue] = relation;
+                            result.Add(relation);
                         }
                     }
                 }
             }
 
-            return result;
+            //return result;
         }
 
         void FindLeafNodes(Tree<Module>.Node providerNode, IList<Tree<Module>.Node> nodes)
