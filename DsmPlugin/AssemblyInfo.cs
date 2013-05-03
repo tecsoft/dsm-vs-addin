@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 // l'ensemble d'attributs suivant. Pour modifier les informations
 // associées à un assembly, changez les valeurs de ces attributs.
 //
-[assembly: AssemblyTitle("Dependency Structure Matrix .NET Plugin")]
+[assembly: AssemblyTitle("Dependency Structure Matrix .NET Plugin Core")]
 [assembly: AssemblyDescription("A plugin for the analysis of dependencies between types defined in .NET assemblies")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("")]
@@ -26,7 +26,7 @@ using System.Runtime.CompilerServices;
 // Vous pouvez spécifier toutes les valeurs ou indiquer des numéros de révision et de build par défaut 
 // en utilisant '*', comme ci-dessous :
 
-[assembly: AssemblyVersion("1.3.*")]
+[assembly: AssemblyVersion("2.0.*")]
 
 //
 // Pour signer votre assembly, vous devez spécifier la clé à utiliser. Consultez 

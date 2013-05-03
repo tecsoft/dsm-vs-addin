@@ -92,18 +92,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Common Files\Microsoft Shared\MSEnv\PublicAssemblies\extensibility.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Reflector, Version=7.0.0.0, Culture=neutral, PublicKeyToken=18ca6bb8dd6a03c3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Reflector7\Reflector.exe</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -122,12 +110,8 @@
     <Reference Include="System.XML">
       <Name>System.XML</Name>
     </Reference>
-    <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\VisualStudioAdapter.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Engines\Cecil\Mono.Cecil.Cil\Code.cs" />
     <Compile Include="Engines\Cecil\Mono.Cecil.Cil\CodeReader.cs" />
     <Compile Include="Engines\Cecil\Mono.Cecil.Cil\CodeWriter.cs" />
@@ -274,7 +258,6 @@
     <Compile Include="Commands\CommandReport.cs" />
     <Compile Include="DsmException.cs" />
     <Compile Include="AnalyserOptions.cs" />
-    <Compile Include="Adapters\ReflectorAdapter.cs" />
     <Compile Include="Adapters\IAdapter.cs" />
     <Compile Include="Engines\IAnalyser.cs" />
     <Compile Include="Commands\ICommand.cs" />
@@ -348,10 +331,6 @@
     <Compile Include="View\TypePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <EmbeddedResource Include="Adapters\VisualStudioAdapter.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>VisualStudioAdapter.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\ErrorDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ErrorDialog.cs</DependentUpon>
@@ -398,7 +377,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="lib\nunit.framework.dll" />
-    <Content Include="lib\Reflector7\Reflector.exe" />
     <Content Include="README.txt" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>

@@ -77,6 +77,10 @@
       <Project>{B8FDC0F6-309D-483D-8B25-FC0BE0A1E287}</Project>
       <Name>DSMPlugIn</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DsmVsAddin\DsmVsAddin.csproj">
+      <Project>{604AC94F-7E5B-4028-BCCE-2C0D22CED300}</Project>
+      <Name>DsmVsAddin</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="DsmModel\ModelFile.dsm">

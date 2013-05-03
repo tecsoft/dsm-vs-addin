@@ -1,17 +1,13 @@
 using System;
-using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Windows.Forms;
-using Tcdev.Dsm.Model;
-using Reflector;
-using Reflector.CodeModel;
-using Tcdev.Dsm.Engine;
 using System.IO;
-using Tcdev.Outil;
-using Tcdev.Dsm.Commands;
+using System.Windows.Forms;
 using Tcdev.Dsm.Adapters;
+using Tcdev.Dsm.Commands;
+using Tcdev.Dsm.Engine;
+using Tcdev.Dsm.Model;
+using Tcdev.Outil;
 namespace Tcdev.Dsm.View
 {
 	/// <summary>
@@ -61,7 +57,6 @@ namespace Tcdev.Dsm.View
         private Label label2;
         private ToolStripButton btnAddRule;
         private ToolStripButton btnMacroView;
-        IAdapter _adapter;
 
         //-------------------------------------------------------------------------------------------------
         /// <summary>
@@ -78,17 +73,6 @@ namespace Tcdev.Dsm.View
             InitializeComponent();
             Font sysFont = SystemFonts.MessageBoxFont;
             this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
-            _adapter = null;
-        }
-
-        //-------------------------------------------------------------------------------------------------
-        /// <summary>
-        /// Get or set the parent adapter
-        /// </summary>
-        public IAdapter Adapter
-        {
-            get { return _adapter; }
-            set { _adapter = value; }
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -669,7 +653,7 @@ namespace Tcdev.Dsm.View
 
         public void ReAnalyse()
         {
-            IAnalyser analyser = _adapter.GetAnalyser();
+            IAnalyser analyser = new CecilAnalyser();
            // {
                 TabPage assemblyPage = this.tabControl.TabPages[0];
 
@@ -739,7 +723,7 @@ namespace Tcdev.Dsm.View
                     {
                         this.Refresh();
 
-                        IAnalyser analyser = _adapter.GetAnalyser();
+                        IAnalyser analyser = new CecilAnalyser();
                         //{
                             TabPage assemblyPage = this.tabControl.TabPages[0];
 
@@ -1037,16 +1021,6 @@ namespace Tcdev.Dsm.View
         {
             DoProjectOpen(null);
         }
-
-        ////-------------------------------------------------------------------------------------------------
-        //public void UpdateProgress(int val, string message)
-        //{
-        //    this.lblStatus.Text = message;
-        //    this.progressBar1.Value = val;
-
-        //    this.lblStatus.Refresh();
-        //    this.progressBar1.Refresh();
-        //}
 
         //-------------------------------------------------------------------------------------------------
 

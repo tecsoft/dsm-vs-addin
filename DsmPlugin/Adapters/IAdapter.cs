@@ -13,16 +13,6 @@ namespace Tcdev.Dsm.Adapters
     /// </summary>
     public interface IAdapter
     {
-        /// <summary>
-        /// Retrieve a new instance of an Analyser used on the Adpater's environment
-        /// </summary>
-        /// <returns></returns>
-        IAnalyser GetAnalyser();
-
-        //DirectoryInfo ProjectPath { get; set; }
-        //string ProjectName { get; set;  }
-
         void Open( string directory, string name );
-
     }
 }

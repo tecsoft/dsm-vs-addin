@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Tcdev.Dsm.Adapters;
 using Tcdev.Dsm.Engine;
 using System.IO;
+using Tcdev.DsmVsAddin;
 
 namespace Tcdev.Dsm.Tests.Adapters
 {

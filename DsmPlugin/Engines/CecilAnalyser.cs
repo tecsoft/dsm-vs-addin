@@ -23,7 +23,6 @@ namespace Tcdev.Dsm.Engine
         Dictionary< string, Tcdev.Dsm.Model.Module> _modules;
         IList<Mono.Cecil.TypeDefinition> _typeList;
         private Tcdev.Dsm.Model.DsmModel          _model;
-        //private static Logger                     _log;
         private DsmOptions                        _options;
 
         public Dictionary<string, Tcdev.Dsm.Model.Module> Modules
@@ -40,7 +39,7 @@ namespace Tcdev.Dsm.Engine
         public CecilAnalyser()
         {
             //_log = new Logger(Path.Combine( Path.GetTempPath(), "log.txt" ) );
-            System.Diagnostics.Debug.WriteLine("FRAMEWORK ANALYSER : New Analysis : " + DateTime.Now);
+            System.Diagnostics.Debug.WriteLine("CECIL ANALYSER : New Analysis : " + DateTime.Now);
 
             _modules    = new Dictionary<string, Tcdev.Dsm.Model.Module>();
             _typeList = new List<Mono.Cecil.TypeDefinition>();
@@ -499,9 +498,6 @@ namespace Tcdev.Dsm.Engine
             }
             else
             {
-                //Tcdev.Dsm.Model.Module consumer;
-
-                //Tcdev.Dsm.Model.Module provider;
                 if (_options.HideNestedClasses)
                 {
                     providerType = NestedParentHelper(providerType);

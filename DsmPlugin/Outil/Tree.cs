@@ -18,7 +18,7 @@ namespace Tcdev.Collections.Generic
         /// </summary>
         public class Node : IState
         {
-            private Module nodeValue = null;
+            private T nodeValue = default(T);
             internal int  childCount      = 0;
             internal Node firstChild      = null;
             internal Node lastChild       = null;
@@ -48,7 +48,7 @@ namespace Tcdev.Collections.Generic
                 get { return parent; }
             }
 
-            public Module NodeValue
+            public T NodeValue
             {
                 get { return nodeValue; }
                 set { nodeValue = value; }
@@ -141,7 +141,7 @@ namespace Tcdev.Collections.Generic
             rootNode = new Node() ;
         }
 
-        internal IDictionary<string, Node> Lookup = new Dictionary<string, Node>();
+        internal IDictionary<T, Node> Lookup = new Dictionary<T, Node>();
 
         //-------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -166,7 +166,7 @@ namespace Tcdev.Collections.Generic
         /// </summary>
         /// <param name="theNodeValue">Valaue to be associated with this node</param>
         /// <returns></returns>
-        public Node CreateNode(Module theNodeValue)
+        public Node CreateNode(T theNodeValue)
         {
             Node newNode = new Node();
             newNode.NodeValue = theNodeValue;
@@ -206,8 +206,8 @@ namespace Tcdev.Collections.Generic
                //    node.previousSibling = last;
             }
 
-            if (Lookup.ContainsKey(node.NodeValue.FullName) == false)
-                Lookup.Add(node.NodeValue.FullName, node);
+            if (Lookup.ContainsKey(node.NodeValue) == false)
+                Lookup.Add(node.NodeValue, node);
         }
 
         //-------------------------------------------------------------------------------------------------------------
@@ -243,8 +243,8 @@ namespace Tcdev.Collections.Generic
                 node.previousSibling = last;
             } 
 
-            if (Lookup.ContainsKey(node.NodeValue.FullName) == false)
-                Lookup.Add(node.NodeValue.FullName, node);
+            if (Lookup.ContainsKey(node.NodeValue) == false)
+                Lookup.Add(node.NodeValue, node);
         }
 
         //-------------------------------------------------------------------------------------------------------------
@@ -281,7 +281,7 @@ namespace Tcdev.Collections.Generic
             node.previousSibling = null;
             node.nextSibling = null;
 
-             Lookup.Remove(node.NodeValue.FullName);
+             Lookup.Remove(node.NodeValue);
             
         }
         //-------------------------------------------------------------------------------------------------------------
@@ -316,7 +316,7 @@ namespace Tcdev.Collections.Generic
                 position.previousSibling = node;
             }
 
-            Lookup.Add(node.NodeValue.FullName, node);
+            Lookup.Add(node.NodeValue, node);
         }
     }
 }

@@ -9,17 +9,8 @@ namespace Tcdev.Dsm.View
     /// <summary>
     /// An interface to a UserControl 
     /// </summary>
-    interface IDsmParentControl
+    public interface IDsmParentControl
     {
-        /// <summary>
-        /// Allows an Adapter to be associated with this particular control
-        /// </summary>
-        IAdapter Adapter
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Allows a list of potential assemblies to be included in the control for selection by user for example
         /// Adapters must create a Target object to encaspulate the assembly

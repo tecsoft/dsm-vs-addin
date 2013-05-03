@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Tcdev.Dsm.Adapters;
 using System.IO;
+using Tcdev.DsmVsAddin;
 
 namespace VisualStudioTestDouble
 {

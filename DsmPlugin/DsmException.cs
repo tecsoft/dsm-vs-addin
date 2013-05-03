@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tcdev.Dsm
 {
-    class DsmException : ApplicationException
+    public class DsmException : ApplicationException
     {
         public DsmException()
             : base()
