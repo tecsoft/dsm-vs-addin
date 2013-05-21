@@ -14,7 +14,7 @@ Now it is possible to create a dependency matrix for the projects and references
 
 1.1 Requirements
 
-* For the VS Add-in, VS2008 or VS2010
+* For the VS Add-in, VS2008,VS2010 or VS2012
 * For Reflector version 6.5, 7 and 8 are currently supported
 
 1.2 Install Steps
