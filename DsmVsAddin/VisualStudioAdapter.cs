@@ -110,7 +110,6 @@ namespace Tcdev.DsmVsAddin
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dependency Structure Matrix for Visual Studio";
             this.ResumeLayout(false);
-
         }
 
         #region IDisposable Members
