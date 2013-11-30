@@ -16,14 +16,7 @@ namespace Tcdev.Dsm.View
             InitializeComponent();
 
             Task = task;
-            //lblTask.Invalidate();
-
-            //Show();
-            //var timer = new System.Threading.Timer(new System.Threading.TimerCallback(DoShow), null, 2000, 0);
         }
-
-        private void DoShow(object o) { Show(); }
-
         public string Task
         {
             private set { lblTask.Text = value; }

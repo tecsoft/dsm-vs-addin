@@ -19,13 +19,9 @@ namespace Tcdev.Dsm.Model
     /// </summary>
     public class DsmModel 
     {    
-        //static Logger _log = new Logger(Path.Combine( Path.GetTempPath() ,"model.txt" ));
-
         public int BuildNumber { get; internal set; }
 
         Dictionary<string, Tree<Module>.Node> branchLookup = new Dictionary<string, Tree<Module>.Node>();
-
-        //public IList<DependencyRule> Rules { get; protected set; }
 
         public RuleManager RuleManager { get; protected set; }
 

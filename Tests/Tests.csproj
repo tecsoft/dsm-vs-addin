@@ -68,6 +68,7 @@
     <Compile Include="CecilAnalyser\MarkInterfacesFixture.cs" />
     <Compile Include="Commands\AnalyseCommandFixture.cs" />
     <Compile Include="Commands\FindRelationsCommandFixture.cs" />
+    <Compile Include="Install\InstallerFixture.cs" />
     <Compile Include="DsmModel\RuleManagerFixture.cs" />
     <Compile Include="DsmModel\ModelLoadFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +87,14 @@
     <None Include="DsmModel\ModelFile.dsm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Install\NewVersion.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Install\OldVersion.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

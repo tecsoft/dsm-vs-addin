@@ -17,7 +17,7 @@ namespace Tcdev.DsmVsAddin
 {
     public delegate string OnResolveAssembly( string name );
     
-    public class VisualStudioAdapter : Form, IAdapter,IDisposable
+    public class VisualStudioAdapter : Form, IAdapter
     {
         MainControl _mainControl = null;
 
@@ -27,6 +27,7 @@ namespace Tcdev.DsmVsAddin
         { 
             InitializeComponent();
             _mainControl = new MainControl();
+            
             this.Controls.Add( _mainControl );
             _mainControl.Dock = DockStyle.Fill;
         }
@@ -89,7 +90,6 @@ namespace Tcdev.DsmVsAddin
 
         public Tcdev.Dsm.Engine.IAnalyser GetAnalyser()
         {
-
             _analyser = new CecilAnalyser();
 
             return _analyser;
@@ -110,16 +110,9 @@ namespace Tcdev.DsmVsAddin
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dependency Structure Matrix for Visual Studio";
             this.ResumeLayout(false);
+
         }
 
-        #region IDisposable Members
 
-        void IDisposable.Dispose()
-        {
-            //if (_analyser != null)
-            //    _analyser.Dispose();
-        }
-
-        #endregion
     }
 }

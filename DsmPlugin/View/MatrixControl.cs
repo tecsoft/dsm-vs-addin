@@ -790,9 +790,7 @@ namespace Tcdev.Dsm.View
             }
             catch( Exception ex )
             {
-                ErrorDialog errdlg = new ErrorDialog(ex.ToString());
-                errdlg.ShowDialog();
-                errdlg.Dispose();
+                ErrorDialog.Show(ex.ToString());
             }
             finally
             {
@@ -800,7 +798,7 @@ namespace Tcdev.Dsm.View
             }        
         }
 
-        void WritePreamble(StreamWriter sw)
+        static void WritePreamble(StreamWriter sw)
         {
             sw.WriteLine("<html><head><style>");
             sw.WriteLine("body    { font-family:  Arial, Helvetica; font-size: 0.9em; color: #444444; }");
@@ -868,9 +866,7 @@ namespace Tcdev.Dsm.View
             }
             catch (Exception ex)
             {
-                ErrorDialog errdlg = new ErrorDialog(ex.ToString());
-                errdlg.ShowDialog();
-                errdlg.Dispose();
+                ErrorDialog.Show(ex.ToString());
             }
             finally
             {

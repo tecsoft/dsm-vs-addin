@@ -18,8 +18,8 @@ namespace Tcdev.Dsm.View
         private IContainer components = null;
 
         Pen          _borderPen;         // panel _borderPen pen
-        Pen          _fcPen;             // main font color Pen
-        Brush        _fcBrush;           // main font color Brush
+        //Pen          _fcPen;             // main font color Pen
+        //Brush        _fcBrush;           // main font color Brush
         StringFormat _vStringFormat;     // vertical string format
 
         Image _imgExpanded;  
@@ -46,8 +46,8 @@ namespace Tcdev.Dsm.View
             this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
 
             _borderPen = new Pen(Brushes.DarkGray, 1);
-            _fcPen     = new Pen(Brushes.Black, 1);
-            _fcBrush   = new SolidBrush(this.ForeColor);
+            //_fcPen     = new Pen(Brushes.Black, 1);
+            //_fcBrush   = new SolidBrush(this.ForeColor);
            
             _vStringFormat =  new StringFormat(StringFormatFlags.DirectionVertical);
 

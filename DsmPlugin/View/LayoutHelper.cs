@@ -26,9 +26,8 @@ namespace Tcdev.Dsm.View
         //-----------------------------------------------------------------------------------------
         public NodePanel LocatePanel(Point p)
         {
-        
             NodePanel panel = null;
-try{
+
             for (int i = 0; i < _layout.Count && panel == null; i++)
             {
                 if (_layout[i].HitTest(p))
@@ -36,12 +35,8 @@ try{
                     panel = _layout[i];
                 }
             }
-}catch(Exception e )
-        {   
-            MessageBox.Show( e.StackTrace );
-        }
+
             return panel;
-        
         }
 
         //-----------------------------------------------------------------------------------------

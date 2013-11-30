@@ -15,7 +15,6 @@ namespace Tcdev.Dsm.Model
 	public class Module
 	{
         string name;
-        string srcFile;
         string namespaceName;
         string assemblyName;
         bool   isNested;
@@ -80,7 +79,7 @@ namespace Tcdev.Dsm.Model
         public Module( string name, string srcFile, string namespaceName, string assemblyName, bool isNested )
         {
             this.name          = name;
-            this.srcFile       = srcFile;
+            //this.srcFile       = srcFile;
             this.namespaceName = namespaceName;
             this.assemblyName  = assemblyName;
             this.isNested      = isNested;

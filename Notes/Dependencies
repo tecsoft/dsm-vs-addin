@@ -1,0 +1,20 @@
+Dependencies
+
+1.  For a given relation module1 -> module2 can define an "allow dependency"
+2.  For a given relation mod1 -> mod2 can define a "disallow dependency"
+3.  For a given provider mod1 can define a "disallow dependency" with all sibling modules "below"
+4.  ditto but "above"
+5.  For a given provider mod1 can define an "allow dependency" with all sibling modules "below"
+6.  ditto but "above"
+
+Cases 3 -> 6 are shortcuts for specifying multiple cases of type 1 or 2 (I think)
+"Allow rules" (cases 1,5 and 6) are exception rules only have meaning to override certain relations found as part of a disallow rule
+
+We impose no rule by default
+
+For cases 3 -> we could aply the rule on the selected provider or the children of the provider (a short cut)
+
+Violation
+For "allow" dependencies violation always = false
+
+For violation case 2, no "disallow" dependency defined  between descendent modules

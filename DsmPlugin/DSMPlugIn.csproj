@@ -67,6 +67,7 @@
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRules>-Microsoft.Naming#CA1702;-Microsoft.Naming#CA1712;-Microsoft.Naming#CA1704;-Microsoft.Naming#CA1710;-Microsoft.Naming#CA1707;-Microsoft.Naming#CA1711</CodeAnalysisRules>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -242,6 +243,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Install\Installer.cs" />
+    <Compile Include="View\InstallNotifier.cs" />
+    <Compile Include="View\InstallRunner.cs" />
     <Compile Include="Model\DependencyRules\DependencyRule.cs" />
     <Compile Include="Model\DependencyRules\CannotUseRule.cs" />
     <Compile Include="Model\DependencyRules\RuleManager.cs" />
@@ -376,8 +380,10 @@
     <None Include="Engines\cecil_LICENSE.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="images\DSM.ico" />
     <Content Include="lib\nunit.framework.dll" />
     <Content Include="README.txt" />
+    <Content Include="Version.txt" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>

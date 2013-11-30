@@ -28,5 +28,15 @@ namespace Tcdev.Dsm.View
 
             this.txtBoxError.Text = errorText;
         }
+
+        //-----------------------------------------------------------------------------------------------
+
+        public static void Show( string msg )
+        {
+            ErrorDialog dlg = new ErrorDialog(msg);
+            dlg.ShowDialog();
+            dlg.Dispose();
+        }
+        //-----------------------------------------------------------------------------------------------
     }
 }

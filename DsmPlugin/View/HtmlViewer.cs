@@ -82,8 +82,7 @@ namespace Tcdev.Dsm.View
                 }
                 catch (Exception ex)
                 {
-                    ErrorDialog dlgE = new ErrorDialog(ex.ToString());
-                    dlgE.ShowDialog();
+                    ErrorDialog.Show(ex.ToString() );
                 }
                 finally
                 {

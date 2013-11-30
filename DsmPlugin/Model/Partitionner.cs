@@ -36,7 +36,7 @@ namespace Tcdev.Dsm.Model
             }
         }
         //-------------------------------------------------------------------------------------------------
-        SquareMatrix BuildPartitionMatrix(IList<Tree<Module>.Node> nodes)
+        static SquareMatrix BuildPartitionMatrix(IList<Tree<Module>.Node> nodes)
         {
             SquareMatrix matrix = new SquareMatrix(nodes.Count);
 

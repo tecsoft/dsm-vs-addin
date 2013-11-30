@@ -39,19 +39,6 @@ namespace Tcdev.Dsm.Matrix
         }
 
         //----------------------------------------------------------------------------------------------------
-        int First
-        {
-            get { return _first; }
-        }
-
-        //----------------------------------------------------------------------------------------------------
-        int Second
-        {
-            get { return _second; }
-        }
-
-
-        //----------------------------------------------------------------------------------------------------
         /// <summary>
         /// Equals override so that permutations can be used as a key on a dictionary
         /// </summary>
@@ -59,10 +46,9 @@ namespace Tcdev.Dsm.Matrix
         /// <returns></returns>
         public override bool Equals( object obj )
         {
-            if ( obj != null && obj is Permutation)
+            Permutation test = obj as Permutation;
+            if ( test != null )
             {
-                Permutation test = obj as Permutation;
-
                 return test._first == _first  && 
                        test._second == _second;
             }

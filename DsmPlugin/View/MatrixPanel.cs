@@ -24,7 +24,6 @@ namespace Tcdev.Dsm.View
         public Rectangle ViewRectangle;
 
         Pen          _borderPen;
-        Pen          _fcPen;
         Brush        _fcBrush;
         StringFormat _vStringFormat;
 
@@ -37,7 +36,7 @@ namespace Tcdev.Dsm.View
         ToolTip _tooltip;
         Timer   _ttTimer;
         
-        Image _imgExpanded;
+        //Image _imgExpanded;
         Image _imgCollapsed;
 
         //-------------------------------------------------------------------------------------------------
@@ -53,7 +52,7 @@ namespace Tcdev.Dsm.View
             this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
 
             _borderPen     = new Pen(Brushes.DarkGray, 1);
-            _fcPen         = new Pen(Brushes.Black, 1);
+            //_fcPen         = new Pen(Brushes.Black, 1);
             _fcBrush       = Brushes.Black;
             _vStringFormat = new StringFormat(StringFormatFlags.DirectionVertical);
 
@@ -65,7 +64,7 @@ namespace Tcdev.Dsm.View
             _hLayout = new LayoutHelper();
             _vLayout = new LayoutHelper();
 
-            _imgExpanded = Tcdev.Dsm.Properties.Resources.Expanded;
+            //_imgExpanded = Tcdev.Dsm.Properties.Resources.Expanded;
             _imgCollapsed = Tcdev.Dsm.Properties.Resources.Collpased;
   
 		}
@@ -183,8 +182,6 @@ catch(Exception ex )
 
             while (node != null )
             {
-                Module module = node.NodeValue;
-
                 if (node.IsCollapsed == false || node.IsHidden )
                 {
                     node = iterator.Next();
@@ -455,7 +452,7 @@ catch(Exception ex )
 
         //-------------------------------------------------------------------------------------------------
 
-        string TooltipString(Module mod)
+        static string TooltipString(Module mod)
         {
             if ( mod == null ) MessageBox.Show("string tooltip" );
             
