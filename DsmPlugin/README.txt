@@ -1,5 +1,5 @@
 
-Dependency Structure Matrix Add In - Version 2.0 Beta
+Dependency Structure Matrix Add In - Version 2.1
 =======================================================
 
 1. Notes
@@ -14,7 +14,7 @@ Now it is possible to create a dependency matrix for the projects and references
 
 1.1 Requirements
 
-* For the VS Add-in, VS2008,VS2010 or VS2012
+* For the VS Add-in, VS2008,VS2010,VS2012 or VS2013
 * For Reflector version 6.5, 7 and 8 are currently supported
 
 1.2 Install Steps
@@ -77,13 +77,10 @@ Now it is possible to create a dependency matrix for the projects and references
 
 3.1 Notes
 
-* The DSM Add-in v2.0 is currently in Beta.  There may be a number of minor issues to resolve
-* If you find any please email me them to tom.e.carter@gmail
+* If you find any bugs or have any ideas for improvements, please email me them to tom.e.carter@gmail.com
 
 3.1.2 Known Issues
 
-* Loading a previously saved .dsm, the selected items in the assembly list doesn't reflect accurately
-  the assembles previously selected for analysis
 * When there is no single root element we cannot partition the top level modules
 
 4. Further Information

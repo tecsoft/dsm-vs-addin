@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Text;
 
-using Tcdev.Dsm.Adapters;
+//using Tcdev.Dsm.Adapters;
 
 namespace Tcdev.Dsm.View
 {

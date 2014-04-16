@@ -262,7 +262,6 @@
     <Compile Include="Commands\CommandReport.cs" />
     <Compile Include="DsmException.cs" />
     <Compile Include="AnalyserOptions.cs" />
-    <Compile Include="Adapters\IAdapter.cs" />
     <Compile Include="Engines\IAnalyser.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Matrix\PartitionerMarkII.cs" />
@@ -418,6 +417,9 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Adapters\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

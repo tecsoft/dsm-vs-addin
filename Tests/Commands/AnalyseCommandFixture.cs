@@ -28,7 +28,7 @@ namespace Tcdev.Dsm.Tests.Commands
         [Test]
         public void Test_Create()
         {
-            _analyser.IncludeAssembly(new Target("DSMPLUGIN", @"D:\Perso\DSM\WorkDir\Tests\bin\Debug\TcDev.DsmPlugin.dll" ));
+            //_analyser.IncludeAssembly(new Target("DSMPLUGIN", @"D:\Perso\DSM\WorkDir\Tests\bin\Debug\TcDev.DsmPlugin.dll" ));
             
             Tcdev.Dsm.Model.DsmModel model = new Tcdev.Dsm.Model.DsmModel();
             _analyser.Model = model;
@@ -37,7 +37,10 @@ namespace Tcdev.Dsm.Tests.Commands
             //model.CreateModule("type1", "namespace", null, false);
             int i = model.BuildNumber;
 
-            CommandAnalyse sut = new CommandAnalyse(_analyser, model);
+            CommandAnalyse sut = new CommandAnalyse(
+                new List<Target> { 
+                    new Target("DSMPLUGIN", @"D:\Perso\DSM\WorkDir\Tests\bin\Debug\TcDev.DsmPlugin.dll") }, 
+                    model);
 
             sut.Execute(null);
 

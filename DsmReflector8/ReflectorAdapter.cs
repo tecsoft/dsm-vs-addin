@@ -5,7 +5,7 @@ using Reflector.CodeModel;
 using Tcdev.Dsm;
 using Tcdev.Dsm.Engine;
 using Tcdev.Dsm.View;
-using Tcdev.Dsm.Adapters;
+//using Tcdev.Dsm.Adapters;
 
 namespace Tcdev.DsmReflector8
 {

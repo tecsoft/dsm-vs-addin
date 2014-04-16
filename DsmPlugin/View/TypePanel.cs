@@ -46,8 +46,6 @@ namespace Tcdev.Dsm.View
             this.Font = new Font(sysFont.Name, sysFont.SizeInPoints, sysFont.Style);
 
             _borderPen = new Pen(Brushes.DarkGray, 1);
-            //_fcPen     = new Pen(Brushes.Black, 1);
-            //_fcBrush   = new SolidBrush(this.ForeColor);
            
             _vStringFormat =  new StringFormat(StringFormatFlags.DirectionVertical);
 
@@ -160,8 +158,6 @@ namespace Tcdev.Dsm.View
 
             while (node != null)
             {
-                Module module = node.NodeValue;
-
                 if (node.IsHidden == false )
                 {
                     if (node.IsCollapsed == false)
@@ -230,15 +226,6 @@ namespace Tcdev.Dsm.View
             {
                 g.FillRectangle(Controller.GetBackgroundColour(node, null), bounds);
             }
-
-            //g.FillPolygon(
-            //    Brushes.Red,
-            //   new Point[] { 
-            //       new Point(bounds.Right - 10, bounds.Top), 
-            //       new Point( bounds.Right, bounds.Top ),
-            //       new Point( bounds.Right, bounds.Top +10)
-            //   }
-            //    );
             
             if ( node.HasChildren )
             {
@@ -357,7 +344,6 @@ namespace Tcdev.Dsm.View
                 
                 if ( current == null ) return;
                 
-                //Controller.ProviderModule = current.Node.NodeValue;
                 Controller.SetCurrentModules( current.Node, Controller.ConsumerNode );
                 
                 _nodePanel = current;

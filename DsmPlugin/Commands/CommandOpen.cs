@@ -14,13 +14,27 @@ namespace Tcdev.Dsm.Commands
         Dsm.Model.DsmModel _model = null;
         bool               _done  = false;
         FileInfo _file = null;
+        DirectoryInfo _directory = null;
 
         //-----------------------------------------------------------------------------------------
 
-        public CommandOpen( Dsm.Model.DsmModel model,FileInfo file)
+        public CommandOpen(Dsm.Model.DsmModel model, DirectoryInfo startDirectory) : this (model, null, startDirectory )
         {
+        }
+
+        public CommandOpen(Dsm.Model.DsmModel model, FileInfo file) : this( model, file, null )
+        {
+        }
+
+        protected CommandOpen( Dsm.Model.DsmModel model,FileInfo file, DirectoryInfo startDirectory )
+        {
+            if (model == null)
+                throw new ArgumentNullException("Model must not be null", "model");
+
+            
             _model = model;
             _file = file;
+            _directory = startDirectory;
         }
 
         //-----------------------------------------------------------------------------------------
@@ -60,6 +74,8 @@ namespace Tcdev.Dsm.Commands
 
                     _done = true;
                 }
+                
+                          
             }
             catch (Exception e)
             {
@@ -74,6 +90,11 @@ namespace Tcdev.Dsm.Commands
             if (_file == null)
             {
                 OpenFileDialog dlg = new OpenFileDialog();
+                if (_directory != null)
+                {
+                    dlg.InitialDirectory = _directory.FullName;
+                }
+
                 dlg.AddExtension = true;
                 dlg.CheckFileExists = true;
                 dlg.CheckPathExists = true;

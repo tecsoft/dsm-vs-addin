@@ -34,13 +34,13 @@ namespace Tcdev.Dsm.View
             BringToFront();
         }
 
-        public void UpdateProgress( int i, string x )
+        public void UpdateProgress( int value, string message )
         {
             if (Visible == false)
                 Show();
 
-            this.lblMessage.Text = x;
-            this.progressBar1.Value = i;
+            this.lblMessage.Text = message;
+            this.progressBar1.Value = value;
 
             this.lblMessage.Refresh();
             this.progressBar1.Refresh();

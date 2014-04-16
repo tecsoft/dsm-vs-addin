@@ -1,15 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Tcdev.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml;
+using Tcdev.Collections.Generic;
 using Tcdev.Dsm;
-using Tcdev.Dsm.Matrix;
 using Tcdev.Dsm.Engine;
-using Tcdev.Outil;
+using Tcdev.Dsm.Matrix;
 using Tcdev.Dsm.Model.DependencyRules;
+using Tcdev.Outil;
 
 namespace Tcdev.Dsm.Model
 {
@@ -17,8 +17,8 @@ namespace Tcdev.Dsm.Model
     /// DsmModel is based around the Module Hierarchy held in form of a tree.
     /// DsmModel provides methods for its contruction and modification
     /// </summary>
-    public class DsmModel 
-    {    
+    public class DsmModel
+    {
         public int BuildNumber { get; internal set; }
 
         Dictionary<string, Tree<Module>.Node> branchLookup = new Dictionary<string, Tree<Module>.Node>();
@@ -41,6 +41,11 @@ namespace Tcdev.Dsm.Model
         {
             get;
             set;
+        }
+
+        public IEnumerable<string> Assembles
+        {
+            get { return SourceFiles.Keys; }
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -74,7 +79,7 @@ namespace Tcdev.Dsm.Model
             get;
             set;
         }
-        
+
         //-----------------------------------------------------------------------------------------
 
         /// <summary>
@@ -101,6 +106,7 @@ namespace Tcdev.Dsm.Model
         {
             return branchLookup.Keys.Count;
         }
+
         /// <summary>
         /// Adds a module to the end list of children of parentNode
         /// </summary>
@@ -133,7 +139,7 @@ namespace Tcdev.Dsm.Model
         /// Remove node and its children from the model
         /// </summary>
         /// <param name="node"></param>
-        void RemoveNode(Tree<Module>.Node node)
+        private void RemoveNode(Tree<Module>.Node node)
         {
             // Remove node from hierarchy and branch lookup and
             // recurse down doing the same for child nodes
@@ -157,7 +163,7 @@ namespace Tcdev.Dsm.Model
         /// </summary>
         /// <param name="buildNumber"></param>
         /// <param name="current"></param>
-        void RemoveIfOld(int buildNumber, Tree<Module>.Node current)
+        private void RemoveIfOld(int buildNumber, Tree<Module>.Node current)
         {
             Module m = current.NodeValue;
             if (m != null && m.BuildNumber != buildNumber)
@@ -182,17 +188,22 @@ namespace Tcdev.Dsm.Model
             Tree<Module>.Node current = Hierarchy.Root;
 
             RemoveIfOld(buildNumber, current);
+        }
 
+        public void ClearAssemblies()
+        {
+            SourceFiles.Clear();
         }
 
         //TODO Change so that it is done automatically in call CreateModule
-        public void AddAssembly(string src)
+        public void AddAssembly(Target assembly)
         {
-            if (!SourceFiles.ContainsKey( src ) )
+            if (!SourceFiles.ContainsKey(assembly.FullPath))
             {
-                SourceFiles.Add(src, null);
+                SourceFiles.Add(assembly.FullPath, assembly);
             }
         }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Creates a module in the _model but without any particular placement in a Hierarchy
@@ -201,13 +212,13 @@ namespace Tcdev.Dsm.Model
         /// <param name="namespaceName"></param>
         /// <param name="assemblyName"></param>
         /// <returns></returns>
-        public Module CreateModule(string typeName, string namespaceName, string assemblyName, bool isNested )
+        public Module CreateModule(string typeName, string namespaceName, string assemblyName, bool isNested)
         {
-            Module m = new Module(typeName, null, namespaceName, assemblyName, isNested );
+            Module m = new Module(typeName, null, namespaceName, assemblyName, isNested);
             m.BuildNumber = BuildNumber;
             return m;
         }
- 
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Construct the module Hierarchy according to namespace ( logical _model) or by assembly
@@ -216,7 +227,7 @@ namespace Tcdev.Dsm.Model
         /// </summary>
         /// <param name="modelType"></param>
         /// <param name="useAsterix"></param>
-        public void BuildHierarchy( IList<Module> types)
+        public void BuildHierarchy(IList<Module> types)
         {
             // new
             if (Hierarchy == null)
@@ -229,19 +240,19 @@ namespace Tcdev.Dsm.Model
                 StartBuild();
             }
 
-            if (this.Options.DsmModelType == DsmOptions.ModelType.Physical )
+            if (this.Options.DsmModelType == DsmOptions.ModelType.Physical)
             {
-                PhysicalModelBuilder( types );
+                PhysicalModelBuilder(types);
             }
             else
             {
-                LogicalModelBuilder2( types );
+                LogicalModelBuilder2(types);
 
                 if (BuildNumber > 0)
                 {
                     RemoveOldItems(BuildNumber);
                 }
-                
+
                 // clean up hanging leaf nodes to a * namespace
                 BalanceLeafNodes();
             }
@@ -252,18 +263,16 @@ namespace Tcdev.Dsm.Model
             return Contains(key) ? Get(key) : null;
         }
 
-        
-
         //-------------------------------------------------------------------------------------------------
 
-        void LogicalModelBuilder2(IList<Module> typeModules)
+        private void LogicalModelBuilder2(IList<Module> typeModules)
         {
             foreach (Module module in typeModules)
             {
                 Tree<Module>.Node parentNode = null;
 
                 bool exists = Contains(module.FullName);
-                if ( exists )
+                if (exists)
                 {
                     parentNode = Get(module.FullName);
                     parentNode.NodeValue.BuildNumber = BuildNumber;
@@ -271,7 +280,6 @@ namespace Tcdev.Dsm.Model
                     if (parentNode.Parent != null && parentNode.Parent.NodeValue != null
                         && "*".Equals(parentNode.Parent.NodeValue.Name))
                         parentNode.Parent.NodeValue.BuildNumber = BuildNumber;
-
                 }
                 string[] tokens = module.Namespace.Split('.');
                 if (tokens[0].Length > 0)  // ignore .<Module> for the moment
@@ -283,7 +291,7 @@ namespace Tcdev.Dsm.Model
                         namespacePortion = (namespacePortion.Length > 0)
                             ? namespacePortion + "." + token : token;
 
-                        if (exists || Contains(namespacePortion ) )
+                        if (exists || Contains(namespacePortion))
                         {
                             parentNode = Get(namespacePortion);
                             parentNode.NodeValue.BuildNumber = BuildNumber;
@@ -302,111 +310,104 @@ namespace Tcdev.Dsm.Model
                             parentNode = Add(m, m.FullName, parentNode, BuildNumber);
                         }
                     }
-                
-                    if ( !exists )
+
+                    if (!exists)
                     {
                         Module copy = CreateModule(module.Name, module.Namespace, module.AssemblyName, module.IsNested);
                         Tree<Module>.Node node = Add(copy, copy.FullName, parentNode, BuildNumber);//tree.CreateNode(module);
                         node.IsHidden = (module.IsNested == true && Options.HideNestedClasses == true);
-                   }
+                    }
                 }
             }
-
         }
-//        void LogicalModelBuilder( IList<Module> typeModules )
-//        {
-//            //// the tree hierarchy which represents the model
-//            //Tree<Module> tree = new Tree<Module>();
-//            //// dictionary to remember existing tree nodes 
-//            //Dictionary<string, Tree<Module>.Node> branchLookup = new Dictionary<string, Tree<Module>.Node>();
 
-//            foreach( Module module in typeModules )
-//            {
-//                Tree<Module>.Node parentNode = null;
+        //        void LogicalModelBuilder( IList<Module> typeModules )
+        //        {
+        //            //// the tree hierarchy which represents the model
+        //            //Tree<Module> tree = new Tree<Module>();
+        //            //// dictionary to remember existing tree nodes
+        //            //Dictionary<string, Tree<Module>.Node> branchLookup = new Dictionary<string, Tree<Module>.Node>();
 
-//                // descend each part to update or create each part of the missing branch
+        //            foreach( Module module in typeModules )
+        //            {
+        //                Tree<Module>.Node parentNode = null;
 
-                
+        //                // descend each part to update or create each part of the missing branch
 
+        //                if ( Hierarchy.Contains(module.FullName) )
+        //                {
+        //                    parentNode = Hierarchy.Get(module.Namespace);
+        //                ////}
 
+        //                //if (parentNode == null)
+        //                //{
+        //                    // need to create the parts of this hierarchy that don't exist
+        //                    string[] tokens = module.Namespace.Split('.');
 
-//                if ( Hierarchy.Contains(module.FullName) )
-//                {
-//                    parentNode = Hierarchy.Get(module.Namespace);
-//                ////}
+        //                    if (tokens[0].Length > 0)  // ignore .<Module> for the moment
+        //                    {
+        //                        string namespacePortion = string.Empty;
 
-//                //if (parentNode == null)
-//                //{
-//                    // need to create the parts of this hierarchy that don't exist
-//                    string[] tokens = module.Namespace.Split('.');
+        //                        foreach (string token in tokens)
+        //                        {
+        //                            namespacePortion = (namespacePortion.Length > 0)
+        //                                ? namespacePortion + "." + token : token;
 
-//                    if (tokens[0].Length > 0)  // ignore .<Module> for the moment
-//                    {
-//                        string namespacePortion = string.Empty;
+        //                            //if (!branchLookup.ContainsKey(namespacePortion))
+        //                            if ( ! Hierarchy.Contains(namespacePortion ) )
+        //                            {
+        //                                // create a new module
+        //                                string nspace = null;
+        //                                int pos = namespacePortion.LastIndexOf('.');
+        //                                if (pos != -1)
+        //                                {
+        //                                    nspace = namespacePortion.Substring(0, pos);
+        //                                }
 
-//                        foreach (string token in tokens)
-//                        {
-//                            namespacePortion = (namespacePortion.Length > 0)
-//                                ? namespacePortion + "." + token : token;
+        //                                //Module m = new Module(token, null, nspace, null, false);
+        //                                Module m = CreateModule(token, nspace, null, false);
+        //                                parentNode = Hierarchy.Add(m, m.FullName, parentNode, BuildNumber);
 
-//                            //if (!branchLookup.ContainsKey(namespacePortion))
-//                            if ( ! Hierarchy.Contains(namespacePortion ) )
-//                            {
-//                                // create a new module
-//                                string nspace = null;
-//                                int pos = namespacePortion.LastIndexOf('.');
-//                                if (pos != -1)
-//                                {
-//                                    nspace = namespacePortion.Substring(0, pos);
-//                                }
+        //                                //_lookup[m.FullName] = m;
 
-//                                //Module m = new Module(token, null, nspace, null, false);
-//                                Module m = CreateModule(token, nspace, null, false);
-//                                parentNode = Hierarchy.Add(m, m.FullName, parentNode, BuildNumber);
+        //                                //Tree<Module>.Node n = tree.CreateNode(m);
 
-//                                //_lookup[m.FullName] = m;
-                                
+        //                                //if ( parentNode != null )
+        //                                //    n.Depth = parentNode.Depth + 1;
 
-//                                //Tree<Module>.Node n = tree.CreateNode(m);
-                                
-//                                //if ( parentNode != null )
-//                                //    n.Depth = parentNode.Depth + 1;
-                                    
-//                                //tree.Add(parentNode, n);
-//                                //parentNode = n;
-//                                //branchLookup.Add(namespacePortion, parentNode);
-//                            }
-//                            else
-//                            {
-//                                parentNode = Hierarchy.Get(namespacePortion);
-//                            }
-//                        }
-//                    }
-                
+        //                                //tree.Add(parentNode, n);
+        //                                //parentNode = n;
+        //                                //branchLookup.Add(namespacePortion, parentNode);
+        //                            }
+        //                            else
+        //                            {
+        //                                parentNode = Hierarchy.Get(namespacePortion);
+        //                            }
+        //                        }
+        //                    }
 
-//                // add type to end of branch
-//                Module copy = CreateModule(module.Name, module.Namespace, module.AssemblyName, module.IsNested);
-//                Tree<Module>.Node node = Hierarchy.Add(copy, copy.FullName, parentNode, BuildNumber);//tree.CreateNode(module);
+        //                // add type to end of branch
+        //                Module copy = CreateModule(module.Name, module.Namespace, module.AssemblyName, module.IsNested);
+        //                Tree<Module>.Node node = Hierarchy.Add(copy, copy.FullName, parentNode, BuildNumber);//tree.CreateNode(module);
 
-//                node.IsHidden = (module.IsNested == true && Options.HideNestedClasses == true);
-//}
-                
-//                //_lookup[module.FullName] = module;
-                
-                
-//                //if (parentNode != null)
-//                //{
-//                //    node.Depth = parentNode.Depth + 1;
-//                //}
-//                //tree.Add(parentNode, node);
-//            }
+        //                node.IsHidden = (module.IsNested == true && Options.HideNestedClasses == true);
+        //}
 
-//            //return tree;
-//        }
+        //                //_lookup[module.FullName] = module;
+
+        //                //if (parentNode != null)
+        //                //{
+        //                //    node.Depth = parentNode.Depth + 1;
+        //                //}
+        //                //tree.Add(parentNode, node);
+        //            }
+
+        //            //return tree;
+        //        }
 
         //-------------------------------------------------------------------------------------------------
 
-        Tree<Module> PhysicalModelBuilder(IList<Module> typeModules)
+        private Tree<Module> PhysicalModelBuilder(IList<Module> typeModules)
         {
             Tree<Module> tree = new Tree<Module>();
             Dictionary<string, Tree<Module>.Node > branchLookup = new Dictionary<string, Tree<Module>.Node>();
@@ -428,17 +429,16 @@ namespace Tcdev.Dsm.Model
                     branchLookup.Add(module.AssemblyName, parentNode);
                 }
 
-                
                 Tree<Module>.Node node = tree.CreateNode(module);
                 node.Depth = parentNode.Depth + 1;
-                node.IsHidden = ( module.IsNested == true && Options.HideNestedClasses == true);
+                node.IsHidden = (module.IsNested == true && Options.HideNestedClasses == true);
                 tree.Add(parentNode, node);
             }
             return tree;
         }
 
         //-------------------------------------------------------------------------------------------------
-        void BalanceLeafNodes()
+        private void BalanceLeafNodes()
         {
             /*
              * In the DSM we do not display types and namespaces at the same level.
@@ -470,18 +470,18 @@ namespace Tcdev.Dsm.Model
             }
         }
 
-        void Balance(Tree<Module> tree, Tree<Module>.Node parentNode)
+        private void Balance(Tree<Module> tree, Tree<Module>.Node parentNode)
         {
             // if parentNode contains leafs and branches - we copy leafs to a branch *
             // creating * if it does not yest exist
 
             //IList<Tree<Module>.Node> branches = new List<Tree<Module>.Node>();
             IList<Tree<Module>.Node> leaves   = new List<Tree<Module>.Node>();
-            
+
             Tree<Module>.Node starNode = null;
             bool branchFound = false;
 
-            foreach( var child in parentNode.Children )
+            foreach (var child in parentNode.Children)
             {
                 Module m = child.NodeValue;
                 if ("*".Equals(m.Name))
@@ -499,12 +499,12 @@ namespace Tcdev.Dsm.Model
                 }
             }
 
-            if ( branchFound && leaves.Count > 0 )
+            if (branchFound && leaves.Count > 0)
             {
-                if ( starNode == null )
+                if (starNode == null)
                 {
-                    Module m = CreateModule( "*", 
-                        parentNode.NodeValue == null ? null : parentNode.NodeValue.FullName, null, false );
+                    Module m = CreateModule("*",
+                        parentNode.NodeValue == null ? null : parentNode.NodeValue.FullName, null, false);
                     starNode = Add(m, m.FullName, parentNode, BuildNumber);
                 }
 
@@ -526,7 +526,7 @@ namespace Tcdev.Dsm.Model
         {
             return (SelectedNode != null && SelectedNode.nextSibling != null);
         }
-        
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Moves the currently select node below the next sibling
@@ -535,7 +535,7 @@ namespace Tcdev.Dsm.Model
         public bool MoveDown()
         {
             bool ok = false;
-            if ( CanMoveNodeDown() )
+            if (CanMoveNodeDown())
             {
                 // we actually move up the next sibling !
                 Tree<Module>.Node node = SelectedNode.nextSibling;
@@ -567,7 +567,7 @@ namespace Tcdev.Dsm.Model
         public bool MoveUp()
         {
             bool ok = false;
-            if ( CanMoveNodeUp() )
+            if (CanMoveNodeUp())
             {
                 Tree<Module>.Node node = SelectedNode.previousSibling;
                 Hierarchy.Remove(SelectedNode);
@@ -612,7 +612,7 @@ namespace Tcdev.Dsm.Model
             TreeIterator<Module> it = new TreeIterator<Module>(this.Hierarchy);
 
             Tree<Module>.Node node = it.Next();
-            
+
             while (node != null)
             {
                 node.NodeValue.Id = i;
@@ -730,14 +730,12 @@ namespace Tcdev.Dsm.Model
                                         {
                                             branchProvider.AddRelation(ascendent.NodeValue, rel.Weight);
                                             ascendent = ascendent.Parent;
-
                                         }
                                     }
                                 }
 
                                 n3 = it3.Next();
                             }
-
                         }
                         d2 = it2.Next();
                     }
@@ -747,13 +745,12 @@ namespace Tcdev.Dsm.Model
             }
         }
 
-        
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Save the current model to an XML file
         /// </summary>
         /// <param name="filename"></param>
-        public void SaveModel( string filename )
+        public void SaveModel(string filename)
         {
             StreamWriter sw = null;
 
@@ -764,27 +761,31 @@ namespace Tcdev.Dsm.Model
 
                 XmlDocument doc = new XmlDocument();
                 XmlElement root = doc.CreateElement("DSM");
-                doc.AppendChild( root );
+                doc.AppendChild(root);
 
-                root.SetAttribute( "type", ((int)Options.DsmModelType).ToString()  );
+                root.SetAttribute("type", ((int)Options.DsmModelType).ToString());
 
                 root.SetAttribute("nestedhidden", Options.HideNestedClasses.ToString());
 
                 XmlElement ass = doc.CreateElement("Assemblies");
-                root.AppendChild( ass );
+                root.AppendChild(ass);
+
+                // TODO decide how to store assembly paths
+                // relative to solution file if (in VS) otherwise full path hard coded
+                // ???? original path supplied by adapter - when reopen ing assume same adapter
 
                 int i = 1;
-                foreach (string src in SourceFiles.Keys)
+                foreach (string src in Assembles)
                 {
                     XmlElement e = doc.CreateElement("Assembly");
-                    e.SetAttribute( "idref", i.ToString());
-                    e.SetAttribute( "name", src );
+                    e.SetAttribute("idref", i.ToString());
+                    e.SetAttribute("name", src);
                     ass.AppendChild(e);
                     i++;
                 }
 
                 XmlElement mat = doc.CreateElement("Matrix");
-                root.AppendChild( mat );
+                root.AppendChild(mat);
 
                 TreeIterator<Module> it = new TreeIterator<Module>(this.Hierarchy);
                 Tree<Module>.Node node = it.Next();
@@ -796,10 +797,10 @@ namespace Tcdev.Dsm.Model
                     XmlElement e = doc.CreateElement("Module");
                     e.SetAttribute("idref", module.Id.ToString());
                     e.SetAttribute("name", module.Name);
-                    e.SetAttribute("parent", 
+                    e.SetAttribute("parent",
                         node.parent.NodeValue == null ? "" : node.parent.NodeValue.Id.ToString());
                     e.SetAttribute("namespace", module.Namespace);
-                    e.SetAttribute("nested", module.IsNested.ToString() );
+                    e.SetAttribute("nested", module.IsNested.ToString());
 
                     mat.AppendChild(e);
 
@@ -825,6 +826,7 @@ namespace Tcdev.Dsm.Model
                 if (sw != null) sw.Close();
             }
         }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Load a model from a previously saved DSM (XML) file
@@ -832,65 +834,60 @@ namespace Tcdev.Dsm.Model
         /// <param name="filename"></param>
         /// <param name="newModel"></param>
         /// <returns></returns>
-        public static DsmModel LoadModel( string filename, DsmModel newModel)
+        public static DsmModel LoadModel(string filename, DsmModel newModel)
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(filename);
 
+            // need to save assembly file names in model so that we can present loaded files
+            // in ihm
+
             XmlNode attribute = xmlDoc.SelectSingleNode("//DSM/@type");
 
-            if ( attribute != null )
+            if (attribute != null)
             {
                 newModel.Options.DsmModelType = (DsmOptions.ModelType)(int.Parse(attribute.InnerText));
             }
 
-            attribute = xmlDoc.SelectSingleNode( "//DSM/@nestedhidden" );
-            if ( attribute != null )
+            attribute = xmlDoc.SelectSingleNode("//DSM/@nestedhidden");
+            if (attribute != null)
             {
-                newModel.Options.HideNestedClasses = bool.Parse( attribute.InnerText );
+                newModel.Options.HideNestedClasses = bool.Parse(attribute.InnerText);
             }
 
             XmlNodeList assemblies = xmlDoc.SelectNodes("//DSM/Assemblies/Assembly");
-
-            //if (assemblies.Count < 1)
-            //{
-            //    throw new DsmException("No assemblies found in project file");
-            //}
 
             XmlNodeList modules = xmlDoc.SelectNodes("//DSM/Matrix/Module");
 
             if (modules.Count < 1)
             {
-                throw new DsmException( "No modules found in project file" );
+                throw new DsmException("No modules found in project file");
             }
+
+            // TODO default selection depends on load origin (load of exisitn dsm = select if on model
 
             foreach (XmlNode node in assemblies)
             {
-                newModel.AddAssembly( node.Attributes["name"].InnerText);
+                string name = node.Attributes["name"].InnerText;
+                Target assembly = new Target(name, name);
+                newModel.AddAssembly(assembly);
             }
 
             Dictionary<string, Tree<Module>.Node> nodeMap = new Dictionary<string, Tree<Module>.Node>();
 
             newModel.Hierarchy = new Tree<Module>();
             newModel.BuildNumber = 0; // reset build number to zero
-            //newModel.Hierarchy = new ModuleTree();
 
             foreach (XmlNode node in modules)
             {
                 bool isNested = false;
-                if ( node.Attributes["nested"] != null )
+                if (node.Attributes["nested"] != null)
                 {
-                    isNested = bool.Parse( node.Attributes["nested"].InnerText );
+                    isNested = bool.Parse(node.Attributes["nested"].InnerText);
                 }
 
-                Module m = newModel.CreateModule(node.Attributes["name"].InnerText, 
-                   node.Attributes["namespace"].InnerText, null, isNested );
-                
-                //// Set hidden if nested classes are to be hidden
-                //if (m.IsNested == true && newModel.Options.HideNestedClasses == true)
-                //{
-                //    m.IsHidden = true;
-                //}
+                Module m = newModel.CreateModule(node.Attributes["name"].InnerText,
+                   node.Attributes["namespace"].InnerText, null, isNested);
 
                 string parentId = node.Attributes["parent"].InnerText;
                 Tree<Module>.Node parentNode = null;
@@ -917,12 +914,13 @@ namespace Tcdev.Dsm.Model
                     string consumerId = relation.Attributes["to"].InnerText;
                     Module con = nodeMap[consumerId].NodeValue;
 
-                    mod.AddRelation( con, int.Parse( relation.Attributes["weight"].InnerText ) );
+                    mod.AddRelation(con, int.Parse(relation.Attributes["weight"].InnerText));
                 }
-            }  
+            }
 
             return newModel;
         }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Build the model report
@@ -930,7 +928,7 @@ namespace Tcdev.Dsm.Model
         /// <param name="sw"></param>
         public void DoReport(StreamWriter sw)
         {
-            if( this.Options.DsmModelType.Equals( DsmOptions.ModelType.Logical ) )
+            if (this.Options.DsmModelType.Equals(DsmOptions.ModelType.Logical))
             {
                 DoLogicalReport(sw);
             }
@@ -941,31 +939,30 @@ namespace Tcdev.Dsm.Model
         }
 
         //---------------------------------------------------------------------------------------------------
-        void DoLogicalReport( StreamWriter sw )
+        private void DoLogicalReport(StreamWriter sw)
         {
             try
             {
                 XmlDocument xhtml = new XmlDocument();
-                XmlNode root = xhtml.CreateNode(XmlNodeType.Element, "div", null );
+                XmlNode root = xhtml.CreateNode(XmlNodeType.Element, "div", null);
                 xhtml.AppendChild(root);
 
                 XmlElement e = xhtml.CreateElement("h1");
                 root.AppendChild(e)
-                    .AppendChild(xhtml.CreateTextNode("Dependency Structure Report (Architecture Model)" ));
+                    .AppendChild(xhtml.CreateTextNode("Dependency Structure Report (Architecture Model)"));
 
                 //
                 // Write out Assemblies currently being analysed
                 //
-                root.AppendChild( xhtml.CreateElement( "h2"))
-                    .AppendChild( xhtml.CreateTextNode( "Assemblies Analysed" ) );
+                root.AppendChild(xhtml.CreateElement("h2"))
+                    .AppendChild(xhtml.CreateTextNode("Assemblies Analysed"));
 
                 XmlNode list = root.AppendChild(xhtml.CreateElement("ul"));
 
                 foreach (string src in SourceFiles.Keys)
                 {
-                    list.AppendChild( xhtml.CreateElement( "li" ) ).AppendChild( xhtml.CreateTextNode( src ) );                   
+                    list.AppendChild(xhtml.CreateElement("li")).AppendChild(xhtml.CreateTextNode(src));
                 }
-
 
                 //
                 // Cyclic dependencies
@@ -984,13 +981,13 @@ namespace Tcdev.Dsm.Model
 
                         TreeIterator<Module> it2 = new TreeIterator<Module>(Hierarchy);
                         Tree<Module>.Node n2 = it2.Next();
-                        while( n2 != null )
+                        while (n2 != null)
                         {
-                            if ( node != n2 && n2.HasChildren == false )
+                            if (node != n2 && n2.HasChildren == false)
                             {
                                 Module consumer = n2.NodeValue;
 
-                                // This prevents us from writing out the same relation in the opposite direction 
+                                // This prevents us from writing out the same relation in the opposite direction
                                 if (mod.Id < consumer.Id)
                                 {
                                     Relation rel = mod.GetRelation(n2.NodeValue);
@@ -1006,14 +1003,13 @@ namespace Tcdev.Dsm.Model
 
                             n2 = it2.Next();
                         }
-                        
                     }
                     node = it.Next();
                 }
 
                 if (list.SelectNodes("li").Count == 0)
                 {
-                    list.AppendChild(xhtml.CreateElement("li")).AppendChild(xhtml.CreateTextNode("N/A") );
+                    list.AppendChild(xhtml.CreateElement("li")).AppendChild(xhtml.CreateTextNode("N/A"));
                 }
                 //
                 // Possible design breaks all relations in upper corner
@@ -1043,7 +1039,7 @@ namespace Tcdev.Dsm.Model
                             {
                                 Module consumer = n2.NodeValue;
 
-                                // Only if nodes are in top half of _matrix 
+                                // Only if nodes are in top half of _matrix
                                 // and don't have the same parent (unless at top level )
                                 if (mod.Id < consumer.Id &&
                                     !(node.Parent == n2.Parent && node.Depth > 1))
@@ -1061,7 +1057,6 @@ namespace Tcdev.Dsm.Model
 
                             n2 = it2.Next();
                         }
-
                     }
                     node = it.Next();
                 }
@@ -1073,7 +1068,7 @@ namespace Tcdev.Dsm.Model
 
                 sw.WriteLine(xhtml.OuterXml);
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
                 sw.WriteLine(ex.Message);
                 throw;
@@ -1082,7 +1077,7 @@ namespace Tcdev.Dsm.Model
 
         //--------------------------------------------------------------------------------------------------
 
-        void DoPhysicalReport( StreamWriter sw )
+        private void DoPhysicalReport(StreamWriter sw)
         {
             //try
             //{
@@ -1104,7 +1099,7 @@ namespace Tcdev.Dsm.Model
 
             //    foreach (string src in this._sourceFiles.Keys)
             //    {
-            //        list.AppendChild( xhtml.CreateElement( "li" ) ).AppendChild( xhtml.CreateTextNode( src ) );                   
+            //        list.AppendChild( xhtml.CreateElement( "li" ) ).AppendChild( xhtml.CreateTextNode( src ) );
             //    }
 
             //    root.AppendChild(xhtml.CreateElement("h2"))
@@ -1140,7 +1135,7 @@ namespace Tcdev.Dsm.Model
 
             //        node = node.NextSibling;
             //    }
-                
+
             //    if (list.SelectNodes("li").Count == 0)
             //    {
             //        list.AppendChild(xhtml.CreateElement("li")).AppendChild(xhtml.CreateTextNode("N/A"));
@@ -1154,6 +1149,7 @@ namespace Tcdev.Dsm.Model
             //    throw;
             //}
         }
+
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Run a partition on the children of the currently selected module
@@ -1178,15 +1174,14 @@ namespace Tcdev.Dsm.Model
         {
             IList<Relation> result = new List<Relation>();
             FindRelations(node1, node2, result);
-            
+
             return result;
         }
 
         // Get a list of modules that make up the relation between provider and consumer
-        void FindRelations(
-            Tree<Module>.Node providerNode, Tree<Module>.Node consumerNode, IList<Relation> result )
+        private void FindRelations(
+            Tree<Module>.Node providerNode, Tree<Module>.Node consumerNode, IList<Relation> result)
         {
-
             var relations = providerNode.NodeValue.Relations;
             if (relations.Count == 0 || relations.ContainsKey(consumerNode.NodeValue) == false)
             {
@@ -1204,7 +1199,7 @@ namespace Tcdev.Dsm.Model
                     {
                         var node = FindNode(relation.Consumer.FullName);
 
-                        if ( node.HasChildren == false && ( consumerNode == node || IsDescendent(consumerNode, node ) ) )
+                        if (node.HasChildren == false && (consumerNode == node || IsDescendent(consumerNode, node)))
                         {
                             result.Add(relation);
                         }
@@ -1213,7 +1208,7 @@ namespace Tcdev.Dsm.Model
             }
         }
 
-        void FindLeafNodes(Tree<Module>.Node providerNode, IList<Tree<Module>.Node> nodes)
+        private void FindLeafNodes(Tree<Module>.Node providerNode, IList<Tree<Module>.Node> nodes)
         {
             if (providerNode.HasChildren)
             {
@@ -1227,7 +1222,7 @@ namespace Tcdev.Dsm.Model
                 nodes.Add(providerNode);
             }
         }
-       
+
         /******************************************************************************************/
         /* DsmModel Helper functions                                                                 */
         /******************************************************************************************/
@@ -1249,12 +1244,12 @@ namespace Tcdev.Dsm.Model
             Tree<Module>.Node testNode = node2;
             bool found = false;
 
-            while ( testNode != null && ! found )
+            while (testNode != null && !found)
             {
                 found = (node1 == testNode);
                 testNode = testNode.parent;
             }
-         
+
             return found;
         }
 
@@ -1265,6 +1260,7 @@ namespace Tcdev.Dsm.Model
 
             return (relation == null ? false : relation.IsCyclic);
         }
+
         //-------------------------------------------------------------------------------------------------
 
         /// <summary>

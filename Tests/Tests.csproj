@@ -35,10 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DsmPlugin\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Reflector, Version=7.0.0.0, Culture=neutral, PublicKeyToken=18ca6bb8dd6a03c3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DsmPlugin\lib\Reflector7\Reflector.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>

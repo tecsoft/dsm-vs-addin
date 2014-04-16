@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing;
 using Tcdev.Dsm.Install;
 
 namespace Tcdev.Dsm.View
@@ -12,10 +12,11 @@ namespace Tcdev.Dsm.View
     {
         NotifyIcon _icon;
         Installer _installer;
+
         public InstallNotifier(Installer installer)
         {
             _icon = new NotifyIcon();
-            _icon.Icon = new Icon( 
+            _icon.Icon = new Icon(
                 System.Reflection.Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream("Tcdev.Dsm.images.DSM.ico"));
             _icon.Visible = true;
@@ -35,7 +36,7 @@ namespace Tcdev.Dsm.View
             _icon.Visible = true;
         }
 
-        void AddMenu()
+        private void AddMenu()
         {
             MenuItem exit = new MenuItem() { Text = "Exit" };
             exit.Click += new EventHandler(exit_Click);
@@ -43,53 +44,51 @@ namespace Tcdev.Dsm.View
             MenuItem install = new MenuItem() { Text = "Install" };
             install.Click += new EventHandler(install_Click);
 
-            _icon.ContextMenu = new ContextMenu(new MenuItem[]{install, exit});
+            _icon.ContextMenu = new ContextMenu(new MenuItem[] { install, exit });
 
             _icon.MouseClick += new MouseEventHandler(_icon_MouseClick);
-         }
-
-        void _icon_MouseClick(object sender, MouseEventArgs e)
-        {
-            DoInstall();
         }
 
-        void DoInstall()
+        private void _icon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                DoInstall();
+        }
+
+        private void DoInstall()
         {
             _installer.Run();
-            
         }
 
-        void exit_Click(object sender, EventArgs e)
+        private void exit_Click(object sender, EventArgs e)
         {
             Dispose();
         }
 
-        void install_Click(object sender, EventArgs e)
+        private void install_Click(object sender, EventArgs e)
         {
             DoInstall();
         }
 
-        void icon_BalloonTipClicked(object sender, EventArgs e)
+        private void icon_BalloonTipClicked(object sender, EventArgs e)
         {
             AddMenu();
+
             DoInstall();
         }
 
-        void icon_BalloonTipClosed(object sender, EventArgs e)
+        private void icon_BalloonTipClosed(object sender, EventArgs e)
         {
             AddMenu();
         }
-
-        #region IDisposable Members
 
         public void Dispose()
         {
             _icon.BalloonTipClosed -= new EventHandler(icon_BalloonTipClosed);
             _icon.BalloonTipClicked -= new EventHandler(icon_BalloonTipClicked);
-            
+            _icon.MouseClick -= new MouseEventHandler(_icon_MouseClick);
+
             _icon.Dispose();
         }
-
-        #endregion
     }
 }

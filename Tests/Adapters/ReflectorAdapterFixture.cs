@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Tcdev.Dsm.Adapters;
+//using Tcdev.Dsm.Adapters;
 using System.IO;
 using Tcdev.Dsm.Engine;
 

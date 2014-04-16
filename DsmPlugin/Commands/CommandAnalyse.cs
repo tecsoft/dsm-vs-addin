@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Tcdev.Dsm.Engine;
 using Tcdev.Dsm.Model;
 using Tcdev.Dsm.View;
-using Tcdev.Dsm.Engine;
 
 namespace Tcdev.Dsm.Commands
 {
-    public class CommandAnalyse :ICommand
+    public class CommandAnalyse : ICommand
     {
+        IEnumerable<Target> _targets;
         IAnalyser _analyser;
         DsmModel  _model;
         bool      _done = false;
@@ -21,13 +22,12 @@ namespace Tcdev.Dsm.Commands
         }
 
         //-----------------------------------------------------------------------------------------
-        public CommandAnalyse(
-            IAnalyser analyser, 
+        public CommandAnalyse(IEnumerable<Target> targets,
             DsmModel model)
         {
-            _analyser = analyser;
+            _targets = targets;
+            _analyser = new CecilAnalyser();
             _model = model;
-            
         }
 
         //------------------------------------------------------------------------------------------------------
@@ -38,11 +38,19 @@ namespace Tcdev.Dsm.Commands
             {
                 _analyser.Model = _model;
 
+                // TODO requires refactoring interface between targets, model and analyser needs to be reworked
+                _model.ClearAssemblies();
+
+                foreach (Target target in _targets)
+                {
+                    _analyser.IncludeAssembly(target);
+                }
+
                 updateFunction(0, "Loading assemblies");
                 var types = _analyser.LoadTypes();
 
                 updateFunction(20, "Building module hierarchy");
-                _model.BuildHierarchy( types);
+                _model.BuildHierarchy(types);
 
                 updateFunction(30, "Assigning IDs");
                 _model.AllocateIds();
@@ -65,10 +73,10 @@ namespace Tcdev.Dsm.Commands
         }
 
         //------------------------------------------------------------------------------------------------------
-        
-        bool ValidateParameters()
+
+        private bool ValidateParameters()
         {
-            return true; 
+            return true;
         }
     }
 }

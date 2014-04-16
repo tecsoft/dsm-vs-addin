@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Tcdev.Dsm;
 using Tcdev.Dsm.Engine;
 using Tcdev.Dsm.View;
-using Tcdev.Dsm.Adapters;
+//using Tcdev.Dsm.Adapters;
 using Reflector;
 using Reflector.CodeModel;
 
@@ -15,7 +15,7 @@ namespace Tcdev.DsmReflector6
     /// The adapter is responsible for getting the assemblies 
     /// </summary>
     
-    public class ReflectorAdapter : IPackage, IAdapter
+    public class ReflectorAdapter : IPackage//, IAdapter
     {
         IDsmParentControl    _mainControl;
         IWindowManager       _windowManager;

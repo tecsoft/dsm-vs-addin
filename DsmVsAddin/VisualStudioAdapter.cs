@@ -1,27 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Tcdev.Dsm.Engine;
-using System.Windows.Forms;
-using Tcdev.Dsm.View;
 using System.IO;
-using System.Reflection;
-using System.Collections;
-using Tcdev.Outil;
-using Tcdev.Dsm.Commands;
-using System.Threading;
-using Tcdev.Dsm.Adapters;
+using System.Windows.Forms;
 using Tcdev.Dsm;
+//using Tcdev.Dsm.Adapters;
+using Tcdev.Dsm.Engine;
+using Tcdev.Dsm.View;
 
 namespace Tcdev.DsmVsAddin
 {
-    public delegate string OnResolveAssembly( string name );
-    
-    public class VisualStudioAdapter : Form, IAdapter
+    public class VisualStudioAdapter : Form//, IAdapter
     {
         MainControl _mainControl = null;
 
-        IAnalyser _analyser = null;
+        //IAnalyser _analyser = null;
 
         public VisualStudioAdapter() 
         { 
@@ -32,9 +23,6 @@ namespace Tcdev.DsmVsAddin
             _mainControl.Dock = DockStyle.Fill;
         }
 
-        public DirectoryInfo ProjectPath { get; set; }
-        public string ProjectName { get; set; }
-        
         public void LoadAssembly( string assemblyPath, bool refOnly )
         {
             try
@@ -50,8 +38,8 @@ namespace Tcdev.DsmVsAddin
 
         public void Open(string directory, string name)
         {
-            ProjectPath = new DirectoryInfo(directory);
-            FileInfo[] files = ProjectPath.GetFiles("*.dsm" );
+            DirectoryInfo projectPath = new DirectoryInfo(directory);
+            FileInfo[] files = projectPath.GetFiles("*.dsm" );
 
             if (files.Length == 0)
             {
@@ -74,7 +62,8 @@ namespace Tcdev.DsmVsAddin
             }
             else
             {
-                MessageBox.Show("TODO too many files found");
+                if ( _mainControl.OpenFile(projectPath) == true )
+                    _mainControl.btnAnalyse_Click(this, EventArgs.Empty);
             }
             this.Show();
             this.BringToFront();
@@ -88,12 +77,13 @@ namespace Tcdev.DsmVsAddin
         
         #region IAdapter Membres
 
-        public Tcdev.Dsm.Engine.IAnalyser GetAnalyser()
-        {
-            _analyser = new CecilAnalyser();
+        //public Tcdev.Dsm.Engine.IAnalyser GetAnalyser()
+        //{
+        //    _analyser = new CecilAnalyserecil
 
-            return _analyser;
-        }
+
+        //    return _analyser;
+        //}
 
         #endregion
 
@@ -110,9 +100,6 @@ namespace Tcdev.DsmVsAddin
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dependency Structure Matrix for Visual Studio";
             this.ResumeLayout(false);
-
         }
-
-
     }
 }

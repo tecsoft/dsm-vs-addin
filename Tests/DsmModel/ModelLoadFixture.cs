@@ -14,6 +14,25 @@ namespace Tcdev.Dsm.Tests.DsmModel
     public class ModelLoadFixture
     {
         [Test]
+        public void Add_Assembles()
+        {
+            DSM.Model.DsmModel sut = new Tcdev.Dsm.Model.DsmModel();
+            sut.AddAssembly(new Target("assembly.src.dll", "assembly/src.dll"));
+            Assert.IsTrue(sut.Assembles.Contains("assembly/src.dll"));
+        }
+
+        [Test]
+        public void Save_Assemblies()
+        {
+            DSM.Model.DsmModel sut = new Tcdev.Dsm.Model.DsmModel();
+            sut.AddAssembly(new Target("assembly.src.dll", "assembly/src.dll"));
+            sut.SaveModel(" test.dsm");
+            DSM.Model.DsmModel newModel = new Tcdev.Dsm.Model.DsmModel();
+            DSM.Model.DsmModel.LoadModel("test.dsm", newModel);
+
+            Assert.IsTrue(newModel.Assembles.Contains("assembly/src.dll"));
+        }
+        [Test]
         public void Test_Load_From_File_Not_Null_Hierarchy()
         {
             DSM.Model.DsmModel sut = new DSM.Model.DsmModel();

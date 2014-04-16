@@ -38,19 +38,6 @@ namespace Tcdev.Dsm.Model
             get { return namespaceName; }
         }
 
-        ////-------------------------------------------------------------------------------------------------
-        //private bool collapsed;
-        ///// <summary>
-        ///// Get or set whether the module in the matrix is currently collapsed or not
-        ///// </summary>
-        //public bool IsCollapsed
-        //{
-        //    get { return collapsed; }
-        //    set { collapsed = value; }
-        //}
-
-        
-
         //-------------------------------------------------------------------------------------------------
         /// <summary>
         /// Gets or sets whether the type nested inside another or not
@@ -79,7 +66,6 @@ namespace Tcdev.Dsm.Model
         public Module( string name, string srcFile, string namespaceName, string assemblyName, bool isNested )
         {
             this.name          = name;
-            //this.srcFile       = srcFile;
             this.namespaceName = namespaceName;
             this.assemblyName  = assemblyName;
             this.isNested      = isNested;
@@ -89,7 +75,7 @@ namespace Tcdev.Dsm.Model
 
         //-------------------------------------------------------------------------------------------------
         /// <summary>
-        /// Get th emodule name
+        /// Get the module name
         /// </summary>
         public string Name
         {

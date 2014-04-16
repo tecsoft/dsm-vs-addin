@@ -120,6 +120,8 @@ namespace Tcdev.Dsm.Engine
                     Mono.Cecil.AssemblyDefinition assembly = 
                         Mono.Cecil.AssemblyDefinition.ReadAssembly( target.FullPath, parameters );
 
+                    _model.AddAssembly(target);
+
                     foreach( Mono.Cecil.ModuleDefinition module in assembly.Modules )
                     {
                         var moduleTypes = module.Types;
