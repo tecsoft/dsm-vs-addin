@@ -8,7 +8,7 @@ namespace Tcdev.Dsm.View
     {
         static Installer _installer;
 
-        public static void Run( Object o)
+        public static void Run(Object o)
         {
             try
             {
@@ -23,9 +23,9 @@ namespace Tcdev.Dsm.View
 
                         (o as Control).Invoke((MethodInvoker)delegate { Notify(); });
                     }
-                    catch (Exception ex )
+                    catch (Exception ex)
                     {
-                        ErrorDialog.Show( "Sorry, but there was an error while trying to install the latest version:" + 
+                        ErrorDialog.Show("Sorry, but there was an error while trying to install the latest version:" +
                             Environment.NewLine + ex.ToString());
                     }
                 }
@@ -34,21 +34,22 @@ namespace Tcdev.Dsm.View
             {
                 // network etc etc not available we ignore any errors silently
                 // and try next time we run the program
+
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
         }
 
         internal static void Notify()
         {
-            var notifier = new InstallNotifier( GetInstaller() );
+            var notifier = new InstallNotifier(GetInstaller());
             notifier.Show();
         }
 
         internal static Installer GetInstaller()
         {
-            if ( _installer == null )
-                _installer = new Installer("http://www.tom-carter.net/Version.txt",
-                                    "http://www.tom-carter.net/DsmInstaller.msi");
+            if (_installer == null)
+                _installer = new Installer("http://sites.google.com/site/tomcarterdeveloper/Version.txt",
+                                    "http://sites.google.com/site/tomcarterdeveloper/DsmInstaller.msi");
 
             return _installer;
         }

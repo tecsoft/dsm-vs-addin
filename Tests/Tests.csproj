@@ -64,6 +64,7 @@
     <Compile Include="CecilAnalyser\MarkInterfacesFixture.cs" />
     <Compile Include="Commands\AnalyseCommandFixture.cs" />
     <Compile Include="Commands\FindRelationsCommandFixture.cs" />
+    <Compile Include="DsmModel\CannotUseRuleFixture.cs" />
     <Compile Include="Install\InstallerFixture.cs" />
     <Compile Include="DsmModel\RuleManagerFixture.cs" />
     <Compile Include="DsmModel\ModelLoadFixture.cs" />

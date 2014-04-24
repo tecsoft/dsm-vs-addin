@@ -1,5 +1,5 @@
 
-Dependency Structure Matrix Add In - Version 2.1
+Dependency Structure Matrix Add In - Version 2.1.0.0
 =======================================================
 
 1. Notes

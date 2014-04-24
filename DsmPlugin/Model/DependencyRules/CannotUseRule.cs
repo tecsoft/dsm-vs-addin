@@ -9,15 +9,20 @@ namespace Tcdev.Dsm.Model.DependencyRules
     /// A rule which says the provider module must not be consumed by the consumer Module.
     /// Applies to all child modules
     /// </summary>
+    /// <remarks>
+    /// If provider is null then consumer may not use any other
+    /// If consumer is null then provider may not be consumed
+    /// </remarks>
     public class CannotUseRule : DependencyRule
     {
-        public CannotUseRule(Module provider, Module consumer) : base( provider, consumer )
+        public CannotUseRule(Module provider, Module consumer)
+            : base(provider, consumer)
         {
         }
 
-        public override bool IsViolated(Module provider, Module consumer)
+        public override bool IsViolated()
         {
-            return !(provider.FullName.Equals(Provider) && consumer.FullName.Equals(Consumer));
+            return Provider.Relations[Consumer].Weight > 0;
         }
     }
 }

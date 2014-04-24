@@ -8,6 +8,7 @@ namespace Tcdev.Dsm.Model.DependencyRules
     public abstract class DependencyRule
     {
         public Module Provider { get; protected set; }
+
         public Module Consumer { get; protected set; }
 
         public DependencyRule(Module provider, Module consumer)
@@ -16,6 +17,6 @@ namespace Tcdev.Dsm.Model.DependencyRules
             Consumer = consumer;
         }
 
-        public abstract bool IsViolated(Module provider, Module consumer);
+        public abstract bool IsViolated();
     }
 }

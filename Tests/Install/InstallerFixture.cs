@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using NUnit.Framework;
-using System.Net;
-using System.IO;
-using System.Diagnostics;
 using Tcdev.Dsm.Install;
 
 namespace Tcdev.Dsm.Tests.Install
@@ -16,29 +16,50 @@ namespace Tcdev.Dsm.Tests.Install
         [Test]
         public void Test_Not_New_Old_Minor()
         {
-            Installer sut = new Installer("","");
-            Assert.IsFalse(sut.IsHigherVersion(122, 32, 122, 32));
+            Installer sut = new Installer("", "");
+            Assert.IsFalse(sut.CompareVersion("100.21.2.0", new Version(100, 22, 2, 0)));
         }
 
         [Test]
         public void Test_Not_New_Old_Major()
         {
             Installer sut = new Installer("", "");
-            Assert.IsFalse(sut.IsHigherVersion(122, 32, 121, 33));
+            Assert.IsFalse(sut.CompareVersion("100.23.2.0", new Version(101, 23, 2, 0)));
         }
 
         [Test]
         public void Test_New_Minor()
         {
             Installer sut = new Installer("", "");
-            Assert.IsTrue(sut.IsHigherVersion(113, 11, 113, 12));
+            Assert.IsFalse(sut.CompareVersion("100.23.2.0", new Version(100, 24, 2, 0)));
         }
 
         [Test]
         public void Test_Not_New_Major_And_Minor_Are_Same()
         {
             Installer sut = new Installer("", "");
-            Assert.IsFalse(sut.IsHigherVersion(113, 11, 113, 11));
+            Assert.IsFalse(sut.CompareVersion("100.23.0.0", new Version(100, 23, 0, 0)));
+        }
+
+        [Test]
+        public void Test_Not_New_Major_And_MinorAnd_Build_Are_Same()
+        {
+            Installer sut = new Installer("", "");
+            Assert.IsFalse(sut.CompareVersion("100.23.2.0", new Version(100, 23, 2, 0)));
+        }
+
+        [Test]
+        public void Test_Higher_Build()
+        {
+            Installer sut = new Installer("", "");
+            Assert.IsTrue(sut.CompareVersion("100.23.3.0", new Version(100, 23, 2, 0)));
+        }
+
+        [Test]
+        public void Test_Higher_Build_No_Build_On_Assembly()
+        {
+            Installer sut = new Installer("", "");
+            Assert.IsTrue(sut.CompareVersion("100.23.2.0", new Version(100, 23, 0, 0)));
         }
 
         [Test]
@@ -50,7 +71,7 @@ namespace Tcdev.Dsm.Tests.Install
             string url = "file://" + fi.FullName;
 
             Installer sut = new Installer(url, "");
-            Assert.IsTrue (sut.NewVersion() );
+            Assert.IsTrue(sut.NewVersion());
         }
 
         [Test]
@@ -77,11 +98,9 @@ namespace Tcdev.Dsm.Tests.Install
 
         //        using (Stream reader = reply.GetResponseStream())
         //        {
-
         //            using (FileStream fs = new FileStream(
         //                "DsmInstaller.msi", FileMode.OpenOrCreate, FileAccess.Write))
         //            {
-
         //                Byte[] buffer = new Byte[32 * 1024];
         //                int read = reader.Read(buffer, 0, buffer.Length);
 
@@ -104,6 +123,5 @@ namespace Tcdev.Dsm.Tests.Install
         //        Console.WriteLine( e.ToString() );
         //    }
         //}
-
     }
 }
