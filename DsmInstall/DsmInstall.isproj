@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\DsmPlugin\DSMPlugIn.csproj">
+			<Name>DSMPlugIn</Name>
+			<Project>{B8FDC0F6-309D-483D-8B25-FC0BE0A1E287}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\DsmReflector6\DsmReflector6.csproj">
+			<Name>DsmReflector6</Name>
+			<Project>{B91DC4EF-5059-499C-90C8-A7AB7D528A5F}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\DsmReflector7\DsmReflector7.csproj">
+			<Name>DsmReflector7</Name>
+			<Project>{7ED3E037-E0E4-41A6-A4BB-94C0B1C900C6}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\DsmReflector8\DsmReflector8.csproj">
+			<Name>DsmReflector8</Name>
+			<Project>{2A9E59D2-CEA0-45B2-BBE2-F5BAC4896F5F}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\DsmVsAddin\DsmVsAddin.csproj">
+			<Name>DsmVsAddin</Name>
+			<Project>{604AC94F-7E5B-4028-BCCE-2C0D22CED300}</Project>
+		</ProjectReference>
+	</ItemGroup>
+</Project>
