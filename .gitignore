@@ -5,3 +5,4 @@ obj/
 web/
 DsmPlugInTestAssembly/bin/Debug/*.dll
 DsmPlugInTestAssembly/obj/
+Backup/
