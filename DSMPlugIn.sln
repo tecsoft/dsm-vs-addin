@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMPlugIn", "DsmPlugin\DSMPlugIn.csproj", "{B8FDC0F6-309D-483D-8B25-FC0BE0A1E287}"
 EndProject
@@ -22,8 +22,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsmReflector7", "DsmReflector7\DsmReflector7.csproj", "{7ED3E037-E0E4-41A6-A4BB-94C0B1C900C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DsmReflector8", "DsmReflector8\DsmReflector8.csproj", "{2A9E59D2-CEA0-45B2-BBE2-F5BAC4896F5F}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DsmInstaller", "DsmInstaller\DsmInstaller.vdproj", "{A3615704-E409-4035-A164-033CB2D91340}"
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "DsmInstall", "DsmInstall\DsmInstall.isproj", "{AA544E48-9447-456D-8C0C-39DD9AE75BDC}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -353,33 +351,6 @@ Global
 		{2A9E59D2-CEA0-45B2-BBE2-F5BAC4896F5F}.winphone_Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A9E59D2-CEA0-45B2-BBE2-F5BAC4896F5F}.winphone_Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A9E59D2-CEA0-45B2-BBE2-F5BAC4896F5F}.winphone_Release|Any CPU.Build.0 = Release|Any CPU
-		{A3615704-E409-4035-A164-033CB2D91340}.CD_ROM|Any CPU.ActiveCfg = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.Debug|Any CPU.ActiveCfg = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.Debug|Any CPU.Build.0 = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.DVD-5|Any CPU.ActiveCfg = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.net_2_0_Debug|Any CPU.ActiveCfg = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.net_2_0_Debug|Any CPU.Build.0 = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.net_2_0_Release|Any CPU.ActiveCfg = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.net_2_0_Release|Any CPU.Build.0 = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.net_3_5_Debug|Any CPU.ActiveCfg = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.net_3_5_Debug|Any CPU.Build.0 = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.net_3_5_Release|Any CPU.ActiveCfg = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.net_3_5_Release|Any CPU.Build.0 = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.net_4_0_Debug|Any CPU.ActiveCfg = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.net_4_0_Debug|Any CPU.Build.0 = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.net_4_0_Release|Any CPU.ActiveCfg = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.net_4_0_Release|Any CPU.Build.0 = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.Release|Any CPU.ActiveCfg = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.Release|Any CPU.Build.0 = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.silverlight_Debug|Any CPU.ActiveCfg = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.silverlight_Debug|Any CPU.Build.0 = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.silverlight_Release|Any CPU.ActiveCfg = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.silverlight_Release|Any CPU.Build.0 = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.SingleImage|Any CPU.ActiveCfg = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.winphone_Debug|Any CPU.ActiveCfg = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.winphone_Debug|Any CPU.Build.0 = Debug
-		{A3615704-E409-4035-A164-033CB2D91340}.winphone_Release|Any CPU.ActiveCfg = Release
-		{A3615704-E409-4035-A164-033CB2D91340}.winphone_Release|Any CPU.Build.0 = Release
 		{AA544E48-9447-456D-8C0C-39DD9AE75BDC}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
 		{AA544E48-9447-456D-8C0C-39DD9AE75BDC}.CD_ROM|Any CPU.Build.0 = CD_ROM
 		{AA544E48-9447-456D-8C0C-39DD9AE75BDC}.Debug|Any CPU.ActiveCfg = DVD-5
